@@ -37,7 +37,7 @@ export function createAnthropicCaller(apiKey: string, model: string): CallModel 
       });
     } catch (error) {
       if (error instanceof Anthropic.AuthenticationError) {
-        throw new ModelError("The Anthropic API key was rejected. Check ANTHROPIC_API_KEY.");
+        throw new ModelError("The Anthropic API key was rejected. Check APP_ANTHROPIC_API_KEY (or ANTHROPIC_API_KEY).");
       }
       if (error instanceof Anthropic.NotFoundError) {
         throw new ModelError(`The model "${model}" was not found. Check ANTHROPIC_MODEL.`);

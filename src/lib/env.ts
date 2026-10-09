@@ -38,8 +38,9 @@ export const env = {
   get salesPhone() {
     return read("SALES_PHONE");
   },
+  /** APP_ANTHROPIC_API_KEY wins; ANTHROPIC_API_KEY is the fallback. */
   get anthropicApiKey() {
-    return read("ANTHROPIC_API_KEY");
+    return read("APP_ANTHROPIC_API_KEY") ?? read("ANTHROPIC_API_KEY");
   },
   /** Model for site copy. Defaults to the current Claude Opus. */
   get anthropicModel() {

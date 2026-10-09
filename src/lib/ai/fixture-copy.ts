@@ -1,9 +1,10 @@
 import type { SiteContent } from "@/lib/content/schema";
 import type { BusinessFacts, CallModel } from "./copy";
 
-// Used when ANTHROPIC_API_KEY is not set. Produces copy that passes the same
-// schema as Claude's output, written from the business facts, so every other
-// part of the pipeline can be exercised without an API key.
+// Used when neither APP_ANTHROPIC_API_KEY nor ANTHROPIC_API_KEY is set.
+// Produces copy that passes the same schema as Claude's output, written from
+// the business facts, so every other part of the pipeline can be exercised
+// without an API key.
 
 const NEARBY_SUFFIXES = ["Downtown", "North", "South", "East", "West", "Heights", "Park"];
 

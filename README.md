@@ -32,7 +32,8 @@ Copy `.env.example` to `.env.local`.
 | `ROOT_DOMAIN` | yes | `minitebuild.com` in production, `localhost:3000` locally |
 | `SALES_PHONE` | yes | Shown as "Contact us to activate" on checkout while billing is the stub |
 | `WORKER_SECRET` | yes | **Added by me.** Protects `POST /api/worker`; pg_cron sends it as a bearer token. Generate with `openssl rand -hex 32` |
-| `ANTHROPIC_API_KEY` | no | Without it, built-in sample copy is used |
+| `APP_ANTHROPIC_API_KEY` | no | Anthropic key for site copy. Read first. Without it (or `ANTHROPIC_API_KEY`), built-in sample copy is used |
+| `ANTHROPIC_API_KEY` | no | Fallback when `APP_ANTHROPIC_API_KEY` is not set |
 | `ANTHROPIC_MODEL` | no | **Added by me.** Model for site copy; defaults to `claude-opus-5-5` |
 | `GOOGLE_PLACES_API_KEY` | no | Without it, fixture businesses are used |
 
@@ -44,7 +45,7 @@ If `GOOGLE_PLACES_API_KEY` is missing, lookups use fixtures in `src/lib/places/f
 - Any name containing **"unlisted"** is never found, so it gets the `unverified` tag.
 - Anything else is "found" in the city you typed, with your phone number.
 
-If `ANTHROPIC_API_KEY` is missing, copy comes from `src/lib/ai/fixture-copy.ts`. It passes the same schema as Claude's output.
+If neither `APP_ANTHROPIC_API_KEY` nor `ANTHROPIC_API_KEY` is set, copy comes from `src/lib/ai/fixture-copy.ts`. It passes the same schema as Claude's output.
 
 ## Local setup
 

@@ -52,7 +52,7 @@ export default function SettingsPage() {
             label="Claude (site copy)"
             value={fixtures.copy ? "Sample copy (no API key)" : env.anthropicModel}
             ok={!fixtures.copy}
-            note={fixtures.copy ? "Set ANTHROPIC_API_KEY to write real copy." : undefined}
+            note={fixtures.copy ? "Set APP_ANTHROPIC_API_KEY (or ANTHROPIC_API_KEY) to write real copy." : undefined}
           />
           <Row
             label="Google Places"
