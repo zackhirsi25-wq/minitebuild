@@ -3,7 +3,15 @@
 import { useToast } from "./toast";
 
 /** Copies a URL and confirms with a "Copied" toast. */
-export function CopyLinkButton({ url, label = "Copy link", className = "" }: { url: string; label?: string; className?: string }) {
+export function CopyLinkButton({
+  url,
+  label = "Copy link",
+  className = "",
+}: {
+  url: string;
+  label?: string;
+  className?: string;
+}) {
   const toast = useToast();
   async function copy() {
     try {

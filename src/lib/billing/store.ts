@@ -85,7 +85,11 @@ export function supabaseBillingStore(): BillingStore {
     async markProcessed(event, note) {
       await db
         .from("billing_events")
-        .update({ processed_at: new Date().toISOString(), error: note ?? null, business_id: await knownBusinessId(event.businessId) })
+        .update({
+          processed_at: new Date().toISOString(),
+          error: note ?? null,
+          business_id: await knownBusinessId(event.businessId),
+        })
         .eq("provider", event.provider)
         .eq("event_id", event.eventId);
     },

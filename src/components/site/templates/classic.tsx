@@ -1,6 +1,16 @@
 import { Source_Sans_3, Source_Serif_4 } from "next/font/google";
 import Image from "next/image";
-import { CallLink, CheckIcon, ClockIcon, FaqList, HoursList, MapPinIcon, MobileCallBar, Paragraphs, PhoneIcon } from "../parts";
+import {
+  CallLink,
+  CheckIcon,
+  ClockIcon,
+  FaqList,
+  HoursList,
+  MapPinIcon,
+  MobileCallBar,
+  Paragraphs,
+  PhoneIcon,
+} from "../parts";
 import type { TemplateProps } from "../types";
 
 // Classic: light, calm and trust-focused. Serif headings, one deep-blue accent.
@@ -33,7 +43,9 @@ export function ClassicTemplate({ site, images }: TemplateProps) {
         <section className="bg-slate-50">
           <div className="mx-auto grid max-w-6xl items-center gap-10 px-5 py-14 sm:px-8 sm:py-20 lg:grid-cols-[1.1fr_1fr] lg:gap-14 lg:py-24">
             <div>
-              <p className="text-sm font-semibold uppercase tracking-widest text-blue-800">{site.category ?? "Local contractor"} · {site.city}</p>
+              <p className="text-sm font-semibold uppercase tracking-widest text-blue-800">
+                {site.category ?? "Local contractor"} · {site.city}
+              </p>
               <h1 className={`${heading} mt-4 text-4xl leading-tight sm:text-5xl`}>{content.headline}</h1>
               <p className="mt-5 text-lg leading-relaxed text-slate-600 sm:text-xl">{content.subheadline}</p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
@@ -114,7 +126,10 @@ export function ClassicTemplate({ site, images }: TemplateProps) {
             <p className="mt-3 text-lg text-slate-600">Homeowners in these communities call us for work.</p>
             <ul className="mt-8 grid grid-cols-2 gap-x-6 gap-y-3 sm:grid-cols-3 lg:grid-cols-4">
               {content.serviceAreas.map((area) => (
-                <li key={area} className="flex items-center gap-2 border-b border-slate-200 py-2 font-medium text-slate-800">
+                <li
+                  key={area}
+                  className="flex items-center gap-2 border-b border-slate-200 py-2 font-medium text-slate-800"
+                >
                   <MapPinIcon className="h-4 w-4 shrink-0 text-blue-800" />
                   {area}
                 </li>
@@ -159,7 +174,10 @@ export function ClassicTemplate({ site, images }: TemplateProps) {
         <div className="mx-auto grid max-w-6xl gap-10 px-5 sm:px-8 md:grid-cols-3">
           <div>
             <p className="font-[family-name:var(--font-classic-serif)] text-xl font-semibold text-white">{site.name}</p>
-            <CallLink phone={site.phone} className="mt-3 inline-flex min-h-11 items-center gap-2 font-semibold text-white hover:underline">
+            <CallLink
+              phone={site.phone}
+              className="mt-3 inline-flex min-h-11 items-center gap-2 font-semibold text-white hover:underline"
+            >
               <PhoneIcon />
               {site.phone}
             </CallLink>

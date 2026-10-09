@@ -17,7 +17,10 @@ export default function HomePage() {
     <div className={`${brandFont.className} min-h-dvh bg-white text-slate-900`}>
       <header className="mx-auto flex max-w-5xl items-center justify-between px-5 py-5">
         <p className="text-lg font-bold tracking-tight">{product.name}</p>
-        <Link href="/login" className="inline-flex min-h-11 items-center text-sm font-medium text-slate-600 hover:text-slate-900">
+        <Link
+          href="/login"
+          className="inline-flex min-h-11 items-center text-sm font-medium text-slate-600 hover:text-slate-900"
+        >
           Sign in
         </Link>
       </header>

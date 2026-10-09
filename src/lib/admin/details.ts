@@ -27,7 +27,9 @@ export const businessDetailsSchema = z.object({
   websiteUrl: z
     .string()
     .trim()
-    .refine((v) => v === "" || /^https?:\/\/\S+\.\S+/.test(v), { message: "Website must start with http:// or https://" })
+    .refine((v) => v === "" || /^https?:\/\/\S+\.\S+/.test(v), {
+      message: "Website must start with http:// or https://",
+    })
     .transform((v) => v || null),
   trade: z.enum(TRADES),
   template: z.enum(TEMPLATES),

@@ -42,7 +42,9 @@ export function NotesAndTags({ id, notes, tags }: { id: string; notes: string; t
               aria-pressed={on}
               onClick={() => toggle(tag)}
               className={`min-h-11 rounded-full border px-4 text-sm font-medium transition ${
-                on ? "border-brand-600 bg-brand-600 text-white" : "border-slate-300 bg-white text-slate-700 hover:bg-slate-50"
+                on
+                  ? "border-brand-600 bg-brand-600 text-white"
+                  : "border-slate-300 bg-white text-slate-700 hover:bg-slate-50"
               }`}
             >
               {on ? "✓ " : ""}

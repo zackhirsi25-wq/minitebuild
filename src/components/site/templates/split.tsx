@@ -108,7 +108,10 @@ export function SplitTemplate({ site, images }: TemplateProps) {
             <h2 className="text-3xl font-extrabold tracking-tight text-stone-900 sm:text-4xl">Where we work</h2>
             <ul className="mt-8 flex flex-wrap gap-3">
               {content.serviceAreas.map((area) => (
-                <li key={area} className="rounded-full bg-orange-50 px-4 py-2 font-semibold text-orange-900 ring-1 ring-orange-200">
+                <li
+                  key={area}
+                  className="rounded-full bg-orange-50 px-4 py-2 font-semibold text-orange-900 ring-1 ring-orange-200"
+                >
                   {area}
                 </li>
               ))}
@@ -147,7 +150,10 @@ export function SplitTemplate({ site, images }: TemplateProps) {
         <div className="mx-auto grid max-w-7xl gap-10 px-5 sm:px-8 md:grid-cols-3">
           <div>
             <p className="text-lg font-extrabold text-stone-900">{site.name}</p>
-            <CallLink phone={site.phone} className="mt-3 inline-flex min-h-11 items-center gap-2 font-bold text-orange-800 hover:underline">
+            <CallLink
+              phone={site.phone}
+              className="mt-3 inline-flex min-h-11 items-center gap-2 font-bold text-orange-800 hover:underline"
+            >
               <PhoneIcon />
               {site.phone}
             </CallLink>

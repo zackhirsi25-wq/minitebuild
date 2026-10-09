@@ -28,6 +28,4 @@ export type PlaceDetails = {
   websiteUrl: string | null;
 };
 
-export type PlaceMatch =
-  | { found: true; matchedBy: "phone" | "city"; place: PlaceDetails }
-  | { found: false };
+export type PlaceMatch = { found: true; matchedBy: "phone" | "city"; place: PlaceDetails } | { found: false };

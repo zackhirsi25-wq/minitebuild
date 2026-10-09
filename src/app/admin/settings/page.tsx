@@ -31,8 +31,8 @@ export default function SettingsPage() {
       <div>
         <h1 className="text-2xl font-bold tracking-tight">Settings</h1>
         <p className="mt-1 text-slate-600">
-          Read-only overview. Prices live in <code className="rounded bg-slate-100 px-1">src/config/product.ts</code>; keys are
-          environment variables.
+          Read-only overview. Prices live in <code className="rounded bg-slate-100 px-1">src/config/product.ts</code>;
+          keys are environment variables.
         </p>
       </div>
 
@@ -41,7 +41,11 @@ export default function SettingsPage() {
         <dl className="divide-y divide-slate-100">
           <Row label="Name" value={product.name} />
           <Row label="Monthly" value={`${formatPrice(product.plans.monthly.price)}/mo`} />
-          <Row label="Annual" value={`${formatPrice(product.plans.annual.price)}/yr`} note={`Saves ${formatPrice(annualSaving)} a year`} />
+          <Row
+            label="Annual"
+            value={`${formatPrice(product.plans.annual.price)}/yr`}
+            note={`Saves ${formatPrice(annualSaving)} a year`}
+          />
         </dl>
       </section>
 
@@ -64,7 +68,11 @@ export default function SettingsPage() {
             label="Billing"
             value={billing.online ? `${billing.id} (test checkout)` : `${billing.id} (contact to activate)`}
             ok={false}
-            note={billing.online ? "Checkout opens a fake payment page." : `Checkout shows ${env.salesPhone ?? "no number: set SALES_PHONE"}. Use “Mark as paid”.`}
+            note={
+              billing.online
+                ? "Checkout opens a fake payment page."
+                : `Checkout shows ${env.salesPhone ?? "no number: set SALES_PHONE"}. Use “Mark as paid”.`
+            }
           />
           <Row
             label="Background worker"
@@ -78,7 +86,10 @@ export default function SettingsPage() {
       </section>
 
       <form action={signOut}>
-        <button type="submit" className="inline-flex min-h-11 items-center rounded-lg border border-slate-300 bg-white px-4 font-semibold text-slate-700 hover:bg-slate-50">
+        <button
+          type="submit"
+          className="inline-flex min-h-11 items-center rounded-lg border border-slate-300 bg-white px-4 font-semibold text-slate-700 hover:bg-slate-50"
+        >
           Sign out
         </button>
       </form>

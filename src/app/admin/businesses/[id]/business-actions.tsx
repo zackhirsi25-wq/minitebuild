@@ -6,7 +6,14 @@ import { ConfirmButton } from "@/components/ui/confirm-dialog";
 import { useToast } from "@/components/ui/toast";
 import { annualSaving, formatPrice, product, type PlanId } from "@/config/product";
 import type { BusinessStatus } from "@/lib/content/schema";
-import { markAsPaid, pauseBusiness, publishBusiness, refreshFromGoogle, regenerateBusinessCopy, type ActionResult } from "../../actions";
+import {
+  markAsPaid,
+  pauseBusiness,
+  publishBusiness,
+  refreshFromGoogle,
+  regenerateBusinessCopy,
+  type ActionResult,
+} from "../../actions";
 import { Spinner } from "@/components/ui/spinner";
 
 const secondary = "border border-slate-300 bg-white text-slate-800 hover:bg-slate-50";
@@ -60,11 +67,16 @@ export function BusinessActions({ id, status }: { id: string; status: BusinessSt
           <legend className="text-sm font-medium text-slate-700">Plan</legend>
           <div className="mt-2 grid gap-2">
             {(["monthly", "annual"] as PlanId[]).map((p) => (
-              <label key={p} className="flex min-h-11 cursor-pointer items-center gap-3 rounded-lg border border-slate-200 px-3 has-[:checked]:border-brand-600">
+              <label
+                key={p}
+                className="flex min-h-11 cursor-pointer items-center gap-3 rounded-lg border border-slate-200 px-3 has-[:checked]:border-brand-600"
+              >
                 <input type="radio" name="plan" value={p} checked={plan === p} onChange={() => setPlan(p)} />
                 <span>
                   {product.plans[p].label}: {formatPrice(product.plans[p].price)}/{product.plans[p].short}
-                  {p === "annual" && <span className="text-sm text-emerald-700"> (saves {formatPrice(annualSaving)})</span>}
+                  {p === "annual" && (
+                    <span className="text-sm text-emerald-700"> (saves {formatPrice(annualSaving)})</span>
+                  )}
                 </span>
               </label>
             ))}

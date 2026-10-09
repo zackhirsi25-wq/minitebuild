@@ -25,7 +25,9 @@ export function Photos({
   return (
     <section className="rounded-xl border border-slate-200 bg-white p-5">
       <h2 className="font-semibold">Photos</h2>
-      <p className="mt-1 text-sm text-slate-600">Replace a stock photo with the business&apos;s own. JPEG, PNG or WebP, up to 5 MB.</p>
+      <p className="mt-1 text-sm text-slate-600">
+        Replace a stock photo with the business&apos;s own. JPEG, PNG or WebP, up to 5 MB.
+      </p>
       <div className="mt-4 space-y-5">
         {slots.map((s) => (
           <PhotoSlot key={s.slot} id={id} defaultAlt={`Recent project by ${name} in ${city}`} {...s} />
@@ -66,7 +68,10 @@ function PhotoSlot({
           setError(null);
           const formData = new FormData(e.currentTarget);
           formData.set("slot", slot);
-          const result = await uploadPhoto(id, formData).catch(() => ({ ok: false as const, error: "Upload failed. Check your connection and try again." }));
+          const result = await uploadPhoto(id, formData).catch(() => ({
+            ok: false as const,
+            error: "Upload failed. Check your connection and try again.",
+          }));
           setBusy(null);
           if (!result.ok) return setError(result.error);
           toast.show(result.message ?? "Photo uploaded");

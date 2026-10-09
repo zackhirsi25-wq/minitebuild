@@ -32,7 +32,9 @@ export default async function StubPaymentPage({ searchParams }: PageProps<"/bill
           <strong>Test mode.</strong> This page stands in for the payment provider. No card is charged.
         </p>
         <div className="mt-6 rounded-2xl bg-white p-6 shadow-sm ring-1 ring-slate-200">
-          <p className="text-sm text-slate-500">{product.name} · {label} plan</p>
+          <p className="text-sm text-slate-500">
+            {product.name} · {label} plan
+          </p>
           <h1 className="mt-1 text-2xl font-bold">{business.name}</h1>
           <p className="mt-4 text-4xl font-bold">
             {formatPrice(price)}

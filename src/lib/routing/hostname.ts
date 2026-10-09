@@ -1,10 +1,7 @@
 // Decides what a request's Host header points at. Pure so it can be unit
 // tested and shared by the proxy (middleware) and server code.
 
-export type HostTarget =
-  | { kind: "app" }
-  | { kind: "site"; slug: string }
-  | { kind: "unknown" };
+export type HostTarget = { kind: "app" } | { kind: "site"; slug: string } | { kind: "unknown" };
 
 /** Subdomains that never map to a customer site. */
 export const RESERVED_SUBDOMAINS = new Set(["www", "app", "admin", "api", "mail"]);
@@ -63,14 +60,20 @@ function isLocal(root: string): boolean {
 
 /** Public address of a live site, e.g. https://elite-remodeling-austin.example.com */
 export function liveSiteUrl(slug: string, rootDomain: string): string {
-  const root = rootDomain.trim().replace(/^[a-z]+:\/\//i, "").replace(/\/.*$/, "");
+  const root = rootDomain
+    .trim()
+    .replace(/^[a-z]+:\/\//i, "")
+    .replace(/\/.*$/, "");
   const protocol = isLocal(root) ? "http" : "https";
   return `${protocol}://${slug}.${root}`;
 }
 
 /** Absolute URL on the main app domain. */
 export function appUrl(path: string, rootDomain: string): string {
-  const root = rootDomain.trim().replace(/^[a-z]+:\/\//i, "").replace(/\/.*$/, "");
+  const root = rootDomain
+    .trim()
+    .replace(/^[a-z]+:\/\//i, "")
+    .replace(/\/.*$/, "");
   const protocol = isLocal(root) ? "http" : "https";
   return `${protocol}://${root}${path.startsWith("/") ? path : `/${path}`}`;
 }

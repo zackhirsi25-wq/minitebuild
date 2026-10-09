@@ -1,6 +1,16 @@
 import { Archivo } from "next/font/google";
 import Image from "next/image";
-import { CallLink, CheckIcon, ClockIcon, FaqList, HoursList, MapPinIcon, MobileCallBar, Paragraphs, PhoneIcon } from "../parts";
+import {
+  CallLink,
+  CheckIcon,
+  ClockIcon,
+  FaqList,
+  HoursList,
+  MapPinIcon,
+  MobileCallBar,
+  Paragraphs,
+  PhoneIcon,
+} from "../parts";
 import type { TemplateProps } from "../types";
 
 // Bold: dark hero, heavy type, one amber accent.
@@ -155,7 +165,10 @@ export function BoldTemplate({ site, images }: TemplateProps) {
         <div className="mx-auto grid max-w-6xl gap-10 px-5 sm:px-8 md:grid-cols-3">
           <div>
             <p className="text-lg font-extrabold uppercase tracking-wide text-white">{site.name}</p>
-            <CallLink phone={site.phone} className="mt-3 inline-flex min-h-11 items-center gap-2 font-semibold text-amber-400 hover:underline">
+            <CallLink
+              phone={site.phone}
+              className="mt-3 inline-flex min-h-11 items-center gap-2 font-semibold text-amber-400 hover:underline"
+            >
               <PhoneIcon />
               {site.phone}
             </CallLink>

@@ -50,7 +50,12 @@ export async function getBusiness(id: string) {
   if (!data) return null;
   const [{ data: subscriptions }, { data: events }] = await Promise.all([
     db.from("subscriptions").select("*").eq("business_id", id).order("created_at", { ascending: false }),
-    db.from("billing_events").select("id, provider, type, received_at, processed_at, error").eq("business_id", id).order("received_at", { ascending: false }).limit(10),
+    db
+      .from("billing_events")
+      .select("id, provider, type, received_at, processed_at, error")
+      .eq("business_id", id)
+      .order("received_at", { ascending: false })
+      .limit(10),
   ]);
   return { business: data, subscriptions: subscriptions ?? [], events: events ?? [] };
 }

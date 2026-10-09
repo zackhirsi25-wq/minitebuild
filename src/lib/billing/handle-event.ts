@@ -36,9 +36,7 @@ export interface BillingStore {
 }
 
 export type HandleResult =
-  | { outcome: "applied"; status: BusinessStatus }
-  | { outcome: "duplicate" }
-  | { outcome: "unknown_business" };
+  { outcome: "applied"; status: BusinessStatus } | { outcome: "duplicate" } | { outcome: "unknown_business" };
 
 /** Applies a billing event exactly once. */
 export async function handleBillingEvent(event: BillingEvent, store: BillingStore): Promise<HandleResult> {

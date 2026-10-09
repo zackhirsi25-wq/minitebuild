@@ -25,11 +25,19 @@ export function ImportClient({ initialProgress }: { initialProgress: BatchProgre
   async function readFile(file: File) {
     setStartError(null);
     if (!/\.(csv|txt)$/i.test(file.name) && file.type !== "text/csv") {
-      setSelected({ name: file.name, text: "", result: { ok: false, error: "That isn't a CSV file. Export your sheet as CSV and try again." } });
+      setSelected({
+        name: file.name,
+        text: "",
+        result: { ok: false, error: "That isn't a CSV file. Export your sheet as CSV and try again." },
+      });
       return;
     }
     if (file.size > 2 * 1024 * 1024) {
-      setSelected({ name: file.name, text: "", result: { ok: false, error: "That file is over 2 MB. Split it into smaller files." } });
+      setSelected({
+        name: file.name,
+        text: "",
+        result: { ok: false, error: "That file is over 2 MB. Split it into smaller files." },
+      });
       return;
     }
     const text = await file.text();
@@ -40,7 +48,10 @@ export function ImportClient({ initialProgress }: { initialProgress: BatchProgre
     if (!selected?.result.ok) return;
     setStarting(true);
     setStartError(null);
-    const result = await startImport(selected.text, selected.name).catch(() => ({ ok: false as const, error: "Couldn't reach the server. Check your connection and try again." }));
+    const result = await startImport(selected.text, selected.name).catch(() => ({
+      ok: false as const,
+      error: "Couldn't reach the server. Check your connection and try again.",
+    }));
     setStarting(false);
     if (!result.ok) {
       setStartError(result.error);
@@ -103,7 +114,10 @@ export function ImportClient({ initialProgress }: { initialProgress: BatchProgre
           aria-label="Import progress"
           className="mt-3 h-3 overflow-hidden rounded-full bg-slate-100"
         >
-          <div className="h-full rounded-full bg-brand-600 transition-[width] duration-500" style={{ width: `${percent}%` }} />
+          <div
+            className="h-full rounded-full bg-brand-600 transition-[width] duration-500"
+            style={{ width: `${percent}%` }}
+          />
         </div>
         <p className="mt-2 flex items-center gap-2 text-sm text-slate-600" aria-live="polite">
           {active ? (
@@ -159,7 +173,10 @@ export function ImportClient({ initialProgress }: { initialProgress: BatchProgre
           >
             Import another file
           </Link>
-          <Link href="/admin" className="inline-flex min-h-11 items-center rounded-lg bg-brand-600 px-4 font-semibold text-white hover:bg-brand-700">
+          <Link
+            href="/admin"
+            className="inline-flex min-h-11 items-center rounded-lg bg-brand-600 px-4 font-semibold text-white hover:bg-brand-700"
+          >
             View businesses
           </Link>
         </div>
@@ -185,8 +202,19 @@ export function ImportClient({ initialProgress }: { initialProgress: BatchProgre
           dragging ? "border-brand-600 bg-brand-50" : "border-slate-300 bg-slate-50"
         }`}
       >
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="h-10 w-10 text-slate-400" aria-hidden="true">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m6.75 12-3-3m0 0-3 3m3-3v6m-1.5-15H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth={1.5}
+          className="h-10 w-10 text-slate-400"
+          aria-hidden="true"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m6.75 12-3-3m0 0-3 3m3-3v6m-1.5-15H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"
+          />
         </svg>
         <p className="mt-3 font-medium text-slate-800">Drag a CSV file here</p>
         <p className="text-sm text-slate-500">or</p>
@@ -221,7 +249,8 @@ export function ImportClient({ initialProgress }: { initialProgress: BatchProgre
           ) : (
             <>
               <p className="mt-2 rounded-lg bg-emerald-50 px-3 py-2 text-emerald-900">
-                Columns look right. {selected.result.validCount} business{selected.result.validCount === 1 ? "" : "es"} ready
+                Columns look right. {selected.result.validCount} business{selected.result.validCount === 1 ? "" : "es"}{" "}
+                ready
                 {selected.result.invalidCount > 0 &&
                   `, ${selected.result.invalidCount} row${selected.result.invalidCount === 1 ? "" : "s"} can't be used (listed below)`}
                 .
@@ -230,10 +259,18 @@ export function ImportClient({ initialProgress }: { initialProgress: BatchProgre
                 <table className="w-full text-left text-sm">
                   <thead className="sticky top-0 bg-slate-50 text-xs uppercase tracking-wide text-slate-500">
                     <tr>
-                      <th scope="col" className="px-3 py-2">Row</th>
-                      <th scope="col" className="px-3 py-2">Name</th>
-                      <th scope="col" className="px-3 py-2">City</th>
-                      <th scope="col" className="px-3 py-2">Phone</th>
+                      <th scope="col" className="px-3 py-2">
+                        Row
+                      </th>
+                      <th scope="col" className="px-3 py-2">
+                        Name
+                      </th>
+                      <th scope="col" className="px-3 py-2">
+                        City
+                      </th>
+                      <th scope="col" className="px-3 py-2">
+                        Phone
+                      </th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-slate-100">
@@ -252,7 +289,9 @@ export function ImportClient({ initialProgress }: { initialProgress: BatchProgre
                 </table>
               </div>
               {selected.result.rows.length > 200 && (
-                <p className="mt-2 text-sm text-slate-500">Showing the first 200 of {selected.result.rows.length} rows.</p>
+                <p className="mt-2 text-sm text-slate-500">
+                  Showing the first 200 of {selected.result.rows.length} rows.
+                </p>
               )}
               {startError && (
                 <p role="alert" className="mt-3 rounded-lg bg-red-50 px-3 py-2 text-red-800">
@@ -267,7 +306,9 @@ export function ImportClient({ initialProgress }: { initialProgress: BatchProgre
                   className="inline-flex min-h-11 items-center gap-2 rounded-lg bg-brand-600 px-5 font-semibold text-white hover:bg-brand-700 disabled:opacity-60"
                 >
                   {starting && <Spinner />}
-                  {starting ? "Starting…" : `Generate ${selected.result.validCount} site${selected.result.validCount === 1 ? "" : "s"}`}
+                  {starting
+                    ? "Starting…"
+                    : `Generate ${selected.result.validCount} site${selected.result.validCount === 1 ? "" : "s"}`}
                 </button>
                 <button
                   type="button"
@@ -285,10 +326,19 @@ export function ImportClient({ initialProgress }: { initialProgress: BatchProgre
   );
 }
 
-function RowStatus({ status, business }: { status: BatchProgress["rows"][number]["status"]; business: { id: string } | null }) {
+function RowStatus({
+  status,
+  business,
+}: {
+  status: BatchProgress["rows"][number]["status"];
+  business: { id: string } | null;
+}) {
   if (status === "done" && business) {
     return (
-      <Link href={`/admin/businesses/${business.id}`} className="shrink-0 text-sm font-semibold text-emerald-700 hover:underline">
+      <Link
+        href={`/admin/businesses/${business.id}`}
+        className="shrink-0 text-sm font-semibold text-emerald-700 hover:underline"
+      >
         Generated
       </Link>
     );

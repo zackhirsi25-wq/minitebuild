@@ -18,13 +18,27 @@ export function SingleBusinessForm() {
         <label htmlFor="single-name" className="text-sm font-medium text-slate-700">
           Business name
         </label>
-        <input id="single-name" name="name" required defaultValue={state.values.name} className={input} autoComplete="off" />
+        <input
+          id="single-name"
+          name="name"
+          required
+          defaultValue={state.values.name}
+          className={input}
+          autoComplete="off"
+        />
       </div>
       <div>
         <label htmlFor="single-city" className="text-sm font-medium text-slate-700">
           City
         </label>
-        <input id="single-city" name="city" required defaultValue={state.values.city} className={input} autoComplete="off" />
+        <input
+          id="single-city"
+          name="city"
+          required
+          defaultValue={state.values.city}
+          className={input}
+          autoComplete="off"
+        />
       </div>
       <div>
         <label htmlFor="single-phone" className="text-sm font-medium text-slate-700">

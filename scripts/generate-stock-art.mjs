@@ -37,16 +37,25 @@ function grid(w, h, step, color, width = 1) {
 // ---------------------------------------------------------------------------
 
 function gcHeroBlueprint() {
-  const w = 1600, h = 1067;
+  const w = 1600,
+    h = 1067;
   const line = "#cfe3ff";
-  const baseY = 860, left = 420, right = 1180, wallTop = 560, ridge = 300;
+  const baseY = 860,
+    left = 420,
+    right = 1180,
+    wallTop = 560,
+    ridge = 300;
   let studs = "";
-  for (let x = left + 40; x < right; x += 48) studs += `<line x1="${x}" y1="${wallTop + 12}" x2="${x}" y2="${baseY - 12}" />`;
+  for (let x = left + 40; x < right; x += 48)
+    studs += `<line x1="${x}" y1="${wallTop + 12}" x2="${x}" y2="${baseY - 12}" />`;
   let rafters = "";
   for (let i = 1; i < 16; i++) {
     const t = i / 16;
     const x = left + (right - left) * t;
-    const y = x <= 800 ? wallTop - (wallTop - ridge) * ((x - left) / (800 - left)) : wallTop - (wallTop - ridge) * ((right - x) / (right - 800));
+    const y =
+      x <= 800
+        ? wallTop - (wallTop - ridge) * ((x - left) / (800 - left))
+        : wallTop - (wallTop - ridge) * ((right - x) / (right - 800));
     rafters += `<line x1="${x}" y1="${wallTop}" x2="${x}" y2="${y}" />`;
   }
   const body = `
@@ -80,7 +89,8 @@ function gcHeroBlueprint() {
 }
 
 function gcHeroDusk() {
-  const w = 1600, h = 1067;
+  const w = 1600,
+    h = 1067;
   const r = rng(7);
   const ground = 820;
   let frame = "";
@@ -93,7 +103,8 @@ function gcHeroDusk() {
   }
   frame += `<path d="M340 476 L805 236 L1270 476" stroke="#1a1410" stroke-width="16" fill="none" stroke-linejoin="round"/>`;
   let stars = "";
-  for (let i = 0; i < 40; i++) stars += `<circle cx="${r() * w}" cy="${r() * 300}" r="${0.8 + r() * 1.4}" fill="#fff" opacity="${0.25 + r() * 0.5}"/>`;
+  for (let i = 0; i < 40; i++)
+    stars += `<circle cx="${r() * w}" cy="${r() * 300}" r="${0.8 + r() * 1.4}" fill="#fff" opacity="${0.25 + r() * 0.5}"/>`;
   const body = `
     <rect width="${w}" height="${h}" fill="url(#sky)"/>
     ${stars}
@@ -107,7 +118,8 @@ function gcHeroDusk() {
 }
 
 function gcAboutLumber() {
-  const w = 1200, h = 900;
+  const w = 1200,
+    h = 900;
   const r = rng(11);
   let ends = "";
   const size = 150;
@@ -117,7 +129,8 @@ function gcAboutLumber() {
       const y = row * (size * 0.86) - 40;
       const tone = ["#d9a066", "#c98d52", "#e3b47a", "#b97a43"][Math.floor(r() * 4)];
       let rings = "";
-      for (let k = 1; k <= 5; k++) rings += `<circle cx="${x + size / 2 + (r() - 0.5) * 8}" cy="${y + size / 2 + (r() - 0.5) * 8}" r="${(size / 2 - 8) * (k / 6)}" fill="none" stroke="#8a5528" stroke-opacity="0.35" stroke-width="2"/>`;
+      for (let k = 1; k <= 5; k++)
+        rings += `<circle cx="${x + size / 2 + (r() - 0.5) * 8}" cy="${y + size / 2 + (r() - 0.5) * 8}" r="${(size / 2 - 8) * (k / 6)}" fill="none" stroke="#8a5528" stroke-opacity="0.35" stroke-width="2"/>`;
       ends += `<rect x="${x + 4}" y="${y + 4}" width="${size - 8}" height="${size - 8}" rx="10" fill="${tone}"/>${rings}`;
     }
   }
@@ -127,7 +140,8 @@ function gcAboutLumber() {
 }
 
 function gcAboutSteel() {
-  const w = 1200, h = 900;
+  const w = 1200,
+    h = 900;
   const beam = (x, y, len, angle, color) =>
     `<g transform="translate(${x} ${y}) rotate(${angle})"><rect x="0" y="-38" width="${len}" height="14" fill="${color}"/><rect x="0" y="24" width="${len}" height="14" fill="${color}"/><rect x="0" y="-26" width="${len}" height="52" fill="${color}" opacity="0.75"/></g>`;
   const body = `
@@ -148,7 +162,8 @@ function gcAboutSteel() {
 // ---------------------------------------------------------------------------
 
 function remHeroKitchen() {
-  const w = 1600, h = 1067;
+  const w = 1600,
+    h = 1067;
   const ink = "#3b3328";
   let uppers = "";
   for (let i = 0; i < 4; i++) {
@@ -166,7 +181,9 @@ function remHeroKitchen() {
     lowers += `<rect x="${x}" y="640" width="135" height="260" rx="6" fill="#4f6b5c" stroke="${ink}" stroke-width="4"/><line x1="${x + 30}" y1="680" x2="${x + 105}" y2="680" stroke="#d6b67a" stroke-width="6" stroke-linecap="round"/>`;
   }
   let tiles = "";
-  for (let y = 440; y < 610; y += 34) for (let x = 205 + ((y / 34) % 2) * 34; x < 1395; x += 68) tiles += `<rect x="${x}" y="${y}" width="64" height="30" rx="3" fill="#f7f2ea" stroke="#d9cdb9" stroke-width="2"/>`;
+  for (let y = 440; y < 610; y += 34)
+    for (let x = 205 + ((y / 34) % 2) * 34; x < 1395; x += 68)
+      tiles += `<rect x="${x}" y="${y}" width="64" height="30" rx="3" fill="#f7f2ea" stroke="#d9cdb9" stroke-width="2"/>`;
   const body = `
     <rect width="${w}" height="${h}" fill="#efe6d8"/>
     <rect x="200" y="440" width="1200" height="180" fill="#f3ece1"/>
@@ -188,9 +205,12 @@ function remHeroKitchen() {
 }
 
 function remHeroBath() {
-  const w = 1600, h = 1067;
+  const w = 1600,
+    h = 1067;
   let tiles = "";
-  for (let y = 0; y < h; y += 46) for (let x = -((y / 46) % 2) * 46; x < w; x += 92) tiles += `<rect x="${x + 2}" y="${y + 2}" width="88" height="42" rx="3" fill="#dfe8e1"/>`;
+  for (let y = 0; y < h; y += 46)
+    for (let x = -((y / 46) % 2) * 46; x < w; x += 92)
+      tiles += `<rect x="${x + 2}" y="${y + 2}" width="88" height="42" rx="3" fill="#dfe8e1"/>`;
   const body = `
     <rect width="${w}" height="${h}" fill="#bfcfc4"/>
     ${tiles}
@@ -208,7 +228,8 @@ function remHeroBath() {
 }
 
 function remAboutSwatches() {
-  const w = 1200, h = 900;
+  const w = 1200,
+    h = 900;
   const r = rng(23);
   let marble = "";
   for (let i = 0; i < 9; i++) {
@@ -221,7 +242,9 @@ function remAboutSwatches() {
     grain += `<path d="M110 ${y} q 130 ${-8 + r() * 16} 260 0 t 260 0" stroke="#8b5a2b" stroke-opacity="0.35" stroke-width="2" fill="none"/>`;
   }
   let tile = "";
-  for (let y = 0; y < 4; y++) for (let x = 0; x < 4; x++) tile += `<rect x="${430 + x * 64}" y="${120 + y * 64}" width="60" height="60" rx="4" fill="${(x + y) % 2 ? "#2f4858" : "#e8e1d4"}"/>`;
+  for (let y = 0; y < 4; y++)
+    for (let x = 0; x < 4; x++)
+      tile += `<rect x="${430 + x * 64}" y="${120 + y * 64}" width="60" height="60" rx="4" fill="${(x + y) % 2 ? "#2f4858" : "#e8e1d4"}"/>`;
   const chips = ["#c56a3d", "#e2b65c", "#7f9b84", "#3d5a80", "#e9e4da"]
     .map((c, i) => `<rect x="${720 + i * 78}" y="600" width="66" height="200" rx="8" fill="${c}" stroke="#00000020"/>`)
     .join("");
@@ -241,7 +264,8 @@ function remAboutSwatches() {
 }
 
 function remAboutPlan() {
-  const w = 1200, h = 900;
+  const w = 1200,
+    h = 900;
   const ink = "#2a4365";
   const body = `
     <rect width="${w}" height="${h}" fill="#f8f5ee"/>

@@ -30,13 +30,18 @@ export default async function CheckoutPage({ params, searchParams }: PageProps<"
   return (
     <main className={`${brandFont.className} min-h-dvh bg-slate-50 px-4 py-10 text-slate-900 sm:py-16`}>
       <div className="mx-auto max-w-2xl">
-        <Link href={`/p/${slug}`} className="inline-flex min-h-11 items-center text-sm font-medium text-slate-600 hover:text-slate-900">
+        <Link
+          href={`/p/${slug}`}
+          className="inline-flex min-h-11 items-center text-sm font-medium text-slate-600 hover:text-slate-900"
+        >
           ← Back to the preview
         </Link>
         <h1 className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl">Put {site.name} online</h1>
         <p className="mt-3 text-lg text-slate-600">
           Your site goes live at{" "}
-          <span className="font-semibold text-slate-900">{liveSiteUrl(site.slug, env.rootDomain).replace(/^https?:\/\//, "")}</span>{" "}
+          <span className="font-semibold text-slate-900">
+            {liveSiteUrl(site.slug, env.rootDomain).replace(/^https?:\/\//, "")}
+          </span>{" "}
           with hosting and updates included. Cancel any time.
         </p>
 
