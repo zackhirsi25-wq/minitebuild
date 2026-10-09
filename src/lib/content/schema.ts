@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { parsePhone } from "./phone";
+import { MAX_INPUT_SERVICES } from "./services";
 
 // ---------------------------------------------------------------------------
 // Text rules shared by every copy field
@@ -41,7 +42,9 @@ export const LIMITS = {
   subheadline: [30, 180],
   serviceTitle: [3, 40],
   serviceDescription: [30, 220],
-  services: [4, 6],
+  // Generated copy has at least 4 (checked in generateSiteContent) unless the
+  // owner listed fewer; the admin can trim down to 1.
+  services: [1, 6],
   about: [150, 1000],
   serviceArea: [2, 40],
   serviceAreas: [3, 12],
@@ -110,7 +113,7 @@ export const siteContentJsonSchema = {
     subheadline: { type: "string", description: "Supporting sentence under the headline, 30-180 characters." },
     services: {
       type: "array",
-      description: "4 to 6 services the business offers.",
+      description: "The services the business offers. How many and which ones are given in the prompt.",
       items: {
         type: "object",
         additionalProperties: false,
@@ -186,6 +189,17 @@ export const businessInputSchema = z.object({
     .trim()
     .min(1, { message: "Phone number is empty" })
     .refine((v) => v === "" || parsePhone(v) !== null, { message: "Phone number doesn't look valid" }),
+  /** Optional list from the CSV "services" column. Used as the exact service titles. */
+  services: z
+    .array(
+      z
+        .string()
+        .trim()
+        .min(LIMITS.serviceTitle[0], { message: `Each service needs at least ${LIMITS.serviceTitle[0]} characters` })
+        .max(LIMITS.serviceTitle[1], { message: `Each service must be ${LIMITS.serviceTitle[1]} characters or fewer` }),
+    )
+    .max(MAX_INPUT_SERVICES, { message: `List at most ${MAX_INPUT_SERVICES} services` })
+    .optional(),
 });
 
 export type BusinessInput = z.infer<typeof businessInputSchema>;

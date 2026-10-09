@@ -4,8 +4,14 @@ Minitebuild generates and hosts a one-page website for a local contractor or rem
 
 How it works:
 
-1. **Lookup.** The business is looked up in Google Places (phone match first, then the top result in the city). Name, address, phone, hours, category and place id are saved. Photos and review text are never requested.
-2. **Copy.** Claude writes the copy as JSON in a fixed shape: headline, subheadline, 4–6 services, about, service areas, 4–5 FAQs and a call to action. A Zod schema checks it (length limits, no HTML, no placeholder text). If it fails, Claude gets one more try with the validation errors.
+1. **Lookup.** The business is looked up in Google Places: a phone match first, then the top result in the city whose name matches (at least half of the name's distinctive words, so "Elite Remodeling" matches "Elite Remodeling & Design LLC" but an unknown name never borrows another company's listing). Name, address, phone, hours, category and place id are saved. Photos and review text are never requested.
+2. **Copy.** Claude writes the copy as JSON in a fixed shape: headline, subheadline, services, about, service areas, 4–5 FAQs and a call to action. Services come from, in order:
+   - the CSV `services` column, used as the exact titles;
+   - otherwise the specialty the business name, then the Google category, points to ("X Roofing" gets roofing services, not kitchens; see `src/lib/content/services.ts`), 4–6 of them;
+   - otherwise 4–6 general contracting services.
+
+   A Zod schema checks the copy (length limits, no HTML, no placeholder text), and a second check rejects invented facts: years in business, license numbers, awards or certifications, team size, guarantees or warranties, and reviews or quotes. If either fails, Claude gets one more try with the problems listed. Generated services show as **Unconfirmed** in the admin until you edit them or click Confirm services.
+
 3. **Site.** The site is built from one of three templates (Bold, Classic, Split) and gets a preview at `/p/<slug>`.
 4. **Go live.** The owner pays and the site goes live at `<slug>.ROOT_DOMAIN`.
 
@@ -23,19 +29,19 @@ Every business gets a site. If it already has a website it's tagged `has website
 
 Copy `.env.example` to `.env.local`.
 
-| Name | Required | What it's for |
-| --- | --- | --- |
-| `NEXT_PUBLIC_SUPABASE_URL` | yes | Supabase project URL |
-| `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` | yes | Publishable key (`sb_publishable_…`). Used for login and public site reads |
-| `SUPABASE_SECRET_KEY` | yes | Secret key (`sb_secret_…`). Server only; used by the admin panel after the login check |
-| `ADMIN_EMAIL` | yes | The only account allowed into `/admin` |
-| `ROOT_DOMAIN` | yes | `minitebuild.com` in production, `localhost:3000` locally |
-| `SALES_PHONE` | yes | Shown as "Contact us to activate" on checkout while billing is the stub |
-| `WORKER_SECRET` | yes | **Added by me.** Protects `POST /api/worker`; pg_cron sends it as a bearer token. Generate with `openssl rand -hex 32` |
-| `APP_ANTHROPIC_API_KEY` | no | Anthropic key for site copy. Read first. Without it (or `ANTHROPIC_API_KEY`), built-in sample copy is used |
-| `ANTHROPIC_API_KEY` | no | Fallback when `APP_ANTHROPIC_API_KEY` is not set |
-| `ANTHROPIC_MODEL` | no | **Added by me.** Model for site copy; defaults to `claude-opus-5-5` |
-| `GOOGLE_PLACES_API_KEY` | no | Without it, fixture businesses are used |
+| Name                                   | Required | What it's for                                                                                                          |
+| -------------------------------------- | -------- | ---------------------------------------------------------------------------------------------------------------------- |
+| `NEXT_PUBLIC_SUPABASE_URL`             | yes      | Supabase project URL                                                                                                   |
+| `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` | yes      | Publishable key (`sb_publishable_…`). Used for login and public site reads                                             |
+| `SUPABASE_SECRET_KEY`                  | yes      | Secret key (`sb_secret_…`). Server only; used by the admin panel after the login check                                 |
+| `ADMIN_EMAIL`                          | yes      | The only account allowed into `/admin`                                                                                 |
+| `ROOT_DOMAIN`                          | yes      | `minitebuild.com` in production, `localhost:3000` locally                                                              |
+| `SALES_PHONE`                          | yes      | Shown as "Contact us to activate" on checkout while billing is the stub                                                |
+| `WORKER_SECRET`                        | yes      | **Added by me.** Protects `POST /api/worker`; pg_cron sends it as a bearer token. Generate with `openssl rand -hex 32` |
+| `APP_ANTHROPIC_API_KEY`                | no       | Anthropic key for site copy. Read first. Without it (or `ANTHROPIC_API_KEY`), built-in sample copy is used             |
+| `ANTHROPIC_API_KEY`                    | no       | Fallback when `APP_ANTHROPIC_API_KEY` is not set                                                                       |
+| `ANTHROPIC_MODEL`                      | no       | **Added by me.** Model for site copy; defaults to `claude-opus-5-5`                                                    |
+| `GOOGLE_PLACES_API_KEY`                | no       | Without it, fixture businesses are used                                                                                |
 
 ### Running without API keys (fixtures)
 
@@ -73,7 +79,7 @@ Then start the app:
 ```bash
 npm run dev            # http://localhost:3000
 npm test               # unit tests
-npm run typecheck
+npm run typecheck      # runs next typegen first, so it works on a fresh checkout
 npm run lint
 ```
 
@@ -96,6 +102,7 @@ select vault.create_secret('<your WORKER_SECRET>', 'import_worker_secret');
    - paste each file into the SQL editor, in filename order.
 
    This creates the five tables with row-level security, the `site-images` storage bucket and the `pg_cron` job.
+
 3. **Auth.** Go to Authentication, then Sign In / Providers, and turn **off** "Allow new users to sign up". Then go to Auth, then Users, then Add user, and create the `ADMIN_EMAIL` account.
 4. **Keys.** In Project Settings, then API Keys, copy the URL, the publishable key and a secret key into Vercel.
 5. **Worker secrets.** After you deploy, run in the SQL editor:
@@ -132,8 +139,9 @@ Vercel preview deployments (`*.vercel.app`) serve the app itself, not customer s
 
 1. **Login.** Open `/admin`. You're sent to `/login`. Signing in as `ADMIN_EMAIL` lands on Businesses; any other account sees "This account doesn't have access to the admin panel."
 2. **Generate one site.** Go to Import, then Add one business. Enter `Elite Remodeling`, `Austin`, `(512) 555-0142` and click Generate site. You land on the business page with the `has website` tag. Try `Unlisted Builders` to see `unverified`. Generate Elite again to get `elite-remodeling-austin-2`.
-3. **CSV import.** Go to Import and drag `samples/businesses.csv` onto the drop zone.
+3. **CSV import.** Go to Import and drag `samples/businesses.csv` onto the drop zone. Columns are `name`, `city`, `phone` and an optional `services` (up to 6, separated by semicolons, 40 characters each).
    - The column check says 6 businesses are ready and 2 rows can't be used.
+   - Hartley & Sons gets exactly the four services from its `services` cell.
    - Click Generate 6 sites and watch the progress bar and per-row list. Rows 7 and 8 fail with their reasons.
    - Close the tab mid-import: pg_cron finishes the batch within about a minute.
 4. **Preview.** Open any preview link from the Businesses table, on a phone-sized window. You should see:
@@ -145,6 +153,7 @@ Vercel preview deployments (`*.vercel.app`) serve the app itself, not customer s
 7. **Admin detail.** On a business page:
    - Edit the headline and click Save (it changes to "Saved"), and the live preview reloads.
    - Switch the template and the preview changes immediately.
+   - The Services section shows **Unconfirmed**. Click Confirm services, or edit a service and save; either clears it. Regenerate copy marks them unconfirmed again.
    - Try Publish, Pause, Mark as paid and Regenerate copy (each asks for confirmation) and Refresh from Google.
    - Upload a photo, toggle tags and save notes.
 8. **SEO.** On a live site, check `/robots.txt`, `/sitemap.xml` and the page source (title, meta description, canonical, `application/ld+json`). An unknown subdomain returns a 404.

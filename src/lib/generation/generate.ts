@@ -77,7 +77,8 @@ export function detailsFromMatch(input: BusinessInput, match: PlaceMatch) {
     city: place.city || input.city,
     // Matched by phone: Google's number is the same one. Matched by city: keep
     // the number we were given, which is the one the admin wants called.
-    phone: match.matchedBy === "phone" && place.phone ? (parsePhone(place.phone)?.display ?? place.phone) : phone.display,
+    phone:
+      match.matchedBy === "phone" && place.phone ? (parsePhone(place.phone)?.display ?? place.phone) : phone.display,
     address: place.address,
     hours: place.hours,
     category: place.category,
@@ -115,6 +116,7 @@ export async function generateBusiness(rawInput: BusinessInput, deps: GenerateDe
     category: details.category,
     trade,
     hours: details.hours,
+    services: input.services,
   };
   const content = await generateSiteContent(facts, deps.callModelFor(facts));
 

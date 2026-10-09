@@ -22,7 +22,9 @@ export default async function ImportPage({ searchParams }: PageProps<"/admin/imp
 
       <section className="rounded-xl border border-slate-200 bg-white p-5 sm:p-6">
         <h2 className="text-lg font-semibold">Add one business</h2>
-        <p className="mt-1 text-sm text-slate-600">Takes up to a minute. You&apos;ll land on the new site when it&apos;s ready.</p>
+        <p className="mt-1 text-sm text-slate-600">
+          Takes up to a minute. You&apos;ll land on the new site when it&apos;s ready.
+        </p>
         <div className="mt-4">
           <SingleBusinessForm />
         </div>
@@ -31,8 +33,9 @@ export default async function ImportPage({ searchParams }: PageProps<"/admin/imp
       <section className="rounded-xl border border-slate-200 bg-white p-5 sm:p-6">
         <h2 className="text-lg font-semibold">Import a CSV</h2>
         <p className="mt-1 text-sm text-slate-600">
-          One business per row, with columns <strong>name</strong>, <strong>city</strong> and <strong>phone</strong>. Sites
-          keep generating in the background if you close this tab.
+          One business per row, with columns <strong>name</strong>, <strong>city</strong> and <strong>phone</strong>. An
+          optional <strong>services</strong> column (separated by semicolons) sets the exact services listed. Sites keep
+          generating in the background if you close this tab.
         </p>
         <div className="mt-4">
           <ImportClient key={batchId ?? "new"} initialProgress={initialProgress} />
@@ -61,7 +64,8 @@ export default async function ImportPage({ searchParams }: PageProps<"/admin/imp
                   <span>
                     <span className="font-medium text-slate-900">{b.filename ?? "Import"}</span>
                     <span className="block text-sm text-slate-500">
-                      {b.total_rows} rows · {new Date(b.created_at).toLocaleString("en-US", { dateStyle: "medium", timeStyle: "short" })}
+                      {b.total_rows} rows ·{" "}
+                      {new Date(b.created_at).toLocaleString("en-US", { dateStyle: "medium", timeStyle: "short" })}
                     </span>
                   </span>
                   <span className={`text-sm font-semibold ${b.completed_at ? "text-emerald-700" : "text-amber-700"}`}>

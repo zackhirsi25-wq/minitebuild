@@ -79,6 +79,7 @@ export type Database = {
           input_city: string;
           input_name: string;
           input_phone: string;
+          input_services: string[];
           name: string;
           notes: string;
           owner_confirmed_at: string | null;
@@ -87,6 +88,7 @@ export type Database = {
           place_id: string | null;
           places_fetched_at: string | null;
           published_at: string | null;
+          services_confirmed_at: string | null;
           slug: string;
           status: string;
           tags: string[];
@@ -109,6 +111,7 @@ export type Database = {
           input_city: string;
           input_name: string;
           input_phone: string;
+          input_services?: string[];
           name: string;
           notes?: string;
           owner_confirmed_at?: string | null;
@@ -117,6 +120,7 @@ export type Database = {
           place_id?: string | null;
           places_fetched_at?: string | null;
           published_at?: string | null;
+          services_confirmed_at?: string | null;
           slug: string;
           status?: string;
           tags?: string[];
@@ -138,6 +142,7 @@ export type Database = {
           input_city?: string;
           input_name?: string;
           input_phone?: string;
+          input_services?: string[];
           name?: string;
           notes?: string;
           owner_confirmed_at?: string | null;
@@ -146,6 +151,7 @@ export type Database = {
           place_id?: string | null;
           places_fetched_at?: string | null;
           published_at?: string | null;
+          services_confirmed_at?: string | null;
           slug?: string;
           status?: string;
           tags?: string[];

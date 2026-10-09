@@ -3,7 +3,14 @@ import { notFound } from "next/navigation";
 import { CopyLinkButton } from "@/components/ui/copy-link-button";
 import { StatusBadge } from "@/components/ui/status-badge";
 import { getBusiness } from "@/lib/admin/queries";
-import { siteContentSchema, type BusinessStatus, type ImageSlot, type Tag, type TemplateId, type Trade } from "@/lib/content/schema";
+import {
+  siteContentSchema,
+  type BusinessStatus,
+  type ImageSlot,
+  type Tag,
+  type TemplateId,
+  type Trade,
+} from "@/lib/content/schema";
 import { env } from "@/lib/env";
 import { siteImage } from "@/lib/images/stock";
 import { appUrl, liveSiteUrl } from "@/lib/routing/hostname";
@@ -40,7 +47,10 @@ export default async function BusinessPage({ params, searchParams }: PageProps<"
 
   return (
     <div>
-      <Link href="/admin" className="inline-flex min-h-11 items-center text-sm font-medium text-slate-600 hover:text-slate-900">
+      <Link
+        href="/admin"
+        className="inline-flex min-h-11 items-center text-sm font-medium text-slate-600 hover:text-slate-900"
+      >
         ← All businesses
       </Link>
 
@@ -103,6 +113,7 @@ export default async function BusinessPage({ params, searchParams }: PageProps<"
               content: content.data,
             }}
             savedAt={b.updated_at}
+            servicesConfirmed={!!b.services_confirmed_at}
           />
         ) : (
           <p role="alert" className="rounded-lg bg-red-50 px-4 py-3 text-red-800">
@@ -129,7 +140,12 @@ export default async function BusinessPage({ params, searchParams }: PageProps<"
             <dt className="text-slate-500">Website</dt>
             <dd>
               {b.website_url ? (
-                <a href={b.website_url} target="_blank" rel="noreferrer" className="break-all text-brand-700 hover:underline">
+                <a
+                  href={b.website_url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="break-all text-brand-700 hover:underline"
+                >
                   {b.website_url}
                 </a>
               ) : (

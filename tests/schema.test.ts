@@ -60,9 +60,10 @@ describe("siteContentSchema", () => {
     expect(formatIssues(result.error!)).toContain("headline: must be at most 70 characters");
   });
 
-  it("requires 4-6 services and 4-5 FAQ entries", () => {
+  it("allows 1-6 services (generation asks for 4+) and requires 4-5 FAQ entries", () => {
     const content = valid();
-    expect(siteContentSchema.safeParse({ ...content, services: content.services.slice(0, 3) }).success).toBe(false);
+    expect(siteContentSchema.safeParse({ ...content, services: [] }).success).toBe(false);
+    expect(siteContentSchema.safeParse({ ...content, services: content.services.slice(0, 1) }).success).toBe(true);
     expect(
       siteContentSchema.safeParse({ ...content, services: [...content.services, ...content.services].slice(0, 7) })
         .success,
@@ -72,7 +73,10 @@ describe("siteContentSchema", () => {
   });
 
   it("rejects placeholder text", () => {
-    const result = siteContentSchema.safeParse({ ...valid(), subheadline: "Serving [Your City] since day one with honest work." });
+    const result = siteContentSchema.safeParse({
+      ...valid(),
+      subheadline: "Serving [Your City] since day one with honest work.",
+    });
     expect(formatIssues(result.error!)).toContain("subheadline: contains placeholder text");
   });
 

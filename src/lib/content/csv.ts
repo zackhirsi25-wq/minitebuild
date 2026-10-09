@@ -1,6 +1,8 @@
 import { businessInputSchema, type BusinessInput } from "./schema";
+import { splitServices } from "./services";
 
-// CSV import: an RFC 4180 parser plus header detection for name, city, phone.
+// CSV import: an RFC 4180 parser plus header detection for name, city, phone
+// and an optional services column.
 // Shared by the browser (column check before upload) and the server.
 
 export const MAX_IMPORT_ROWS = 2000;
@@ -73,32 +75,40 @@ function detectDelimiter(text: string): string {
 // Columns
 // ---------------------------------------------------------------------------
 
-const COLUMN_ALIASES: Record<keyof BusinessInput, string[]> = {
+type RequiredColumn = "name" | "city" | "phone";
+
+const COLUMN_ALIASES: Record<RequiredColumn, string[]> = {
   name: ["name", "business name", "business", "company", "company name", "businessname"],
   city: ["city", "town", "city name"],
   phone: ["phone", "phone number", "telephone", "tel", "phonenumber", "mobile", "number"],
 };
 
+const SERVICES_ALIASES = ["services", "service", "services offered", "specialties", "specialty"];
+
 function normalizeHeader(value: string): string {
-  return value.trim().toLowerCase().replace(/[_\-.]+/g, " ").replace(/\s+/g, " ");
+  return value
+    .trim()
+    .toLowerCase()
+    .replace(/[_\-.]+/g, " ")
+    .replace(/\s+/g, " ");
 }
 
-export type ColumnMap = Record<keyof BusinessInput, number>;
+/** Column index for each field; services is -1 when the file has no services column. */
+export type ColumnMap = Record<RequiredColumn | "services", number>;
 
-export type ColumnCheck =
-  | { ok: true; columns: ColumnMap }
-  | { ok: false; missing: (keyof BusinessInput)[]; found: string[] };
+export type ColumnCheck = { ok: true; columns: ColumnMap } | { ok: false; missing: RequiredColumn[]; found: string[] };
 
 export function detectColumns(header: string[]): ColumnCheck {
   const normalized = header.map(normalizeHeader);
   const columns: Partial<ColumnMap> = {};
-  const missing: (keyof BusinessInput)[] = [];
-  for (const key of Object.keys(COLUMN_ALIASES) as (keyof BusinessInput)[]) {
+  const missing: RequiredColumn[] = [];
+  for (const key of Object.keys(COLUMN_ALIASES) as RequiredColumn[]) {
     const index = normalized.findIndex((h) => COLUMN_ALIASES[key].includes(h));
     if (index === -1) missing.push(key);
     else columns[key] = index;
   }
   if (missing.length > 0) return { ok: false, missing, found: header.map((h) => h.trim()) };
+  columns.services = normalized.findIndex((h) => SERVICES_ALIASES.includes(h));
   return { ok: true, columns: columns as ColumnMap };
 }
 
@@ -115,8 +125,7 @@ export type ImportRow = {
 };
 
 export type ImportParseResult =
-  | { ok: true; rows: ImportRow[]; validCount: number; invalidCount: number }
-  | { ok: false; error: string };
+  { ok: true; rows: ImportRow[]; validCount: number; invalidCount: number } | { ok: false; error: string };
 
 export function parseImportCsv(text: string): ImportParseResult {
   const table = parseCsv(text);
@@ -139,11 +148,13 @@ export function parseImportCsv(text: string): ImportParseResult {
   for (let i = headerIndex + 1; i < table.length; i++) {
     const cells = table[i];
     if (!cells.some((c) => c.trim() !== "")) continue; // blank line, not a business
-    const input = {
+    const input: BusinessInput = {
       name: (cells[check.columns.name] ?? "").trim(),
       city: (cells[check.columns.city] ?? "").trim(),
       phone: (cells[check.columns.phone] ?? "").trim(),
     };
+    const services = check.columns.services === -1 ? [] : splitServices(cells[check.columns.services] ?? "");
+    if (services.length > 0) input.services = services;
     const parsed = businessInputSchema.safeParse(input);
     rows.push({
       rowNumber: i + 1,
@@ -154,7 +165,10 @@ export function parseImportCsv(text: string): ImportParseResult {
 
   if (rows.length === 0) return { ok: false, error: "The file has a header row but no businesses." };
   if (rows.length > MAX_IMPORT_ROWS) {
-    return { ok: false, error: `The file has ${rows.length} rows. Split it into files of ${MAX_IMPORT_ROWS} rows or fewer.` };
+    return {
+      ok: false,
+      error: `The file has ${rows.length} rows. Split it into files of ${MAX_IMPORT_ROWS} rows or fewer.`,
+    };
   }
 
   const invalidCount = rows.filter((r) => r.error).length;

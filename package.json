@@ -9,8 +9,8 @@
     "lint": "eslint",
     "test": "vitest run",
     "test:watch": "vitest",
-    "typecheck": "tsc --noEmit",
-    "db:types": "supabase gen types typescript --local > src/lib/supabase/database.types.ts && prettier --write src/lib/supabase/database.types.ts",
+    "typecheck": "next typegen && tsc --noEmit",
+    "db:types": "supabase gen types typescript --local > src/lib/supabase/database.types.ts.tmp && mv src/lib/supabase/database.types.ts.tmp src/lib/supabase/database.types.ts && prettier --write src/lib/supabase/database.types.ts",
     "stock:generate": "node scripts/generate-stock-art.mjs"
   },
   "dependencies": {

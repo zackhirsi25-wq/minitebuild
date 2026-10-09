@@ -10,6 +10,7 @@ import { requireAdmin } from "@/lib/auth";
 import { handleBillingEvent } from "@/lib/billing/handle-event";
 import { supabaseBillingStore } from "@/lib/billing/store";
 import { parseImportCsv } from "@/lib/content/csv";
+import { serviceKey } from "@/lib/content/services";
 import { businessInputSchema, formatIssues, IMAGE_SLOTS, TAGS, type ImageSlot, type Tag } from "@/lib/content/schema";
 import { env } from "@/lib/env";
 import { detailsFromMatch } from "@/lib/generation/generate";
@@ -74,7 +75,11 @@ export async function createSingleBusiness(_prev: CreateSingleState, formData: F
 
   await runWorker({ batchId: batch.id, budgetMs: Number.POSITIVE_INFINITY, maxChunks: 1, chunkSize: 1 });
 
-  const { data: job } = await db.from("import_jobs").select("status, error, business_id").eq("batch_id", batch.id).single();
+  const { data: job } = await db
+    .from("import_jobs")
+    .select("status, error, business_id")
+    .eq("batch_id", batch.id)
+    .single();
   if (!job?.business_id) {
     return { error: job?.error ?? "Generation didn't finish. Check the Import page for this row.", values };
   }
@@ -137,9 +142,14 @@ export async function getImportProgress(batchId: string): Promise<BatchProgress 
 export async function retryFailedRows(batchId: string): Promise<ActionResult> {
   await requireAdmin();
   const db = supabaseAdmin();
-  const { data: failed } = await db.from("import_jobs").select("id, input").eq("batch_id", batchId).eq("status", "failed");
+  const { data: failed } = await db
+    .from("import_jobs")
+    .select("id, input")
+    .eq("batch_id", batchId)
+    .eq("status", "failed");
   const retryable = (failed ?? []).filter((j) => businessInputSchema.safeParse(j.input).success).map((j) => j.id);
-  if (retryable.length === 0) return { ok: false, error: "No failed rows can be retried. Fix the file and import it again." };
+  if (retryable.length === 0)
+    return { ok: false, error: "No failed rows can be retried. Fix the file and import it again." };
   const { error } = await db
     .from("import_jobs")
     .update({ status: "queued", attempts: 0, error: null, finished_at: null, run_after: new Date().toISOString() })
@@ -153,7 +163,8 @@ export async function retryFailedRows(batchId: string): Promise<ActionResult> {
 // Business detail
 // ---------------------------------------------------------------------------
 
-export type SaveResult = { ok: true; savedAt: string } | { ok: false; error: string; fieldErrors: Record<string, string> };
+export type SaveResult =
+  { ok: true; savedAt: string } | { ok: false; error: string; fieldErrors: Record<string, string> };
 
 export async function saveBusiness(id: string, edit: BusinessEdit): Promise<SaveResult> {
   await requireAdmin();
@@ -174,6 +185,12 @@ export async function saveBusiness(id: string, edit: BusinessEdit): Promise<Save
   try {
     const { details, content } = parsed.data;
     const now = new Date().toISOString();
+    const { data: before, error: loadError } = await supabaseAdmin()
+      .from("businesses")
+      .select("content")
+      .eq("id", id)
+      .single();
+    if (loadError) throw new Error(loadError.message);
     const { data, error } = await supabaseAdmin()
       .from("businesses")
       .update({
@@ -188,6 +205,8 @@ export async function saveBusiness(id: string, edit: BusinessEdit): Promise<Save
         template: details.template,
         content,
         details_confirmed_at: now,
+        // Editing the services counts as confirming them.
+        ...(servicesChanged(before.content, content) ? { services_confirmed_at: now } : {}),
       })
       .eq("id", id)
       .select("id, slug, updated_at")
@@ -196,7 +215,35 @@ export async function saveBusiness(id: string, edit: BusinessEdit): Promise<Save
     afterChange(data);
     return { ok: true, savedAt: data.updated_at };
   } catch (error) {
-    return { ok: false, error: `Could not save: ${error instanceof Error ? error.message : "unknown error"}`, fieldErrors: {} };
+    return {
+      ok: false,
+      error: `Could not save: ${error instanceof Error ? error.message : "unknown error"}`,
+      fieldErrors: {},
+    };
+  }
+}
+
+function servicesChanged(before: Json, after: { services: { title: string; description: string }[] }): boolean {
+  const old = ((before as { services?: { title: string; description: string }[] } | null)?.services ?? []).map(
+    (s) => `${serviceKey(s.title)}|${s.description.trim()}`,
+  );
+  const now = after.services.map((s) => `${serviceKey(s.title)}|${s.description.trim()}`);
+  return old.join("\n") !== now.join("\n");
+}
+
+export async function confirmServices(id: string): Promise<ActionResult> {
+  await requireAdmin();
+  try {
+    const business = await loadBusiness(id);
+    const { error } = await supabaseAdmin()
+      .from("businesses")
+      .update({ services_confirmed_at: new Date().toISOString() })
+      .eq("id", id);
+    if (error) throw new Error(error.message);
+    afterChange(business);
+    return { ok: true, message: "Services confirmed" };
+  } catch (error) {
+    return failure(error, "Could not confirm the services.");
   }
 }
 
@@ -205,7 +252,11 @@ export async function regenerateBusinessCopy(id: string): Promise<ActionResult> 
   try {
     const business = await loadBusiness(id);
     const content = await regenerateCopy(factsFor(business));
-    const { error } = await supabaseAdmin().from("businesses").update({ content }).eq("id", id);
+    // New copy means new services: they need confirming again.
+    const { error } = await supabaseAdmin()
+      .from("businesses")
+      .update({ content, services_confirmed_at: null })
+      .eq("id", id);
     if (error) throw new Error(error.message);
     afterChange(business);
     return { ok: true, message: "New copy written" };
@@ -253,7 +304,9 @@ export async function refreshFromGoogle(id: string): Promise<ActionResult> {
     afterChange(business);
     return {
       ok: true,
-      message: match.found ? "Details updated from Google. Review and save them." : "Google has no listing for this business.",
+      message: match.found
+        ? "Details updated from Google. Review and save them."
+        : "Google has no listing for this business.",
     };
   } catch (error) {
     return failure(error, "Could not refresh from Google.");
@@ -320,7 +373,10 @@ export async function markAsPaid(id: string, plan: PlanId): Promise<ActionResult
 
 export async function saveNotes(id: string, notes: string): Promise<ActionResult> {
   await requireAdmin();
-  const { error } = await supabaseAdmin().from("businesses").update({ notes: notes.slice(0, 5000) }).eq("id", id);
+  const { error } = await supabaseAdmin()
+    .from("businesses")
+    .update({ notes: notes.slice(0, 5000) })
+    .eq("id", id);
   if (error) return { ok: false, error: `Could not save notes: ${error.message}` };
   revalidatePath(`/admin/businesses/${id}`);
   return { ok: true, message: "Notes saved" };
@@ -334,7 +390,10 @@ export async function setTag(id: string, tag: Tag, on: boolean): Promise<ActionR
     const tags = new Set(business.tags);
     if (on) tags.add(tag);
     else tags.delete(tag);
-    const { error } = await supabaseAdmin().from("businesses").update({ tags: Array.from(tags) }).eq("id", id);
+    const { error } = await supabaseAdmin()
+      .from("businesses")
+      .update({ tags: Array.from(tags) })
+      .eq("id", id);
     if (error) throw new Error(error.message);
     revalidatePath(`/admin/businesses/${id}`);
     revalidatePath("/admin");
@@ -376,7 +435,10 @@ export async function uploadPhoto(id: string, formData: FormData): Promise<Actio
     const images = { ...((business.images as Record<string, { path: string; alt: string }>) ?? {}) };
     const previous = images[slot]?.path;
     images[slot] = { path, alt };
-    const { error } = await db.from("businesses").update({ images: images as NonNullable<Json> }).eq("id", id);
+    const { error } = await db
+      .from("businesses")
+      .update({ images: images as NonNullable<Json> })
+      .eq("id", id);
     if (error) throw new Error(error.message);
     if (previous) await db.storage.from("site-images").remove([previous]);
     afterChange(business);
@@ -395,7 +457,10 @@ export async function resetPhoto(id: string, slot: ImageSlot): Promise<ActionRes
     const previous = images[slot]?.path;
     delete images[slot];
     const db = supabaseAdmin();
-    const { error } = await db.from("businesses").update({ images: images as NonNullable<Json> }).eq("id", id);
+    const { error } = await db
+      .from("businesses")
+      .update({ images: images as NonNullable<Json> })
+      .eq("id", id);
     if (error) throw new Error(error.message);
     if (previous) await db.storage.from("site-images").remove([previous]);
     afterChange(business);

@@ -23,7 +23,10 @@ export function generationDeps(input: BusinessInput): GenerateDeps {
 
 /** Fresh copy for an existing business ("Regenerate copy"). */
 export async function regenerateCopy(facts: BusinessFacts): Promise<SiteContent> {
-  return generateSiteContent(facts, generationDeps({ name: facts.name, city: facts.city, phone: facts.phone }).callModelFor(facts));
+  return generateSiteContent(
+    facts,
+    generationDeps({ name: facts.name, city: facts.city, phone: facts.phone }).callModelFor(facts),
+  );
 }
 
 export function factsFor(row: {
@@ -34,8 +37,10 @@ export function factsFor(row: {
   category: string | null;
   trade: string;
   hours: string[];
+  input_services: string[];
 }): BusinessFacts {
-  return { ...row, trade: row.trade as Trade };
+  const { input_services, ...facts } = row;
+  return { ...facts, trade: row.trade as Trade, services: input_services.length ? input_services : undefined };
 }
 
 /** Inserts a generated business under a free slug (business-name-city, then -2, -3...). */
@@ -63,6 +68,7 @@ export async function insertBusiness(generated: GeneratedBusiness): Promise<{ id
         input_name: generated.input.name,
         input_city: generated.input.city,
         input_phone: generated.input.phone,
+        input_services: generated.input.services ?? [],
         name: generated.name,
         city: generated.city,
         phone: generated.phone,
@@ -106,7 +112,13 @@ export async function processJob(job: JobRow): Promise<"done" | "failed" | "retr
     const business = await insertBusiness(generated);
     await db
       .from("import_jobs")
-      .update({ status: "done", business_id: business.id, error: null, locked_at: null, finished_at: new Date().toISOString() })
+      .update({
+        status: "done",
+        business_id: business.id,
+        error: null,
+        locked_at: null,
+        finished_at: new Date().toISOString(),
+      })
       .eq("id", job.id);
     return "done";
   } catch (error) {

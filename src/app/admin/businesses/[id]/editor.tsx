@@ -5,7 +5,7 @@ import { Spinner } from "@/components/ui/spinner";
 import { useToast } from "@/components/ui/toast";
 import type { BusinessEdit } from "@/lib/admin/details";
 import { LIMITS, TEMPLATES, type SiteContent, type TemplateId, type Trade } from "@/lib/content/schema";
-import { saveBusiness } from "../../actions";
+import { confirmServices, saveBusiness } from "../../actions";
 
 type Details = {
   name: string;
@@ -58,10 +58,14 @@ function Field({
 function Count({ value, limit }: { value: string; limit: readonly [number, number] }) {
   const n = value.trim().length;
   const bad = n < limit[0] || n > limit[1];
-  return <span className={bad ? "font-semibold text-red-700" : undefined}>{n}/{limit[1]}</span>;
+  return (
+    <span className={bad ? "font-semibold text-red-700" : undefined}>
+      {n}/{limit[1]}
+    </span>
+  );
 }
 
-function Section({ title, children, action }: { title: string; children: ReactNode; action?: ReactNode }) {
+function Section({ title, children, action }: { title: ReactNode; children: ReactNode; action?: ReactNode }) {
   return (
     <fieldset className="rounded-xl border border-slate-200 bg-white p-5">
       <div className="flex items-center justify-between gap-2">
@@ -73,7 +77,20 @@ function Section({ title, children, action }: { title: string; children: ReactNo
   );
 }
 
-export function Editor({ id, slug, initial, savedAt }: { id: string; slug: string; initial: State; savedAt: string }) {
+export function Editor({
+  id,
+  slug,
+  initial,
+  savedAt,
+  servicesConfirmed,
+}: {
+  id: string;
+  slug: string;
+  initial: State;
+  savedAt: string;
+  /** False until the admin edits the services or confirms them as they are. */
+  servicesConfirmed: boolean;
+}) {
   const toast = useToast();
   const initialJson = JSON.stringify(initial);
   const [state, setState] = useState<State>(initial);
@@ -84,6 +101,19 @@ export function Editor({ id, slug, initial, savedAt }: { id: string; slug: strin
   const [lastSaved, setLastSaved] = useState<string | null>(null);
   const [previewVersion, setPreviewVersion] = useState(savedAt);
   const dirty = useMemo(() => JSON.stringify(state) !== baseline, [state, baseline]);
+  const servicesDirty = useMemo(
+    () => JSON.stringify(state.content.services) !== JSON.stringify((JSON.parse(baseline) as State).content.services),
+    [state, baseline],
+  );
+  const [confirming, setConfirming] = useState(false);
+
+  async function confirm() {
+    setConfirming(true);
+    const result = await confirmServices(id).catch(() => ({ ok: false as const, error: "Couldn't reach the server." }));
+    setConfirming(false);
+    if (result.ok) toast.show("Services confirmed");
+    else toast.show(result.error, "error");
+  }
 
   // The server data changed underneath us (regenerate, refresh from Google, save): load it.
   const lastInitial = useRef(initialJson);
@@ -151,7 +181,13 @@ export function Editor({ id, slug, initial, savedAt }: { id: string; slug: strin
                 key={t}
                 className="flex min-h-11 cursor-pointer items-center gap-2 rounded-lg border border-slate-200 px-3 py-2 text-sm has-[:checked]:border-brand-600 has-[:checked]:bg-brand-50"
               >
-                <input type="radio" name="template" value={t} checked={details.template === t} onChange={() => setDetail("template", t)} />
+                <input
+                  type="radio"
+                  name="template"
+                  value={t}
+                  checked={details.template === t}
+                  onChange={() => setDetail("template", t)}
+                />
                 {TEMPLATE_INFO[t]}
               </label>
             ))}
@@ -164,7 +200,9 @@ export function Editor({ id, slug, initial, savedAt }: { id: string; slug: strin
               {(p) => <input {...p} value={details.name} onChange={(e) => setDetail("name", e.target.value)} />}
             </Field>
             <Field label="Phone" error={err("details.phone")}>
-              {(p) => <input {...p} type="tel" value={details.phone} onChange={(e) => setDetail("phone", e.target.value)} />}
+              {(p) => (
+                <input {...p} type="tel" value={details.phone} onChange={(e) => setDetail("phone", e.target.value)} />
+              )}
             </Field>
             <Field label="City" error={err("details.city")}>
               {(p) => <input {...p} value={details.city} onChange={(e) => setDetail("city", e.target.value)} />}
@@ -188,7 +226,14 @@ export function Editor({ id, slug, initial, savedAt }: { id: string; slug: strin
           </Field>
           <div className="grid gap-4 sm:grid-cols-2">
             <Field label="Existing website" error={err("details.websiteUrl")}>
-              {(p) => <input {...p} type="url" value={details.websiteUrl} onChange={(e) => setDetail("websiteUrl", e.target.value)} />}
+              {(p) => (
+                <input
+                  {...p}
+                  type="url"
+                  value={details.websiteUrl}
+                  onChange={(e) => setDetail("websiteUrl", e.target.value)}
+                />
+              )}
             </Field>
             <Field label="Trade (sets the stock photos)">
               {(p) => (
@@ -202,16 +247,40 @@ export function Editor({ id, slug, initial, savedAt }: { id: string; slug: strin
         </Section>
 
         <Section title="Hero">
-          <Field label="Headline" error={err("content.headline")} hint={<Count value={content.headline} limit={LIMITS.headline} />}>
+          <Field
+            label="Headline"
+            error={err("content.headline")}
+            hint={<Count value={content.headline} limit={LIMITS.headline} />}
+          >
             {(p) => <input {...p} value={content.headline} onChange={(e) => setContent("headline", e.target.value)} />}
           </Field>
-          <Field label="Subheadline" error={err("content.subheadline")} hint={<Count value={content.subheadline} limit={LIMITS.subheadline} />}>
-            {(p) => <textarea {...p} rows={3} value={content.subheadline} onChange={(e) => setContent("subheadline", e.target.value)} />}
+          <Field
+            label="Subheadline"
+            error={err("content.subheadline")}
+            hint={<Count value={content.subheadline} limit={LIMITS.subheadline} />}
+          >
+            {(p) => (
+              <textarea
+                {...p}
+                rows={3}
+                value={content.subheadline}
+                onChange={(e) => setContent("subheadline", e.target.value)}
+              />
+            )}
           </Field>
         </Section>
 
         <Section
-          title={`Services (${content.services.length})`}
+          title={
+            <span className="flex items-center gap-2">
+              Services ({content.services.length})
+              {!servicesConfirmed && (
+                <span className="rounded-full bg-amber-100 px-2 py-0.5 text-xs font-semibold text-amber-900">
+                  Unconfirmed
+                </span>
+              )}
+            </span>
+          }
           action={
             content.services.length < LIMITS.services[1] && (
               <button
@@ -224,6 +293,26 @@ export function Editor({ id, slug, initial, savedAt }: { id: string; slug: strin
             )
           }
         >
+          {!servicesConfirmed && (
+            <div className="flex flex-wrap items-center justify-between gap-3 rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-900">
+              <p className="max-w-prose">
+                {servicesDirty
+                  ? "Saving your edits will confirm these services."
+                  : "These services were written by Claude. Check them with the owner, then edit and save, or confirm them as they are."}
+              </p>
+              {!servicesDirty && (
+                <button
+                  type="button"
+                  onClick={confirm}
+                  disabled={confirming}
+                  className="inline-flex min-h-11 items-center gap-2 rounded-lg border border-amber-300 bg-white px-3 font-semibold text-amber-900 hover:bg-amber-100 disabled:opacity-60"
+                >
+                  {confirming && <Spinner />}
+                  Confirm services
+                </button>
+              )}
+            </div>
+          )}
           {err("content.services") && <p className="text-sm text-red-700">{err("content.services")}</p>}
           {content.services.map((service, i) => (
             <div key={i} className="rounded-lg border border-slate-200 p-4">
@@ -232,7 +321,12 @@ export function Editor({ id, slug, initial, savedAt }: { id: string; slug: strin
                 {content.services.length > LIMITS.services[0] && (
                   <button
                     type="button"
-                    onClick={() => setContent("services", content.services.filter((_, j) => j !== i))}
+                    onClick={() =>
+                      setContent(
+                        "services",
+                        content.services.filter((_, j) => j !== i),
+                      )
+                    }
                     className="min-h-11 rounded-lg px-3 text-sm font-medium text-red-700 hover:bg-red-50"
                   >
                     Remove
@@ -240,13 +334,20 @@ export function Editor({ id, slug, initial, savedAt }: { id: string; slug: strin
                 )}
               </div>
               <div className="space-y-3">
-                <Field label="Title" error={err(`content.services.${i}.title`)} hint={<Count value={service.title} limit={LIMITS.serviceTitle} />}>
+                <Field
+                  label="Title"
+                  error={err(`content.services.${i}.title`)}
+                  hint={<Count value={service.title} limit={LIMITS.serviceTitle} />}
+                >
                   {(p) => (
                     <input
                       {...p}
                       value={service.title}
                       onChange={(e) =>
-                        setContent("services", content.services.map((s, j) => (j === i ? { ...s, title: e.target.value } : s)))
+                        setContent(
+                          "services",
+                          content.services.map((s, j) => (j === i ? { ...s, title: e.target.value } : s)),
+                        )
                       }
                     />
                   )}
@@ -262,7 +363,10 @@ export function Editor({ id, slug, initial, savedAt }: { id: string; slug: strin
                       rows={2}
                       value={service.description}
                       onChange={(e) =>
-                        setContent("services", content.services.map((s, j) => (j === i ? { ...s, description: e.target.value } : s)))
+                        setContent(
+                          "services",
+                          content.services.map((s, j) => (j === i ? { ...s, description: e.target.value } : s)),
+                        )
                       }
                     />
                   )}
@@ -273,15 +377,24 @@ export function Editor({ id, slug, initial, savedAt }: { id: string; slug: strin
         </Section>
 
         <Section title="About">
-          <Field label="About text" error={err("content.about")} hint={<Count value={content.about} limit={LIMITS.about} />}>
-            {(p) => <textarea {...p} rows={8} value={content.about} onChange={(e) => setContent("about", e.target.value)} />}
+          <Field
+            label="About text"
+            error={err("content.about")}
+            hint={<Count value={content.about} limit={LIMITS.about} />}
+          >
+            {(p) => (
+              <textarea {...p} rows={8} value={content.about} onChange={(e) => setContent("about", e.target.value)} />
+            )}
           </Field>
         </Section>
 
         <Section title="Service areas">
           <Field
             label="One place per line"
-            error={err("content.serviceAreas") ?? Object.entries(fieldErrors).find(([k]) => k.startsWith("content.serviceAreas."))?.[1]}
+            error={
+              err("content.serviceAreas") ??
+              Object.entries(fieldErrors).find(([k]) => k.startsWith("content.serviceAreas."))?.[1]
+            }
             hint={`${content.serviceAreas.filter((a) => a.trim()).length} of ${LIMITS.serviceAreas[0]}–${LIMITS.serviceAreas[1]}`}
           >
             {(p) => (
@@ -318,7 +431,12 @@ export function Editor({ id, slug, initial, savedAt }: { id: string; slug: strin
                 {content.faq.length > LIMITS.faq[0] && (
                   <button
                     type="button"
-                    onClick={() => setContent("faq", content.faq.filter((_, j) => j !== i))}
+                    onClick={() =>
+                      setContent(
+                        "faq",
+                        content.faq.filter((_, j) => j !== i),
+                      )
+                    }
                     className="min-h-11 rounded-lg px-3 text-sm font-medium text-red-700 hover:bg-red-50"
                   >
                     Remove
@@ -326,22 +444,40 @@ export function Editor({ id, slug, initial, savedAt }: { id: string; slug: strin
                 )}
               </div>
               <div className="space-y-3">
-                <Field label="Question" error={err(`content.faq.${i}.question`)} hint={<Count value={item.question} limit={LIMITS.faqQuestion} />}>
+                <Field
+                  label="Question"
+                  error={err(`content.faq.${i}.question`)}
+                  hint={<Count value={item.question} limit={LIMITS.faqQuestion} />}
+                >
                   {(p) => (
                     <input
                       {...p}
                       value={item.question}
-                      onChange={(e) => setContent("faq", content.faq.map((f, j) => (j === i ? { ...f, question: e.target.value } : f)))}
+                      onChange={(e) =>
+                        setContent(
+                          "faq",
+                          content.faq.map((f, j) => (j === i ? { ...f, question: e.target.value } : f)),
+                        )
+                      }
                     />
                   )}
                 </Field>
-                <Field label="Answer" error={err(`content.faq.${i}.answer`)} hint={<Count value={item.answer} limit={LIMITS.faqAnswer} />}>
+                <Field
+                  label="Answer"
+                  error={err(`content.faq.${i}.answer`)}
+                  hint={<Count value={item.answer} limit={LIMITS.faqAnswer} />}
+                >
                   {(p) => (
                     <textarea
                       {...p}
                       rows={3}
                       value={item.answer}
-                      onChange={(e) => setContent("faq", content.faq.map((f, j) => (j === i ? { ...f, answer: e.target.value } : f)))}
+                      onChange={(e) =>
+                        setContent(
+                          "faq",
+                          content.faq.map((f, j) => (j === i ? { ...f, answer: e.target.value } : f)),
+                        )
+                      }
                     />
                   )}
                 </Field>
@@ -351,15 +487,44 @@ export function Editor({ id, slug, initial, savedAt }: { id: string; slug: strin
         </Section>
 
         <Section title="Call to action">
-          <Field label="Heading" error={err("content.cta.heading")} hint={<Count value={content.cta.heading} limit={LIMITS.ctaHeading} />}>
-            {(p) => <input {...p} value={content.cta.heading} onChange={(e) => setContent("cta", { ...content.cta, heading: e.target.value })} />}
-          </Field>
-          <Field label="Text" error={err("content.cta.body")} hint={<Count value={content.cta.body} limit={LIMITS.ctaBody} />}>
-            {(p) => <textarea {...p} rows={2} value={content.cta.body} onChange={(e) => setContent("cta", { ...content.cta, body: e.target.value })} />}
-          </Field>
-          <Field label="Button label" error={err("content.cta.buttonLabel")} hint={<Count value={content.cta.buttonLabel} limit={LIMITS.ctaButton} />}>
+          <Field
+            label="Heading"
+            error={err("content.cta.heading")}
+            hint={<Count value={content.cta.heading} limit={LIMITS.ctaHeading} />}
+          >
             {(p) => (
-              <input {...p} value={content.cta.buttonLabel} onChange={(e) => setContent("cta", { ...content.cta, buttonLabel: e.target.value })} />
+              <input
+                {...p}
+                value={content.cta.heading}
+                onChange={(e) => setContent("cta", { ...content.cta, heading: e.target.value })}
+              />
+            )}
+          </Field>
+          <Field
+            label="Text"
+            error={err("content.cta.body")}
+            hint={<Count value={content.cta.body} limit={LIMITS.ctaBody} />}
+          >
+            {(p) => (
+              <textarea
+                {...p}
+                rows={2}
+                value={content.cta.body}
+                onChange={(e) => setContent("cta", { ...content.cta, body: e.target.value })}
+              />
+            )}
+          </Field>
+          <Field
+            label="Button label"
+            error={err("content.cta.buttonLabel")}
+            hint={<Count value={content.cta.buttonLabel} limit={LIMITS.ctaButton} />}
+          >
+            {(p) => (
+              <input
+                {...p}
+                value={content.cta.buttonLabel}
+                onChange={(e) => setContent("cta", { ...content.cta, buttonLabel: e.target.value })}
+              />
             )}
           </Field>
         </Section>
@@ -377,7 +542,11 @@ export function Editor({ id, slug, initial, savedAt }: { id: string; slug: strin
               ) : (
                 <span className="flex items-center gap-1.5 font-medium text-emerald-700">
                   <svg viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4" aria-hidden="true">
-                    <path fillRule="evenodd" d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z" clipRule="evenodd" />
+                    <path
+                      fillRule="evenodd"
+                      d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z"
+                      clipRule="evenodd"
+                    />
                   </svg>
                   {lastSaved ? "Saved" : "All changes saved"}
                 </span>

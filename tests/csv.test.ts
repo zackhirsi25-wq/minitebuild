@@ -42,7 +42,7 @@ describe("detectColumns", () => {
   it("finds columns in any order and with common aliases", () => {
     expect(detectColumns(["Phone Number", "City", "Business Name"])).toEqual({
       ok: true,
-      columns: { name: 2, city: 1, phone: 0 },
+      columns: { name: 2, city: 1, phone: 0, services: -1 },
     });
     expect(detectColumns(["company_name", "town", "tel"]).ok).toBe(true);
   });
