@@ -72,10 +72,13 @@ export function CallLink({
 /**
  * Sticky call bar on phones (hidden from md up, where the header has a call
  * button). Pair it with `pb-20 md:pb-0` on the page so it never covers the footer.
+ * It slides in once the page is scrolled, so it doesn't stack under the hero's
+ * call button on the first screen (`.call-bar` in globals.css; browsers without
+ * scroll-driven animations just show it all the time).
  */
 export function MobileCallBar({ phone, className }: { phone: string; className: string }) {
   return (
-    <div className="fixed inset-x-0 bottom-0 z-40 p-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] md:hidden">
+    <div className="call-bar fixed inset-x-0 bottom-0 z-40 p-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] md:hidden">
       <a
         href={telHref(phone)}
         className={`flex min-h-14 w-full items-center justify-center gap-2 rounded-xl text-lg font-bold shadow-lg ${className}`}

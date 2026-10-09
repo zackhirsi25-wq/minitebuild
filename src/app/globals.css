@@ -23,3 +23,27 @@ body {
   outline: 2px solid currentColor;
   outline-offset: 2px;
 }
+
+/* Generated sites: the phone call bar slides in over the first 200px of
+   scroll, so it doesn't sit right under the hero's own call button. Browsers
+   without scroll-driven animations run the zero-length animation straight to
+   its end state, so the bar is simply always shown there. (No @supports
+   wrapper: the CSS build drops it.) */
+.call-bar {
+  animation: call-bar-in linear both;
+  animation-timeline: scroll(root);
+  animation-range: 0 200px;
+}
+
+@keyframes call-bar-in {
+  from {
+    opacity: 0;
+    transform: translateY(100%);
+    visibility: hidden;
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    visibility: visible;
+  }
+}

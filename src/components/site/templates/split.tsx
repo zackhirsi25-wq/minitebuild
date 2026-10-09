@@ -1,5 +1,6 @@
 import { Manrope } from "next/font/google";
 import Image from "next/image";
+import { phoneKey } from "@/lib/content/phone";
 import { CallLink, ClockIcon, FaqList, HoursList, MapPinIcon, MobileCallBar, Paragraphs, PhoneIcon } from "../parts";
 import type { TemplateProps } from "../types";
 
@@ -43,7 +44,10 @@ export function SplitTemplate({ site, images }: TemplateProps) {
                 <PhoneIcon />
                 {content.cta.buttonLabel}
               </CallLink>
-              <span className="text-center text-stone-600 sm:text-left">or call {site.phone}</span>
+              {/* The model usually puts the number in the button label already. */}
+              {!labelHasPhone(content.cta.buttonLabel, site.phone) && (
+                <span className="text-center text-stone-600 sm:text-left">or call {site.phone}</span>
+              )}
             </div>
           </div>
           <div className="relative aspect-[3/2] lg:aspect-auto">
@@ -175,4 +179,9 @@ export function SplitTemplate({ site, images }: TemplateProps) {
       <MobileCallBar phone={site.phone} className="bg-orange-700 text-white" />
     </div>
   );
+}
+
+function labelHasPhone(label: string, phone: string): boolean {
+  const key = phoneKey(phone);
+  return key !== null && label.replace(/\D/g, "").endsWith(key);
 }
