@@ -1,5 +1,6 @@
 import type { BusinessType } from "@/lib/business-type";
 import type { PublicSite } from "@/lib/sites/public";
+import { MORE_DEMOS } from "./more";
 
 // Invented demo businesses for the template gallery and home page showcase.
 // Shown only on Minitebuild's own pages, always labelled as a demo. Phone
@@ -89,7 +90,7 @@ const contractor: Demo = {
   },
 };
 
-const DEMOS: Partial<Record<BusinessType, Demo>> = { contractor };
+const DEMOS: Partial<Record<BusinessType, Demo>> = { contractor, ...MORE_DEMOS };
 
 /** A demo site for a business type, shaped like a real one so templates render it unchanged. */
 export function demoSite(type: BusinessType, templateId: string): PublicSite {

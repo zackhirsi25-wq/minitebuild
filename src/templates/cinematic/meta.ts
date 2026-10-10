@@ -11,7 +11,8 @@ const accent = (id: string, name: string, color: string, soft: string) => ({
 const meta: TemplateMeta = {
   id: "cinematic",
   name: "Cinematic",
-  concept: "The business shown like a film still: dark, full-bleed photography, an elegant serif and almost nothing else.",
+  concept:
+    "The business shown like a film still: dark, full-bleed photography, an elegant serif and almost nothing else.",
   order: 1,
   styles: ["dark", "elegant"],
   suits: ["contractor", "real-estate", "restaurant", "professional"],

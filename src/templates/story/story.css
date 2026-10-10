@@ -1,0 +1,557 @@
+/* Story: "Chapters". Values from tokens.css. */
+.sto {
+  background: var(--dusk);
+  color: var(--chalk);
+  font-family: var(--serif);
+  font-size: var(--fs-body);
+  line-height: 1.7;
+}
+.sto-wrap {
+  max-width: var(--max);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+.sto-section {
+  padding-block: var(--section-y);
+}
+.sto-sand {
+  background: var(--sand);
+  color: var(--umber);
+  --focus: var(--umber);
+}
+
+/* Type: a grotesque that tells, a serif that explains */
+.sto-display,
+.sto-h2,
+.sto-h3 {
+  font-family: var(--display);
+  font-weight: 700;
+  font-optical-sizing: auto;
+  text-wrap: balance;
+}
+.sto-display {
+  font-size: var(--fs-display);
+  line-height: 0.95;
+  letter-spacing: -0.035em;
+}
+.sto-h2 {
+  font-size: var(--fs-h2);
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+.sto-h3 {
+  font-size: clamp(1.25rem, 1.1rem + 0.6vw, 1.625rem);
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+}
+.sto-lead {
+  font-size: var(--fs-lead);
+  line-height: 1.45;
+  text-wrap: pretty;
+}
+.sto-body {
+  max-width: 60ch;
+  text-wrap: pretty;
+}
+.sto-small {
+  font-family: var(--display);
+  font-size: var(--fs-small);
+  font-weight: 500;
+  line-height: 1.4;
+}
+.sto-muted {
+  color: var(--muted-light);
+}
+.sto-sand .sto-muted {
+  color: var(--muted-dark);
+}
+.sto-skip {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+/* Buttons */
+.sto-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+  min-height: 54px;
+  padding: 0 1.6rem;
+  border-radius: var(--r-full);
+  background: var(--accent);
+  color: var(--on-accent);
+  font-family: var(--display);
+  font-weight: 600;
+  transition:
+    transform var(--dur-fast) var(--ease-out),
+    box-shadow var(--dur-base) var(--ease-out);
+}
+.sto-btn svg {
+  width: 1.05em;
+  height: 1.05em;
+}
+.sto-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px -14px var(--accent);
+}
+.sto-btn:active {
+  transform: scale(0.98);
+}
+.sto-btn--small {
+  min-height: 42px;
+  padding: 0 1.1rem;
+  font-size: var(--fs-small);
+}
+
+/* Header */
+.sto-header {
+  position: sticky;
+  top: var(--site-offset, 0px);
+  z-index: 50;
+  transition: background-color var(--dur-base) var(--ease-out);
+}
+.sto-header[data-scrolled] {
+  background: rgb(20 22 27 / 0.82);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  box-shadow: 0 1px 0 var(--line-dark);
+}
+.sto-header-inner {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-5);
+  min-height: 68px;
+}
+.sto-name {
+  margin-right: auto;
+  font-family: var(--display);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  max-width: 24ch;
+}
+
+/* Hero: headline left, the opening scene bleeds right */
+.sto-hero {
+  display: grid;
+  min-height: calc(100svh - var(--site-offset, 0px) - 68px);
+  align-items: center;
+  gap: var(--sp-7);
+  padding-block: var(--sp-7) var(--sp-8);
+}
+.sto-hero-text {
+  display: grid;
+  gap: var(--sp-6);
+  justify-items: start;
+}
+.sto-hero-photo {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  max-height: 78svh;
+  width: 100%;
+  overflow: clip;
+  border-radius: var(--r-2);
+}
+.sto-hero-photo img {
+  filter: saturate(1.05) sepia(0.12);
+}
+.sto-underline {
+  display: block;
+  width: 5.5rem;
+  height: 6px;
+  border-radius: var(--r-full);
+  background: var(--accent);
+}
+@media (min-width: 1024px) {
+  .sto-hero {
+    grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
+  }
+  .sto-hero-photo {
+    margin-right: calc(-1 * var(--gutter) - max(0px, (100vw - var(--max)) / 2));
+    border-radius: var(--r-2) 0 0 var(--r-2);
+    width: auto;
+  }
+  .sto-hero--type {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* Chapters: text scrolls, the stage stays */
+.sto-chapters {
+  display: grid;
+  gap: var(--sp-9);
+  timeline-scope: --sto-c1, --sto-c2, --sto-c3;
+}
+.sto-chapter {
+  display: grid;
+  gap: var(--sp-5);
+  align-content: center;
+}
+.sto-chapter:nth-child(1) {
+  view-timeline-name: --sto-c1;
+}
+.sto-chapter:nth-child(2) {
+  view-timeline-name: --sto-c2;
+}
+.sto-chapter:nth-child(3) {
+  view-timeline-name: --sto-c3;
+}
+.sto-chapter-mark {
+  font-family: var(--display);
+  font-size: var(--fs-small);
+  font-weight: 600;
+  color: var(--accent);
+}
+.sto-inline-photo {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: clip;
+  border-radius: var(--r-2);
+}
+.sto-services {
+  display: grid;
+  gap: var(--sp-5);
+  margin-top: var(--sp-3);
+}
+.sto-services li {
+  display: grid;
+  gap: var(--sp-2);
+  padding-top: var(--sp-4);
+  border-top: 1px solid var(--line-dark);
+}
+.sto-steps {
+  display: grid;
+  gap: var(--sp-5);
+  counter-reset: step;
+}
+.sto-steps li {
+  display: grid;
+  grid-template-columns: 2.5rem minmax(0, 1fr);
+  gap: var(--sp-2) var(--sp-4);
+}
+.sto-steps li::before {
+  counter-increment: step;
+  content: counter(step);
+  grid-row: span 2;
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  font-family: var(--display);
+  font-weight: 700;
+}
+.sto-stage {
+  display: none;
+}
+@media (min-width: 1024px) {
+  .sto-chapters {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+    column-gap: var(--sp-9);
+    align-items: start;
+  }
+  .sto-chapter-list {
+    display: grid;
+  }
+  .sto-chapter {
+    min-height: 88svh;
+    padding-block: var(--sp-9);
+  }
+  .sto-inline-photo {
+    display: none;
+  }
+  .sto-stage {
+    display: block;
+    position: sticky;
+    top: calc(var(--site-offset, 0px) + 96px);
+    height: calc(100svh - var(--site-offset, 0px) - 140px);
+    border-radius: var(--r-2);
+    overflow: clip;
+    background: var(--dusk-2);
+  }
+}
+.sto-scene {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+}
+.sto-scene:first-child {
+  opacity: 1;
+}
+.sto-scene-empty {
+  display: grid;
+  place-items: center;
+  height: 100%;
+  background:
+    radial-gradient(70% 60% at 30% 30%, color-mix(in oklab, var(--accent) 22%, transparent), transparent 70%),
+    var(--dusk-2);
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: clamp(8rem, 18vw, 16rem);
+  line-height: 1;
+  color: color-mix(in oklab, var(--accent) 70%, var(--dusk));
+}
+/* Scroll-driven scene changes (Chromium); elsewhere the first scene stays. */
+.motion-sd .sto-scene {
+  animation: linear both;
+  animation-range: cover 10% cover 90%;
+}
+.motion-sd .sto-scene:nth-child(1) {
+  animation-name: sto-first;
+  animation-timeline: --sto-c1;
+}
+.motion-sd .sto-scene:nth-child(2) {
+  animation-name: sto-middle;
+  animation-timeline: --sto-c2;
+}
+.motion-sd .sto-scene:nth-child(3) {
+  animation-name: sto-last;
+  animation-timeline: --sto-c3;
+}
+@keyframes sto-first {
+  0%,
+  78% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes sto-middle {
+  0% {
+    opacity: 0;
+  }
+  22%,
+  78% {
+    opacity: 1;
+    scale: 1.03;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes sto-last {
+  0% {
+    opacity: 0;
+  }
+  22%,
+  100% {
+    opacity: 1;
+  }
+}
+/* The chapter rail */
+.sto-rail {
+  position: absolute;
+  left: var(--sp-5);
+  bottom: var(--sp-5);
+  z-index: 2;
+  display: flex;
+  gap: var(--sp-2);
+  padding: var(--sp-2) var(--sp-3);
+  border-radius: var(--r-full);
+  background: rgb(20 22 27 / 0.7);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+.sto-rail li {
+  width: 26px;
+  height: 4px;
+  border-radius: var(--r-full);
+  background: var(--line-dark);
+  overflow: hidden;
+}
+.sto-rail li span {
+  display: block;
+  height: 100%;
+  background: var(--accent);
+  transform-origin: left;
+  transform: scaleX(0);
+}
+.sto-rail li:first-child span {
+  transform: scaleX(1);
+}
+.motion-sd .sto-rail li span {
+  animation: sto-fill linear both;
+  animation-range: cover 10% cover 60%;
+}
+.motion-sd .sto-rail li:nth-child(1) span {
+  animation-timeline: --sto-c1;
+}
+.motion-sd .sto-rail li:nth-child(2) span {
+  animation-timeline: --sto-c2;
+}
+.motion-sd .sto-rail li:nth-child(3) span {
+  animation-timeline: --sto-c3;
+}
+@keyframes sto-fill {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* Work */
+.sto-work {
+  display: grid;
+  gap: var(--sp-4);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: var(--sp-7);
+}
+.sto-work li {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: clip;
+  border-radius: var(--r-2);
+}
+
+/* Areas: a long line on sand */
+.sto-areas {
+  margin-top: var(--sp-6);
+  font-family: var(--display);
+  font-size: clamp(1.5rem, 1.1rem + 2vw, 2.75rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+  text-wrap: balance;
+}
+.sto-areas span[aria-hidden] {
+  color: var(--accent);
+  padding-inline: 0.3em;
+  filter: brightness(0.75);
+}
+
+/* FAQ */
+.sto-faq {
+  margin-top: var(--sp-7);
+  max-width: 54rem;
+}
+.sto-faq details {
+  border-top: 1px solid var(--line-dark);
+}
+.sto-faq details:last-child {
+  border-bottom: 1px solid var(--line-dark);
+}
+.sto-faq summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-5);
+  min-height: 72px;
+  padding-block: var(--sp-4);
+}
+.sto-faq h3 {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: clamp(1.125rem, 1rem + 0.5vw, 1.375rem);
+  line-height: 1.3;
+}
+.sto-faq p {
+  padding-bottom: var(--sp-6);
+  color: var(--muted-light);
+}
+
+/* Closing: the final scene */
+.sto-cta {
+  position: relative;
+  isolation: isolate;
+  min-height: min(90svh, 900px);
+  display: grid;
+  align-items: end;
+  overflow: clip;
+}
+.sto-cta-media {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+}
+.sto-cta::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(0deg, var(--dusk) 0%, rgb(20 22 27 / 0.7) 45%, rgb(20 22 27 / 0.3) 100%);
+}
+.sto-cta--type {
+  background:
+    radial-gradient(80% 80% at 80% 100%, color-mix(in oklab, var(--accent) 25%, transparent), transparent 70%),
+    var(--dusk-2);
+}
+.sto-cta-inner {
+  display: grid;
+  gap: var(--sp-5);
+  justify-items: start;
+  padding-block: var(--sp-9);
+}
+.sto-cta-phone {
+  font-family: var(--display);
+  font-size: var(--fs-h2);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  color: var(--accent);
+}
+
+/* Footer */
+.sto-footer {
+  padding-block: var(--sp-8) calc(var(--sp-7) + 88px);
+  border-top: 1px solid var(--line-dark);
+}
+@media (min-width: 768px) {
+  .sto-footer {
+    padding-bottom: var(--sp-7);
+  }
+}
+.sto-footer-grid {
+  display: grid;
+  gap: var(--sp-6);
+}
+.sto-footer-grid h2 {
+  font-family: var(--display);
+  font-size: var(--fs-small);
+  font-weight: 600;
+  color: var(--accent);
+  margin-bottom: var(--sp-2);
+}
+@media (min-width: 768px) {
+  .sto-footer-grid {
+    grid-template-columns: 2fr 1fr 1fr 1.3fr;
+  }
+}
+
+/* Call bar */
+.sto-callbar a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-4);
+  min-height: 60px;
+  padding: 0 6px 0 20px;
+  border-radius: var(--r-full);
+  background: rgb(29 32 39 / 0.88);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--line-dark);
+  color: var(--chalk);
+  font-family: var(--display);
+  font-variant-numeric: tabular-nums;
+}
+.sto-callbar strong {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  min-height: 46px;
+  padding: 0 1.1rem;
+  border-radius: var(--r-full);
+  background: var(--accent);
+  color: var(--on-accent);
+  font-weight: 600;
+}
+.sto-callbar svg {
+  width: 1em;
+  height: 1em;
+}

@@ -1,0 +1,38 @@
+/* Haven tokens. --accent is set inline from meta.ts. */
+.hav {
+  --linen: #f7f2ec;
+  --cocoa: #2e2622;
+  --taupe: #6e625a; /* 5.6:1 on linen */
+  --blush: #ebddd3;
+  --sage: #dce3d8;
+  --line: rgb(46 38 34 / 0.14);
+  --accent: #a24e3c;
+  --on-accent: #ffffff;
+  --focus: var(--cocoa);
+  --selection-bg: var(--accent);
+  --selection-fg: #ffffff;
+
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 24px;
+  --sp-6: 32px;
+  --sp-7: 48px;
+  --sp-8: 64px;
+  --sp-9: 96px;
+  --gutter: clamp(20px, 4.5vw, 64px);
+  --section-y: clamp(72px, 3rem + 6vw, 160px);
+  --max: 1280px;
+
+  --r-2: 12px;
+  --r-full: 999px;
+  --arch: 999px 999px 18px 18px;
+
+  --serif: var(--hav-serif), Georgia, serif;
+  --sans: var(--hav-sans), system-ui, sans-serif;
+  --fs-display: clamp(2.5rem, 1.4rem + 5.4vw, 6.5rem);
+  --fs-h2: clamp(1.875rem, 1.3rem + 2.8vw, 3.75rem);
+  --fs-lead: clamp(1.125rem, 1rem + 0.6vw, 1.5rem);
+  --fs-body: clamp(1rem, 0.96rem + 0.2vw, 1.125rem);
+  --fs-small: 0.875rem;
+}

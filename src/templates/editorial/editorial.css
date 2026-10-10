@@ -1,0 +1,526 @@
+/* Editorial: "The weekend edition". Values from tokens.css. */
+.edi {
+  background: var(--cream);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: var(--fs-body);
+  line-height: 1.65;
+}
+.edi-wrap {
+  max-width: var(--max);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+.edi-section {
+  padding-block: var(--section-y);
+}
+.edi-night {
+  background: var(--night);
+  color: var(--night-text);
+  --focus: var(--night-text);
+}
+
+/* Type */
+.edi-display,
+.edi-h2,
+.edi-serif {
+  font-family: var(--serif);
+  font-weight: 400;
+  text-wrap: balance;
+}
+.edi-display {
+  font-size: var(--fs-display);
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+}
+.edi-h2 {
+  font-size: var(--fs-h2);
+  line-height: 1;
+  letter-spacing: -0.015em;
+}
+.edi-lead {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: var(--fs-lead);
+  line-height: 1.3;
+  text-wrap: pretty;
+}
+.edi-body {
+  max-width: 62ch;
+  text-wrap: pretty;
+}
+.edi-small {
+  font-size: var(--fs-small);
+  line-height: 1.5;
+  letter-spacing: 0.01em;
+}
+.edi-muted {
+  color: var(--sepia);
+}
+.edi-night .edi-muted {
+  color: var(--night-muted);
+}
+.edi-skip {
+  background: var(--ink);
+  color: var(--cream);
+}
+
+/* Buttons */
+.edi-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+  min-height: 50px;
+  padding: 0 1.4rem;
+  border-radius: var(--r-1);
+  background: var(--accent);
+  color: var(--on-accent);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  transition:
+    transform var(--dur-fast) var(--ease-out),
+    filter var(--dur-fast) var(--ease-out);
+}
+.edi-btn svg {
+  width: 1em;
+  height: 1em;
+}
+.edi-btn:hover {
+  filter: brightness(1.15);
+}
+.edi-btn:active {
+  transform: scale(0.98);
+}
+.edi-link {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1.125rem;
+  text-decoration: underline;
+  text-decoration-color: var(--rule);
+  text-underline-offset: 0.25em;
+  transition: text-decoration-color var(--dur-fast);
+}
+.edi-link:hover {
+  text-decoration-color: currentColor;
+}
+
+/* Running header (appears compact once the masthead scrolls away) */
+.edi-header {
+  position: sticky;
+  top: var(--site-offset, 0px);
+  z-index: 50;
+  border-bottom: 1px solid transparent;
+  transition:
+    background-color var(--dur-base) var(--ease-out),
+    border-color var(--dur-base) var(--ease-out);
+}
+.edi-header[data-scrolled] {
+  background: rgb(244 239 230 / 0.9);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  border-bottom-color: var(--rule);
+}
+.edi-header-inner {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-5);
+  min-height: 60px;
+}
+.edi-header-name {
+  margin-right: auto;
+  font-family: var(--serif);
+  font-size: 1.25rem;
+  line-height: 1.1;
+  opacity: 0;
+  transition: opacity var(--dur-base) var(--ease-out);
+}
+.edi-header[data-scrolled] .edi-header-name {
+  opacity: 1;
+}
+.edi-header nav {
+  display: none;
+  gap: var(--sp-6);
+}
+.edi-header nav a {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  font-size: var(--fs-small);
+}
+@media (min-width: 900px) {
+  .edi-header nav {
+    display: flex;
+  }
+}
+.edi-header .edi-btn {
+  min-height: 40px;
+  padding: 0 1rem;
+  font-size: var(--fs-small);
+}
+
+/* Masthead: the business name as the magazine title */
+.edi-masthead {
+  padding-top: var(--sp-5);
+}
+.edi-masthead h1 {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(2.75rem, 0.8rem + 9.2vw, 11.5rem);
+  line-height: 0.88;
+  letter-spacing: -0.035em;
+  text-align: center;
+  text-wrap: balance;
+  padding-bottom: var(--sp-4);
+}
+.edi-dateline {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--sp-2) var(--sp-5);
+  padding-block: var(--sp-3);
+  border-block: 1px solid var(--ink);
+}
+.edi-dateline > * + *::before {
+  content: "·";
+  margin-right: var(--sp-5);
+  color: var(--sepia);
+}
+.edi-open {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+}
+.edi-open-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--sepia);
+}
+.edi-open[data-open="true"] .edi-open-dot {
+  background: #2f7d4f;
+}
+
+/* Cover: portrait on the left, the story on the right */
+.edi-cover {
+  display: grid;
+  gap: var(--sp-7);
+  padding-block: var(--sp-8) var(--section-y);
+}
+.edi-cover-photo {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: clip;
+  background: var(--rule);
+}
+.edi-cover-text {
+  display: grid;
+  align-content: center;
+  gap: var(--sp-6);
+}
+.edi-cover-text .edi-display {
+  font-size: clamp(2.5rem, 1.2rem + 4.6vw, 6.25rem);
+}
+@media (min-width: 1024px) {
+  .edi-cover {
+    grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
+    column-gap: var(--sp-9);
+  }
+  .edi-cover--type {
+    grid-template-columns: minmax(0, 1fr);
+    max-width: 62rem;
+  }
+}
+
+/* Chapter headings with the number in the margin */
+.edi-chapter {
+  display: grid;
+  gap: var(--sp-3);
+  margin-bottom: var(--sp-8);
+}
+.edi-chapter-num {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1.25rem;
+  color: var(--accent);
+}
+.edi-night .edi-chapter-num {
+  color: var(--night-muted);
+}
+@media (min-width: 1024px) {
+  .edi-chapter {
+    grid-template-columns: 8rem minmax(0, 1fr);
+    align-items: baseline;
+  }
+}
+
+/* Services: two text columns between rules */
+.edi-columns {
+  columns: 1;
+  column-gap: var(--sp-8);
+  column-rule: 1px solid var(--rule);
+}
+.edi-columns article {
+  break-inside: avoid;
+  padding-block: var(--sp-5);
+  border-top: 1px solid var(--rule);
+}
+.edi-columns h3 {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(1.5rem, 1.2rem + 1vw, 2rem);
+  line-height: 1.15;
+  margin-bottom: var(--sp-2);
+}
+@media (min-width: 768px) {
+  .edi-columns {
+    columns: 2;
+  }
+}
+@media (min-width: 1024px) {
+  .edi-columns {
+    margin-left: calc(8rem + var(--sp-3));
+  }
+}
+
+/* About: the night spread. The photo hangs into the margin. */
+.edi-spread {
+  display: grid;
+  gap: var(--sp-7);
+}
+.edi-spread-photo {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  overflow: clip;
+}
+.edi-spread-text {
+  display: grid;
+  gap: var(--sp-5);
+  align-content: start;
+}
+.edi-spread-text .edi-first {
+  font-family: var(--serif);
+  font-size: var(--fs-lead);
+  line-height: 1.35;
+}
+@media (min-width: 1024px) {
+  .edi-spread {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+    column-gap: var(--sp-9);
+  }
+  .edi-spread-photo {
+    margin-left: calc(-1 * var(--gutter) - max(0px, (100vw - var(--max)) / 2));
+  }
+}
+
+/* Work: a contact sheet */
+.edi-sheet {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(42%, 1fr);
+  gap: var(--sp-3);
+  overflow-x: auto;
+  padding: var(--sp-4);
+  background: var(--night);
+  scroll-snap-type: x mandatory;
+}
+.edi-sheet li {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  overflow: clip;
+  scroll-snap-align: start;
+}
+.edi-sheet li::after {
+  content: attr(data-frame);
+  position: absolute;
+  left: 8px;
+  bottom: 6px;
+  font-size: 11px;
+  color: rgb(239 233 222 / 0.85);
+  font-variant-numeric: tabular-nums;
+}
+@media (min-width: 900px) {
+  .edi-sheet {
+    grid-auto-flow: row;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    overflow: visible;
+  }
+}
+
+/* How it works: three short paragraphs */
+.edi-steps {
+  display: grid;
+  gap: var(--sp-7);
+}
+.edi-steps li {
+  display: grid;
+  gap: var(--sp-3);
+  align-content: start;
+  padding-top: var(--sp-5);
+  border-top: 1px solid var(--ink);
+}
+.edi-steps .edi-serif {
+  font-size: clamp(1.5rem, 1.2rem + 1vw, 2rem);
+  line-height: 1.15;
+}
+.edi-steps em {
+  font-family: var(--serif);
+  font-size: 3rem;
+  line-height: 1;
+  color: var(--accent);
+}
+@media (min-width: 900px) {
+  .edi-steps {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin-left: calc(8rem + var(--sp-3));
+  }
+}
+
+/* Areas: set as an index */
+.edi-index {
+  display: grid;
+  gap: 0 var(--sp-7);
+  font-family: var(--serif);
+  font-size: 1.25rem;
+}
+.edi-index li {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--sp-4);
+  padding-block: var(--sp-3);
+  border-bottom: 1px dotted var(--rule);
+}
+.edi-index li span {
+  font-family: var(--sans);
+  font-size: var(--fs-small);
+  color: var(--sepia);
+  font-variant-numeric: tabular-nums;
+}
+@media (min-width: 768px) {
+  .edi-index {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (min-width: 1024px) {
+  .edi-index {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin-left: calc(8rem + var(--sp-3));
+  }
+}
+
+/* FAQ */
+.edi-faq details {
+  border-top: 1px solid var(--rule);
+}
+.edi-faq details:last-child {
+  border-bottom: 1px solid var(--rule);
+}
+.edi-faq summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--sp-5);
+  min-height: 72px;
+  padding-block: var(--sp-4);
+}
+.edi-faq h3 {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(1.375rem, 1.15rem + 0.8vw, 1.875rem);
+  line-height: 1.2;
+}
+.edi-faq p {
+  padding-bottom: var(--sp-6);
+}
+@media (min-width: 1024px) {
+  .edi-faq {
+    margin-left: calc(8rem + var(--sp-3));
+    max-width: 52rem;
+  }
+}
+
+/* Closing */
+.edi-cta {
+  display: grid;
+  gap: var(--sp-5);
+  justify-items: center;
+  text-align: center;
+}
+.edi-cta-phone {
+  font-family: var(--serif);
+  font-size: var(--fs-h2);
+  line-height: 1;
+  font-variant-numeric: lining-nums;
+  transition: opacity var(--dur-fast);
+}
+.edi-cta-phone:hover {
+  opacity: 0.75;
+}
+
+/* Footer */
+.edi-footer {
+  padding-block: var(--sp-8) calc(var(--sp-7) + 88px);
+  border-top: 1px solid var(--ink);
+}
+@media (min-width: 768px) {
+  .edi-footer {
+    padding-bottom: var(--sp-7);
+  }
+}
+.edi-footer-name {
+  font-family: var(--serif);
+  font-size: clamp(2rem, 1rem + 4vw, 4rem);
+  line-height: 1;
+  text-align: center;
+  margin-bottom: var(--sp-6);
+}
+.edi-footer-cols {
+  display: grid;
+  gap: var(--sp-5);
+  padding-top: var(--sp-5);
+  border-top: 1px solid var(--rule);
+}
+.edi-footer-cols h2 {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.0625rem;
+  margin-bottom: var(--sp-2);
+}
+@media (min-width: 768px) {
+  .edi-footer-cols {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* Call bar */
+.edi-callbar a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-4);
+  min-height: 58px;
+  padding: 0 6px 0 18px;
+  border-radius: 4px;
+  background: var(--night);
+  color: var(--night-text);
+  box-shadow: 0 16px 36px -18px rgb(27 26 23 / 0.6);
+  font-variant-numeric: tabular-nums;
+}
+.edi-callbar strong {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  min-height: 46px;
+  padding: 0 1rem;
+  border-radius: 2px;
+  background: var(--accent);
+  color: var(--on-accent);
+  font-weight: 600;
+}
+.edi-callbar svg {
+  width: 1em;
+  height: 1em;
+}

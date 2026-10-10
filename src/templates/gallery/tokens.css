@@ -1,0 +1,38 @@
+/* Gallery tokens. --accent is set inline from meta.ts. */
+.gal {
+  --paper: #fafaf7;
+  --ink: #111111;
+  --stone: #5f5e5a; /* 6.2:1 on paper */
+  --mist: #eeede8;
+  --line: #d9d7d0;
+  --accent: #2f45d0;
+  --on-accent: #ffffff;
+  --focus: var(--ink);
+  --selection-bg: var(--ink);
+  --selection-fg: var(--paper);
+
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 24px;
+  --sp-6: 32px;
+  --sp-7: 48px;
+  --sp-8: 64px;
+  --sp-9: 96px;
+  --sp-10: 128px;
+  --gutter: clamp(20px, 4.5vw, 72px);
+  --section-y: clamp(72px, 3rem + 7vw, 176px);
+  --max: 1440px;
+  --header-h: 72px;
+
+  --r-0: 0;
+  --r-1: 2px;
+  --r-full: 999px;
+
+  --font: var(--gal-font), "Helvetica Neue", Arial, sans-serif;
+  --fs-display: clamp(3rem, 1.2rem + 9vw, 10rem);
+  --fs-h2: clamp(2.25rem, 1.4rem + 4.2vw, 5.5rem);
+  --fs-lead: clamp(1.25rem, 1.05rem + 1vw, 1.875rem);
+  --fs-body: clamp(1rem, 0.97rem + 0.15vw, 1.125rem);
+  --fs-small: 0.875rem;
+}

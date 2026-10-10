@@ -1,0 +1,515 @@
+/* Impact: "Signal". Values from tokens.css. */
+.imp {
+  background: var(--white);
+  color: var(--black);
+  font-family: var(--font);
+  font-size: var(--fs-body);
+  line-height: 1.55;
+}
+.imp-wrap {
+  max-width: var(--max);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+.imp-section {
+  padding-block: var(--section-y);
+}
+.imp-dark {
+  background: var(--black);
+  color: var(--white);
+}
+
+/* Type: condensed for display, normal width for reading */
+.imp-display,
+.imp-h2,
+.imp-h3 {
+  font-weight: 800;
+  font-stretch: 62%;
+  font-variation-settings: "wdth" 62;
+  text-wrap: balance;
+}
+.imp-display {
+  font-size: var(--fs-display);
+  line-height: 0.86;
+  letter-spacing: -0.01em;
+}
+.imp-h2 {
+  font-size: var(--fs-h2);
+  line-height: 0.9;
+}
+.imp-h3 {
+  font-size: var(--fs-h3);
+  line-height: 1.02;
+  font-variation-settings: "wdth" 75;
+  font-weight: 700;
+}
+.imp-body {
+  max-width: 60ch;
+  text-wrap: pretty;
+}
+.imp-small {
+  font-size: var(--fs-small);
+  font-weight: 600;
+  line-height: 1.4;
+}
+.imp-muted {
+  color: var(--grey);
+}
+.imp-dark .imp-muted {
+  color: var(--grey-dark);
+}
+.imp-skip {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+/* Buttons: square, heavy, they push down when pressed */
+.imp-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+  min-height: 56px;
+  padding: 0 1.5rem;
+  background: var(--accent);
+  color: var(--on-accent);
+  font-weight: 800;
+  font-size: 1.0625rem;
+  border: 2px solid var(--black);
+  box-shadow: 4px 4px 0 var(--black);
+  transition:
+    transform var(--dur-fast) var(--ease-out),
+    box-shadow var(--dur-fast) var(--ease-out);
+}
+.imp-btn svg {
+  width: 1.1em;
+  height: 1.1em;
+}
+.imp-btn:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 5px 5px 0 var(--black);
+}
+.imp-btn:active {
+  transform: translate(4px, 4px);
+  box-shadow: 0 0 0 var(--black);
+}
+.imp-dark .imp-btn {
+  border-color: var(--accent);
+  box-shadow: 4px 4px 0 var(--iron);
+}
+.imp-btn--small {
+  min-height: 44px;
+  padding: 0 1rem;
+  font-size: var(--fs-small);
+  box-shadow: 3px 3px 0 var(--black);
+}
+.imp-link {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  gap: 0.4em;
+  font-weight: 700;
+  border-bottom: 3px solid var(--accent);
+  line-height: 1.1;
+  align-self: center;
+}
+
+/* Header: ruled bar */
+.imp-header {
+  position: sticky;
+  top: var(--site-offset, 0px);
+  z-index: 50;
+  background: var(--white);
+  border-bottom: var(--rule);
+  transition: box-shadow var(--dur-base) var(--ease-out);
+}
+.imp-header[data-scrolled] {
+  box-shadow: 0 6px 0 rgb(10 10 10 / 0.06);
+}
+.imp-header-inner {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-5);
+  min-height: 68px;
+}
+.imp-name {
+  margin-right: auto;
+  font-weight: 800;
+  font-size: 1.25rem;
+  font-variation-settings: "wdth" 75;
+  line-height: 1.05;
+  max-width: 24ch;
+}
+.imp-header-phone {
+  display: none;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+@media (min-width: 900px) {
+  .imp-header-phone {
+    display: inline;
+  }
+}
+
+/* Hero: headline left, photo bleeds off the top and right */
+.imp-hero {
+  display: grid;
+  min-height: calc(100svh - var(--site-offset, 0px) - 70px);
+  border-bottom: var(--rule);
+}
+.imp-hero-text {
+  display: grid;
+  align-content: end;
+  gap: var(--sp-6);
+  padding: var(--sp-8) var(--gutter) var(--sp-7);
+}
+.imp-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-4) var(--sp-6);
+}
+.imp-hero-photo {
+  position: relative;
+  min-height: 56svh;
+  overflow: clip;
+  background: var(--concrete);
+}
+.imp-hero-photo img {
+  filter: contrast(1.12) saturate(1.08);
+}
+.motion-sd .imp-hero-photo img {
+  animation: imp-drift linear both;
+  animation-timeline: scroll(root);
+  animation-range: 0 100svh;
+}
+@keyframes imp-drift {
+  to {
+    transform: translateY(6%) scale(1.06);
+  }
+}
+/* No photo: the phone number fills the right half */
+.imp-hero-call {
+  display: grid;
+  align-content: end;
+  gap: var(--sp-3);
+  padding: var(--sp-7) var(--gutter);
+  background: var(--accent);
+  color: var(--on-accent);
+}
+.imp-hero-call a {
+  font-size: clamp(2.75rem, 1rem + 6vw, 7rem);
+  font-weight: 800;
+  font-variation-settings: "wdth" 62;
+  line-height: 0.9;
+  font-variant-numeric: tabular-nums;
+}
+@media (min-width: 1024px) {
+  .imp-hero {
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  }
+  .imp-hero-text {
+    border-right: var(--rule);
+    padding-left: max(var(--gutter), calc(50vw - var(--max) / 2 + var(--gutter)));
+  }
+  .imp-hero-photo {
+    min-height: 0;
+  }
+}
+
+/* Services: a giant index */
+.imp-index-head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: end;
+  gap: var(--sp-5);
+  padding-bottom: var(--sp-6);
+  border-bottom: var(--rule);
+}
+.imp-index li {
+  border-bottom: var(--rule);
+}
+.imp-index-row {
+  display: grid;
+  grid-template-columns: 3.5rem minmax(0, 1fr);
+  gap: var(--sp-2) var(--sp-5);
+  padding-block: var(--sp-5);
+  position: relative;
+  isolation: isolate;
+}
+.imp-index-row::before {
+  content: "";
+  position: absolute;
+  inset: 0 calc(-1 * var(--gutter));
+  z-index: -1;
+  background: var(--accent);
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform var(--dur-base) var(--ease-out);
+}
+.imp-index-row:hover::before {
+  transform: scaleY(1);
+}
+.imp-index-row:hover {
+  color: var(--on-accent);
+}
+.imp-index-row:hover .imp-muted {
+  color: inherit;
+}
+.imp-index-num {
+  font-weight: 800;
+  font-variation-settings: "wdth" 62;
+  font-size: var(--fs-h3);
+  line-height: 1;
+}
+.imp-index-row .imp-body {
+  grid-column: 2;
+}
+@media (min-width: 900px) {
+  .imp-index-row {
+    grid-template-columns: 5rem minmax(0, 1.2fr) minmax(0, 1fr);
+    align-items: baseline;
+  }
+  .imp-index-row .imp-h2 {
+    font-size: clamp(2rem, 1rem + 3.4vw, 4.25rem);
+  }
+  .imp-index-row .imp-body {
+    grid-column: 3;
+  }
+}
+
+/* About: concrete band, photo overlaps the edge */
+.imp-about {
+  background: var(--concrete);
+  border-block: var(--rule);
+}
+.imp-about-grid {
+  display: grid;
+  gap: var(--sp-7);
+}
+.imp-about-photo {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: clip;
+  border: var(--rule);
+  box-shadow: 10px 10px 0 var(--black);
+  background: var(--white);
+}
+.imp-about-text {
+  display: grid;
+  gap: var(--sp-5);
+  align-content: start;
+}
+@media (min-width: 1024px) {
+  .imp-about-grid {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    align-items: start;
+  }
+  .imp-about-photo {
+    margin-top: calc(-1 * (var(--section-y) + 56px));
+    margin-bottom: calc(-1 * (var(--section-y) + 56px));
+  }
+}
+
+/* Work: strict grid */
+.imp-work {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 2px;
+  background: var(--black);
+  border: var(--rule);
+  margin-top: var(--sp-7);
+}
+.imp-work li {
+  position: relative;
+  aspect-ratio: 1;
+  overflow: clip;
+  background: var(--concrete);
+}
+@media (min-width: 900px) {
+  .imp-work {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* How it works: accent band with stepped bars */
+.imp-how {
+  background: var(--accent);
+  color: var(--on-accent);
+  border-block: var(--rule);
+}
+.imp-steps {
+  display: grid;
+  gap: var(--sp-4);
+  margin-top: var(--sp-7);
+  align-items: end;
+}
+.imp-step {
+  display: grid;
+  align-content: start;
+  gap: var(--sp-3);
+  padding: var(--sp-5);
+  background: var(--white);
+  color: var(--black);
+  border: var(--rule);
+  box-shadow: 6px 6px 0 var(--black);
+}
+.imp-step-num {
+  font-size: var(--fs-h2);
+  font-weight: 800;
+  font-variation-settings: "wdth" 62;
+  line-height: 0.85;
+}
+@media (min-width: 900px) {
+  .imp-steps {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .imp-step:nth-child(1) {
+    min-height: 16rem;
+  }
+  .imp-step:nth-child(2) {
+    min-height: 20rem;
+  }
+  .imp-step:nth-child(3) {
+    min-height: 24rem;
+  }
+}
+
+/* Areas: black, four condensed columns */
+.imp-areas {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: var(--sp-7);
+  border-top: 2px solid var(--iron);
+}
+.imp-areas li {
+  padding: var(--sp-4) 0;
+  border-bottom: 2px solid var(--iron);
+  font-size: var(--fs-h3);
+  font-weight: 700;
+  font-variation-settings: "wdth" 70;
+  line-height: 1.05;
+}
+@media (min-width: 900px) {
+  .imp-areas {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    column-gap: var(--sp-5);
+  }
+}
+
+/* FAQ: numbered rows */
+.imp-faq {
+  margin-top: var(--sp-7);
+  border-top: var(--rule);
+  counter-reset: q;
+}
+.imp-faq details {
+  border-bottom: var(--rule);
+  counter-increment: q;
+}
+.imp-faq summary {
+  display: grid;
+  grid-template-columns: 3rem minmax(0, 1fr) auto;
+  align-items: center;
+  gap: var(--sp-4);
+  min-height: 72px;
+  padding-block: var(--sp-4);
+}
+.imp-faq summary::before {
+  content: counter(q, decimal-leading-zero);
+  font-weight: 800;
+  font-variation-settings: "wdth" 62;
+  font-size: 1.5rem;
+}
+.imp-faq h3 {
+  font-size: clamp(1.125rem, 1rem + 0.6vw, 1.5rem);
+  font-weight: 700;
+  font-variation-settings: "wdth" 85;
+  line-height: 1.2;
+}
+.imp-faq p {
+  padding: 0 0 var(--sp-6) calc(3rem + var(--sp-4));
+  max-width: 64ch;
+}
+
+/* Closing: the phone number is the headline */
+.imp-cta {
+  border-top: var(--rule);
+}
+.imp-cta-phone {
+  display: block;
+  font-size: min(15.5vw, 15rem);
+  font-weight: 800;
+  font-variation-settings: "wdth" 62;
+  line-height: 0.82;
+  letter-spacing: -0.01em;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  margin-block: var(--sp-6) var(--sp-7);
+  transition: color var(--dur-fast);
+}
+.imp-cta-phone:hover {
+  color: var(--accent);
+}
+
+/* Footer: black, ruled grid */
+.imp-footer {
+  padding-block: var(--sp-8) calc(var(--sp-7) + 88px);
+}
+@media (min-width: 768px) {
+  .imp-footer {
+    padding-bottom: var(--sp-7);
+  }
+}
+.imp-footer-grid {
+  display: grid;
+  border-top: 2px solid var(--iron);
+}
+.imp-footer-grid > div {
+  padding: var(--sp-5) 0;
+  border-bottom: 2px solid var(--iron);
+}
+.imp-footer-grid h2 {
+  font-size: var(--fs-small);
+  font-weight: 800;
+  color: var(--accent);
+  margin-bottom: var(--sp-2);
+}
+@media (min-width: 768px) {
+  .imp-footer-grid {
+    grid-template-columns: 2fr 1fr 1fr 1.4fr;
+  }
+  .imp-footer-grid > div + div {
+    padding-left: var(--sp-5);
+    border-left: 2px solid var(--iron);
+  }
+}
+
+/* Call bar */
+.imp-callbar a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-4);
+  min-height: 60px;
+  padding: 0 6px 0 18px;
+  background: var(--black);
+  color: var(--white);
+  border: 2px solid var(--black);
+  box-shadow: 4px 4px 0 var(--accent);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+.imp-callbar strong {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  min-height: 46px;
+  padding: 0 1rem;
+  background: var(--accent);
+  color: var(--on-accent);
+  font-weight: 800;
+}
+.imp-callbar svg {
+  width: 1.05em;
+  height: 1.05em;
+}

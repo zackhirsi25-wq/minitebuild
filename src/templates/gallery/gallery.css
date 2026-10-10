@@ -1,0 +1,521 @@
+/* Gallery: "White wall". Values from tokens.css. */
+.gal {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font);
+  font-size: var(--fs-body);
+  line-height: 1.6;
+}
+.gal-wrap {
+  max-width: var(--max);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+.gal-grid {
+  display: grid;
+  gap: var(--sp-6) var(--sp-5);
+}
+@media (min-width: 1024px) {
+  .gal-grid {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+  }
+}
+.gal-section {
+  padding-block: var(--section-y);
+}
+
+/* Type */
+.gal-display {
+  font-size: var(--fs-display);
+  line-height: 0.92;
+  letter-spacing: -0.05em;
+  font-weight: 600;
+  text-wrap: balance;
+}
+.gal-h2 {
+  font-size: var(--fs-h2);
+  line-height: 0.98;
+  letter-spacing: -0.04em;
+  font-weight: 600;
+  text-wrap: balance;
+}
+.gal-lead {
+  font-size: var(--fs-lead);
+  line-height: 1.32;
+  letter-spacing: -0.015em;
+  color: var(--stone);
+  text-wrap: pretty;
+}
+.gal-body {
+  max-width: 62ch;
+  color: var(--stone);
+  text-wrap: pretty;
+}
+.gal-small {
+  font-size: var(--fs-small);
+  line-height: 1.45;
+}
+.gal-skip {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+/* Buttons */
+.gal-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+  min-height: 52px;
+  padding: 0 1.5rem;
+  border-radius: var(--r-full);
+  background: var(--accent);
+  color: var(--on-accent);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  transition:
+    transform var(--dur-fast) var(--ease-out),
+    filter var(--dur-fast) var(--ease-out);
+}
+.gal-btn svg {
+  width: 1.05em;
+  height: 1.05em;
+}
+.gal-btn:hover {
+  filter: brightness(1.12);
+  transform: translateY(-1px);
+}
+.gal-btn:active {
+  transform: scale(0.98);
+}
+.gal-btn--small {
+  min-height: 40px;
+  padding: 0 1.1rem;
+  font-size: var(--fs-small);
+}
+.gal-link {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  font-weight: 500;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.3em;
+  font-variant-numeric: tabular-nums;
+  transition: color var(--dur-fast);
+}
+.gal-link:hover {
+  color: var(--accent);
+}
+
+/* Header */
+.gal-header {
+  position: sticky;
+  top: var(--site-offset, 0px);
+  z-index: 50;
+  height: var(--header-h);
+  transition:
+    background-color var(--dur-base) var(--ease-out),
+    box-shadow var(--dur-base) var(--ease-out),
+    height var(--dur-base) var(--ease-out);
+}
+.gal-header[data-scrolled] {
+  height: 60px;
+  background: rgb(250 250 247 / 0.82);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  box-shadow: 0 1px 0 var(--line);
+}
+.gal-header-inner {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: var(--sp-6);
+}
+.gal-name {
+  margin-right: auto;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  max-width: 26ch;
+}
+.gal-nav {
+  display: none;
+  gap: var(--sp-6);
+  font-size: var(--fs-small);
+  color: var(--stone);
+}
+.gal-nav a {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  transition: color var(--dur-fast);
+}
+.gal-nav a:hover {
+  color: var(--ink);
+}
+@media (min-width: 900px) {
+  .gal-nav {
+    display: flex;
+  }
+}
+
+/* Hero: the headline is the exhibit */
+.gal-hero {
+  min-height: calc(100svh - var(--site-offset, 0px) - var(--header-h));
+  display: grid;
+  align-content: space-between;
+  gap: var(--sp-8);
+  padding-block: var(--sp-8) var(--sp-7);
+}
+.gal-hero .gal-display {
+  max-width: 11ch;
+}
+.gal-hero-foot {
+  display: grid;
+  gap: var(--sp-5);
+  justify-items: start;
+}
+@media (min-width: 1024px) {
+  .gal-hero-foot {
+    grid-column: 7 / -1;
+  }
+}
+
+/* The framed print and its wall label */
+.gal-print {
+  padding-bottom: var(--section-y);
+}
+.gal-frame {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: clip;
+  background: var(--mist);
+  box-shadow:
+    0 0 0 1px var(--line),
+    0 40px 80px -48px rgb(17 17 17 / 0.45);
+}
+.gal-label {
+  display: grid;
+  gap: 2px;
+  margin-top: var(--sp-4);
+  max-width: 44ch;
+}
+.gal-label strong {
+  font-weight: 600;
+}
+.gal-label span {
+  color: var(--stone);
+}
+@media (min-width: 1024px) {
+  .gal-print .gal-frame,
+  .gal-print .gal-label {
+    grid-column: 2 / span 10;
+  }
+}
+/* No photo: a placard listing the work, like a gallery's list of works */
+.gal-placard {
+  border: 1px solid var(--ink);
+  padding: var(--sp-7) var(--sp-6);
+  display: grid;
+  gap: var(--sp-5);
+}
+.gal-placard ol {
+  display: grid;
+  gap: var(--sp-2);
+  font-size: var(--fs-lead);
+  letter-spacing: -0.02em;
+  font-weight: 500;
+  counter-reset: work;
+}
+.gal-placard li {
+  counter-increment: work;
+  display: flex;
+  gap: var(--sp-4);
+}
+.gal-placard li::before {
+  content: counter(work);
+  color: var(--stone);
+  font-size: var(--fs-small);
+  padding-top: 0.6em;
+  min-width: 1.5em;
+}
+@media (min-width: 1024px) {
+  .gal-placard {
+    grid-column: 4 / span 6;
+    padding: var(--sp-9) var(--sp-8);
+  }
+}
+
+/* Services: title and text in rows */
+.gal-services-head {
+  grid-column: 1 / -1;
+}
+.gal-rows {
+  grid-column: 1 / -1;
+  border-top: 1px solid var(--ink);
+}
+.gal-row {
+  display: grid;
+  gap: var(--sp-3) var(--sp-5);
+  padding-block: var(--sp-6);
+  border-bottom: 1px solid var(--line);
+}
+.gal-row h3 {
+  font-size: var(--fs-lead);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  font-weight: 600;
+}
+@media (min-width: 768px) {
+  .gal-row {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+  }
+  .gal-row h3 {
+    grid-column: 1 / span 5;
+  }
+  .gal-row p {
+    grid-column: 7 / -1;
+  }
+}
+
+/* About: photo bleeds off the right edge */
+.gal-about {
+  display: grid;
+  gap: var(--sp-7);
+  align-items: center;
+}
+.gal-about-text {
+  display: grid;
+  gap: var(--sp-5);
+  padding-inline: var(--gutter);
+}
+.gal-about-photo {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: clip;
+  background: var(--mist);
+}
+@media (min-width: 1024px) {
+  .gal-about {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    max-width: calc(var(--max) / 2 + 50vw);
+    margin-left: max(0px, calc(50vw - var(--max) / 2));
+  }
+  .gal-about-text {
+    padding-right: var(--sp-9);
+  }
+  .gal-about-photo {
+    aspect-ratio: auto;
+    min-height: 82svh;
+  }
+}
+
+/* Work: a salon hang */
+.gal-hang {
+  columns: 2;
+  column-gap: var(--sp-5);
+  margin-top: var(--sp-8);
+}
+.gal-hang li {
+  break-inside: avoid;
+  margin-bottom: var(--sp-7);
+}
+.gal-hang .gal-frame {
+  aspect-ratio: auto;
+}
+.gal-hang li:nth-child(3n + 1) .gal-frame {
+  aspect-ratio: 4 / 5;
+}
+.gal-hang li:nth-child(3n + 2) .gal-frame {
+  aspect-ratio: 1;
+}
+.gal-hang li:nth-child(3n) .gal-frame {
+  aspect-ratio: 3 / 4;
+}
+@media (min-width: 1024px) {
+  .gal-hang {
+    columns: 3;
+    column-gap: var(--sp-7);
+  }
+}
+
+/* How it works: three lines at heading size */
+.gal-how {
+  background: var(--mist);
+}
+.gal-steps {
+  margin-top: var(--sp-8);
+  display: grid;
+  gap: var(--sp-6);
+}
+.gal-step {
+  display: grid;
+  gap: var(--sp-2) var(--sp-7);
+  align-items: baseline;
+  padding-bottom: var(--sp-6);
+  border-bottom: 1px solid var(--line);
+}
+.gal-step h3 {
+  font-size: var(--fs-h2);
+  line-height: 1;
+  letter-spacing: -0.04em;
+  font-weight: 600;
+}
+.gal-step h3 span {
+  color: var(--stone);
+  font-weight: 400;
+}
+@media (min-width: 900px) {
+  .gal-step {
+    grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+  }
+}
+
+/* Areas: one flowing line */
+.gal-areas {
+  margin-top: var(--sp-6);
+  font-size: var(--fs-lead);
+  line-height: 1.5;
+  letter-spacing: -0.015em;
+  max-width: 48ch;
+}
+.gal-areas span[aria-hidden] {
+  color: var(--line);
+  padding-inline: 0.4em;
+}
+
+/* FAQ */
+.gal-faq {
+  display: grid;
+  gap: var(--sp-7);
+}
+@media (min-width: 1024px) {
+  .gal-faq {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+  }
+  .gal-faq > h2 {
+    grid-column: 1 / span 4;
+  }
+  .gal-faq-list {
+    grid-column: 5 / span 7;
+  }
+}
+.gal-faq-list details {
+  border-top: 1px solid var(--line);
+}
+.gal-faq-list details:last-child {
+  border-bottom: 1px solid var(--line);
+}
+.gal-faq-list summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-5);
+  min-height: 72px;
+  padding-block: var(--sp-5);
+}
+.gal-faq-list h3 {
+  font-size: var(--fs-lead);
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  font-weight: 500;
+}
+.gal-faq-list p {
+  padding-bottom: var(--sp-6);
+  max-width: 60ch;
+  color: var(--stone);
+}
+
+/* Closing: the only dark room in the building */
+.gal-cta {
+  background: var(--ink);
+  color: var(--paper);
+  --focus: var(--paper);
+}
+.gal-cta .gal-lead {
+  color: rgb(250 250 247 / 0.72);
+  max-width: 40ch;
+}
+.gal-cta-inner {
+  display: grid;
+  gap: var(--sp-6);
+  justify-items: start;
+}
+.gal-cta-phone {
+  font-size: var(--fs-h2);
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  transition: opacity var(--dur-fast);
+}
+.gal-cta-phone:hover {
+  opacity: 0.75;
+}
+
+/* Footer: the catalogue colophon */
+.gal-footer {
+  padding-block: var(--sp-9) calc(var(--sp-8) + 88px);
+  border-top: 1px solid var(--line);
+}
+@media (min-width: 768px) {
+  .gal-footer {
+    padding-bottom: var(--sp-8);
+  }
+}
+.gal-colophon {
+  display: grid;
+  gap: var(--sp-6);
+  font-size: var(--fs-small);
+}
+.gal-colophon h2 {
+  font-size: var(--fs-small);
+  font-weight: 600;
+  margin-bottom: var(--sp-2);
+}
+.gal-colophon p,
+.gal-colophon li {
+  color: var(--stone);
+}
+@media (min-width: 768px) {
+  .gal-colophon {
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+  }
+}
+.gal-fine {
+  margin-top: var(--sp-8);
+  color: var(--stone);
+}
+
+/* Call bar */
+.gal-callbar a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-4);
+  min-height: 60px;
+  padding: 0 8px 0 20px;
+  border-radius: var(--r-full);
+  background: rgb(255 255 255 / 0.88);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  box-shadow:
+    0 0 0 1px var(--line),
+    0 18px 40px -20px rgb(17 17 17 / 0.4);
+  font-variant-numeric: tabular-nums;
+}
+.gal-callbar strong {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  min-height: 44px;
+  padding: 0 1.1rem;
+  border-radius: var(--r-full);
+  background: var(--accent);
+  color: var(--on-accent);
+  font-weight: 600;
+}
+.gal-callbar svg {
+  width: 1em;
+  height: 1em;
+}

@@ -4,25 +4,65 @@ import type { ComponentType } from "react";
 import type { TemplateDemo, TemplateMeta, TemplateProps } from "./_kit/types";
 import cinematicMeta from "./cinematic/meta";
 import cinematicDemo from "./cinematic/demo";
+import editorialMeta from "./editorial/meta";
+import editorialDemo from "./editorial/demo";
+import galleryMeta from "./gallery/meta";
+import galleryDemo from "./gallery/demo";
+import havenMeta from "./haven/meta";
+import havenDemo from "./haven/demo";
+import impactMeta from "./impact/meta";
+import impactDemo from "./impact/demo";
+import storyMeta from "./story/meta";
+import storyDemo from "./story/demo";
 import cinematicDesktop from "./cinematic/thumb-desktop.jpg";
 import cinematicMobile from "./cinematic/thumb-mobile.jpg";
+import editorialDesktop from "./editorial/thumb-desktop.jpg";
+import editorialMobile from "./editorial/thumb-mobile.jpg";
+import galleryDesktop from "./gallery/thumb-desktop.jpg";
+import galleryMobile from "./gallery/thumb-mobile.jpg";
+import havenDesktop from "./haven/thumb-desktop.jpg";
+import havenMobile from "./haven/thumb-mobile.jpg";
+import impactDesktop from "./impact/thumb-desktop.jpg";
+import impactMobile from "./impact/thumb-mobile.jpg";
+import storyDesktop from "./story/thumb-desktop.jpg";
+import storyMobile from "./story/thumb-mobile.jpg";
 
-export const TEMPLATE_IDS = ["cinematic"] as const;
+export const TEMPLATE_IDS = ["cinematic", "editorial", "gallery", "haven", "impact", "story"] as const;
 
 export const TEMPLATE_METAS: Record<string, TemplateMeta> = {
-  "cinematic": cinematicMeta,
+  cinematic: cinematicMeta,
+  editorial: editorialMeta,
+  gallery: galleryMeta,
+  haven: havenMeta,
+  impact: impactMeta,
+  story: storyMeta,
 };
 
 export const TEMPLATE_DEMOS: Record<string, TemplateDemo> = {
-  "cinematic": cinematicDemo,
+  cinematic: cinematicDemo,
+  editorial: editorialDemo,
+  gallery: galleryDemo,
+  haven: havenDemo,
+  impact: impactDemo,
+  story: storyDemo,
 };
 
 /** Rendered thumbnails of each template's demo, where they exist. */
 export const TEMPLATE_THUMBS: Record<string, { desktop: StaticImageData; mobile: StaticImageData }> = {
-  "cinematic": { desktop: cinematicDesktop, mobile: cinematicMobile },
+  cinematic: { desktop: cinematicDesktop, mobile: cinematicMobile },
+  editorial: { desktop: editorialDesktop, mobile: editorialMobile },
+  gallery: { desktop: galleryDesktop, mobile: galleryMobile },
+  haven: { desktop: havenDesktop, mobile: havenMobile },
+  impact: { desktop: impactDesktop, mobile: impactMobile },
+  story: { desktop: storyDesktop, mobile: storyMobile },
 };
 
 /** Loaded on demand so a page only pulls in the fonts and CSS of the template it shows. */
 export const TEMPLATE_LOADERS: Record<string, () => Promise<{ default: ComponentType<TemplateProps> }>> = {
-  "cinematic": () => import("./cinematic/Template"),
+  cinematic: () => import("./cinematic/Template"),
+  editorial: () => import("./editorial/Template"),
+  gallery: () => import("./gallery/Template"),
+  haven: () => import("./haven/Template"),
+  impact: () => import("./impact/Template"),
+  story: () => import("./story/Template"),
 };

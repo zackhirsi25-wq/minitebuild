@@ -1,0 +1,41 @@
+/* Story tokens. --accent is set inline from meta.ts. */
+.sto {
+  --dusk: #14161b;
+  --dusk-2: #1d2027;
+  --sand: #efe7da;
+  --chalk: #f5f1ea;
+  --umber: #1c1b19;
+  --muted-dark: #5e584f; /* 5.5:1 on sand */
+  --muted-light: #a9a398; /* 7.6:1 on dusk */
+  --line-dark: rgb(245 241 234 / 0.14);
+  --line-light: rgb(28 27 25 / 0.15);
+  --accent: #e8a33d;
+  --on-accent: var(--umber);
+  --focus: var(--accent);
+  --selection-bg: var(--accent);
+  --selection-fg: var(--umber);
+
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 24px;
+  --sp-6: 32px;
+  --sp-7: 48px;
+  --sp-8: 64px;
+  --sp-9: 96px;
+  --gutter: clamp(20px, 4vw, 64px);
+  --section-y: clamp(72px, 3rem + 6vw, 160px);
+  --max: 1360px;
+
+  --r-1: 4px;
+  --r-2: 14px;
+  --r-full: 999px;
+
+  --display: var(--sto-display), system-ui, sans-serif;
+  --serif: var(--sto-serif), Georgia, serif;
+  --fs-display: clamp(2.75rem, 1.3rem + 7vw, 8rem);
+  --fs-h2: clamp(2rem, 1.3rem + 3.4vw, 4.5rem);
+  --fs-lead: clamp(1.25rem, 1.05rem + 0.9vw, 1.75rem);
+  --fs-body: clamp(1.0625rem, 1rem + 0.25vw, 1.1875rem);
+  --fs-small: 0.875rem;
+}

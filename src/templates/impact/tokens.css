@@ -1,0 +1,36 @@
+/* Impact tokens. --accent and --on-accent are set inline from meta.ts. */
+.imp {
+  --black: #0a0a0a;
+  --white: #ffffff;
+  --concrete: #e6e4df;
+  --iron: #2a2a2a;
+  --grey: #6b6b6b; /* 5.3:1 on white */
+  --grey-dark: #a3a3a3; /* 7.9:1 on black */
+  --accent: #ffd400;
+  --on-accent: #0a0a0a;
+  --focus: var(--accent);
+  --selection-bg: var(--accent);
+  --selection-fg: var(--on-accent);
+
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 24px;
+  --sp-6: 32px;
+  --sp-7: 48px;
+  --sp-8: 64px;
+  --sp-9: 96px;
+  --gutter: clamp(16px, 3vw, 48px);
+  --section-y: clamp(64px, 3rem + 6vw, 160px);
+  --max: 1520px;
+  --rule: 2px solid var(--black);
+
+  --r-0: 0;
+
+  --font: var(--imp-font), "Arial Narrow", Arial, sans-serif;
+  --fs-display: clamp(3.5rem, 1.5rem + 10vw, 11rem);
+  --fs-h2: clamp(2.5rem, 1.5rem + 5vw, 6rem);
+  --fs-h3: clamp(1.5rem, 1.2rem + 1.5vw, 2.25rem);
+  --fs-body: clamp(1rem, 0.96rem + 0.2vw, 1.125rem);
+  --fs-small: 0.875rem;
+}

@@ -9,7 +9,10 @@ export function processSteps(content: SiteContent, phone: string) {
     content.process ?? [
       { title: "Call", body: `Call ${phone} and tell us what you need.` },
       { title: "Talk it through", body: "We go over the details with you and agree on the next steps together." },
-      { title: "Get it done", body: "The work happens on the schedule you agreed to, with a call if anything changes." },
+      {
+        title: "Get it done",
+        body: "The work happens on the schedule you agreed to, with a call if anything changes.",
+      },
     ]
   );
 }

@@ -1,0 +1,477 @@
+/* Haven: "Open door". Values from tokens.css. */
+.hav {
+  background: var(--linen);
+  color: var(--cocoa);
+  font-family: var(--sans);
+  font-size: var(--fs-body);
+  line-height: 1.65;
+}
+.hav-wrap {
+  max-width: var(--max);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+.hav-section {
+  padding-block: var(--section-y);
+}
+.hav-blush {
+  background: var(--blush);
+}
+.hav-sage {
+  background: var(--sage);
+}
+
+/* Type */
+.hav-display,
+.hav-h2,
+.hav-h3 {
+  font-family: var(--serif);
+  font-weight: 400;
+  text-wrap: balance;
+}
+.hav-display {
+  font-size: var(--fs-display);
+  line-height: 1;
+  letter-spacing: -0.015em;
+}
+.hav-h2 {
+  font-size: var(--fs-h2);
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+}
+.hav-h3 {
+  font-size: clamp(1.25rem, 1.1rem + 0.5vw, 1.5rem);
+  line-height: 1.25;
+}
+.hav-lead {
+  font-size: var(--fs-lead);
+  line-height: 1.5;
+  text-wrap: pretty;
+}
+.hav-body {
+  max-width: 60ch;
+  text-wrap: pretty;
+}
+.hav-small {
+  font-size: var(--fs-small);
+  line-height: 1.5;
+}
+.hav-muted {
+  color: var(--taupe);
+}
+.hav-skip {
+  background: var(--cocoa);
+  color: var(--linen);
+}
+
+/* Buttons */
+.hav-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+  min-height: 52px;
+  padding: 0 1.5rem;
+  border-radius: var(--r-full);
+  background: var(--accent);
+  color: var(--on-accent);
+  font-weight: 600;
+  transition:
+    transform var(--dur-fast) var(--ease-out),
+    filter var(--dur-fast) var(--ease-out);
+}
+.hav-btn svg {
+  width: 1em;
+  height: 1em;
+}
+.hav-btn:hover {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+}
+.hav-btn:active {
+  transform: scale(0.98);
+}
+.hav-btn--small {
+  min-height: 42px;
+  padding: 0 1.1rem;
+  font-size: var(--fs-small);
+}
+
+/* Open status pill */
+.hav-open {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55em;
+  min-height: 32px;
+  padding: 0 0.9rem;
+  border-radius: var(--r-full);
+  background: rgb(255 255 255 / 0.65);
+  box-shadow: inset 0 0 0 1px var(--line);
+  font-size: var(--fs-small);
+  font-weight: 500;
+}
+.hav-open-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--taupe);
+}
+.hav-open[data-open="true"] .hav-open-dot {
+  background: #3b8a5a;
+  box-shadow: 0 0 0 4px rgb(59 138 90 / 0.18);
+}
+
+/* Header */
+.hav-header {
+  position: sticky;
+  top: var(--site-offset, 0px);
+  z-index: 50;
+  transition: background-color var(--dur-base) var(--ease-out);
+}
+.hav-header[data-scrolled] {
+  background: rgb(247 242 236 / 0.86);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  box-shadow: 0 1px 0 var(--line);
+}
+.hav-header-inner {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-4);
+  min-height: 72px;
+}
+.hav-name {
+  margin-right: auto;
+  font-family: var(--serif);
+  font-size: 1.3rem;
+  line-height: 1.1;
+  max-width: 22ch;
+}
+.hav-header .hav-open {
+  display: none;
+}
+/* One status on screen at a time: in the header from tablet up, in the hero on phones. */
+@media (min-width: 768px) {
+  .hav-header .hav-open {
+    display: inline-flex;
+  }
+  .hav-hero .hav-open {
+    display: none;
+  }
+}
+
+/* Hero: text left, arched photo right that breaks out of the bottom edge */
+.hav-hero {
+  display: grid;
+  gap: var(--sp-7);
+  align-items: center;
+  min-height: calc(100svh - var(--site-offset, 0px) - 72px);
+  padding-block: var(--sp-6) var(--sp-8);
+}
+.hav-hero-text {
+  display: grid;
+  gap: var(--sp-5);
+  justify-items: start;
+}
+.hav-arch {
+  position: relative;
+  overflow: clip;
+  border-radius: var(--arch);
+  background: var(--blush);
+}
+.hav-hero .hav-arch {
+  aspect-ratio: 4 / 5;
+  width: min(100%, 520px);
+  justify-self: center;
+}
+.hav-hero .hav-arch img {
+  transition: scale 1.2s var(--ease-out);
+}
+/* No photo: an empty doorway with the business initial */
+.hav-door {
+  display: grid;
+  place-items: center;
+  font-family: var(--serif);
+  font-size: clamp(7rem, 16vw, 13rem);
+  line-height: 1;
+  color: var(--accent);
+  background:
+    radial-gradient(60% 50% at 50% 20%, rgb(255 255 255 / 0.7), transparent 70%),
+    linear-gradient(var(--blush), var(--sage));
+}
+@media (min-width: 1024px) {
+  .hav-hero {
+    grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
+    column-gap: var(--sp-9);
+  }
+  .hav-hero .hav-arch {
+    margin-bottom: calc(-1 * var(--sp-9));
+    position: relative;
+    z-index: 2;
+  }
+}
+
+/* Services: two columns, a small arch beside the list */
+.hav-services {
+  display: grid;
+  gap: var(--sp-7);
+}
+.hav-services-list {
+  display: grid;
+  gap: var(--sp-6) var(--sp-8);
+}
+.hav-services-list li {
+  display: grid;
+  gap: var(--sp-2);
+  padding-top: var(--sp-5);
+  border-top: 1px solid var(--line);
+}
+.hav-detail {
+  aspect-ratio: 1;
+  width: min(100%, 320px);
+}
+@media (min-width: 768px) {
+  .hav-services-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (min-width: 1024px) {
+  .hav-services {
+    grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
+    align-items: start;
+  }
+}
+
+/* About: text with an arch that overlaps it */
+.hav-about {
+  display: grid;
+  gap: var(--sp-7);
+  align-items: center;
+}
+.hav-about-text {
+  display: grid;
+  gap: var(--sp-5);
+}
+.hav-about .hav-arch {
+  aspect-ratio: 3 / 4;
+  width: min(100%, 440px);
+}
+@media (min-width: 1024px) {
+  .hav-about {
+    grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
+  }
+  .hav-about-text {
+    padding: var(--sp-8);
+    margin-right: calc(-1 * var(--sp-9));
+    border-radius: var(--r-2);
+    background: var(--linen);
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 30px 60px -40px rgb(46 38 34 / 0.4);
+  }
+}
+
+/* Work: a row of arches with varied heights */
+.hav-arches {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--sp-5);
+  align-items: end;
+  margin-top: var(--sp-7);
+}
+.hav-arches .hav-arch:nth-child(odd) {
+  aspect-ratio: 3 / 4;
+}
+.hav-arches .hav-arch:nth-child(even) {
+  aspect-ratio: 3 / 5;
+}
+@media (min-width: 900px) {
+  .hav-arches {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+/* How it works: three steps on a path line */
+.hav-path {
+  position: relative;
+  display: grid;
+  gap: var(--sp-7);
+  margin-top: var(--sp-8);
+}
+.hav-path li {
+  position: relative;
+  display: grid;
+  gap: var(--sp-3);
+  justify-items: start;
+}
+.hav-path-num {
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--linen);
+  box-shadow: inset 0 0 0 1px var(--cocoa);
+  font-family: var(--serif);
+  font-size: 1.5rem;
+}
+@media (min-width: 900px) {
+  .hav-path {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .hav-path::before {
+    content: "";
+    position: absolute;
+    top: 28px;
+    left: 28px;
+    right: 33%;
+    border-top: 1.5px dashed var(--cocoa);
+    opacity: 0.35;
+  }
+}
+
+/* Areas with the opening hours beside them */
+.hav-visit {
+  display: grid;
+  gap: var(--sp-8);
+}
+.hav-areas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2);
+  margin-top: var(--sp-5);
+}
+.hav-areas li {
+  padding: 0.45rem 1rem;
+  border-radius: var(--r-full);
+  box-shadow: inset 0 0 0 1px var(--line);
+  background: rgb(255 255 255 / 0.5);
+}
+.hav-hours {
+  display: grid;
+  margin-top: var(--sp-5);
+}
+.hav-hours div {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--sp-5);
+  padding-block: var(--sp-3);
+  border-bottom: 1px solid var(--line);
+}
+@media (min-width: 900px) {
+  .hav-visit {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+}
+
+/* FAQ */
+.hav-faq {
+  max-width: 52rem;
+  margin: var(--sp-7) auto 0;
+}
+.hav-faq details {
+  margin-bottom: var(--sp-3);
+  border-radius: var(--r-2);
+  background: rgb(255 255 255 / 0.6);
+  box-shadow: inset 0 0 0 1px var(--line);
+}
+.hav-faq summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-4);
+  min-height: 64px;
+  padding: var(--sp-4) var(--sp-5);
+}
+.hav-faq h3 {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 1.25rem;
+  line-height: 1.3;
+}
+.hav-faq p {
+  padding: 0 var(--sp-5) var(--sp-5);
+}
+
+/* Closing */
+.hav-cta {
+  display: grid;
+  gap: var(--sp-5);
+  justify-items: center;
+  text-align: center;
+  padding: var(--sp-9) var(--sp-6);
+  border-radius: 400px 400px var(--r-2) var(--r-2);
+  background: var(--blush);
+  max-width: 56rem;
+  margin-inline: auto;
+}
+.hav-cta-phone {
+  font-family: var(--serif);
+  font-size: var(--fs-h2);
+  line-height: 1;
+  color: var(--accent);
+  font-variant-numeric: lining-nums;
+}
+
+/* Footer */
+.hav-footer {
+  padding-block: var(--sp-8) calc(var(--sp-7) + 88px);
+}
+@media (min-width: 768px) {
+  .hav-footer {
+    padding-bottom: var(--sp-7);
+  }
+}
+.hav-footer-grid {
+  display: grid;
+  gap: var(--sp-6);
+  padding-top: var(--sp-6);
+  border-top: 1px solid var(--line);
+}
+.hav-footer-grid h2 {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 1.125rem;
+  margin-bottom: var(--sp-2);
+}
+.hav-footer-grid a[href^="https://maps"] {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+@media (min-width: 768px) {
+  .hav-footer-grid {
+    grid-template-columns: 2fr 1fr 1.4fr;
+  }
+}
+
+/* Call bar */
+.hav-callbar a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-4);
+  min-height: 60px;
+  padding: 0 6px 0 20px;
+  border-radius: var(--r-full);
+  background: rgb(255 255 255 / 0.9);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  box-shadow:
+    inset 0 0 0 1px var(--line),
+    0 18px 40px -20px rgb(46 38 34 / 0.45);
+  font-variant-numeric: tabular-nums;
+}
+.hav-callbar strong {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  min-height: 46px;
+  padding: 0 1.1rem;
+  border-radius: var(--r-full);
+  background: var(--accent);
+  color: var(--on-accent);
+  font-weight: 600;
+}
+.hav-callbar svg {
+  width: 1em;
+  height: 1em;
+}

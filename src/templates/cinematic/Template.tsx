@@ -177,11 +177,7 @@ export default function CinematicTemplate({ site, images, palette }: TemplatePro
               <ul className="cin-work-grid" data-count={work.length}>
                 {work.map((image) => (
                   <li key={image.src} className="cin-work-item" data-reveal>
-                    <Photo
-                      image={image}
-                      sizes="(min-width: 768px) 58vw, 100vw"
-                      className="cin-grade"
-                    />
+                    <Photo image={image} sizes="(min-width: 768px) 58vw, 100vw" className="cin-grade" />
                   </li>
                 ))}
               </ul>

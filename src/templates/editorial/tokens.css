@@ -1,0 +1,38 @@
+/* Editorial tokens. --accent is set inline from meta.ts. */
+.edi {
+  --cream: #f4efe6;
+  --ink: #1b1a17;
+  --sepia: #6b6358; /* 4.9:1 on cream */
+  --night: #1f1d1a;
+  --night-text: #efe9de;
+  --night-muted: #b3aa9c; /* 7.4:1 on night */
+  --rule: #cfc6b8;
+  --accent: #7a1f2b;
+  --on-accent: #ffffff;
+  --focus: var(--ink);
+  --selection-bg: var(--accent);
+  --selection-fg: #ffffff;
+
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 24px;
+  --sp-6: 32px;
+  --sp-7: 48px;
+  --sp-8: 64px;
+  --sp-9: 96px;
+  --gutter: clamp(20px, 4vw, 64px);
+  --section-y: clamp(72px, 3rem + 6vw, 168px);
+  --max: 1320px;
+
+  --r-0: 0;
+  --r-1: 2px;
+
+  --serif: var(--edi-serif), "Iowan Old Style", Georgia, serif;
+  --sans: var(--edi-sans), system-ui, sans-serif;
+  --fs-display: clamp(3rem, 1.4rem + 8vw, 9.5rem);
+  --fs-h2: clamp(2.25rem, 1.5rem + 3.6vw, 5rem);
+  --fs-lead: clamp(1.25rem, 1.1rem + 0.8vw, 1.75rem);
+  --fs-body: clamp(1rem, 0.97rem + 0.15vw, 1.0625rem);
+  --fs-small: 0.8125rem;
+}
