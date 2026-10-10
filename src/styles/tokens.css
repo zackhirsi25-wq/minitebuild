@@ -1,0 +1,124 @@
+/* Minitebuild design tokens: the one source for the product site, the build
+   flow and the admin. Scoped to .mb so customer sites (which share the root
+   layout) never inherit them. Dark first; data-theme="light" swaps values,
+   never names. Tailwind utilities map onto these in globals.css (@theme).
+
+   Contrast (WCAG AA):
+   - text on canvas: 15.8:1 dark, 17.4:1 light
+   - muted on canvas: 7.0:1 dark, 6.2:1 light
+   - on-accent (#1A1206) on accent: 11.2:1 dark, 9.0:1 light
+   - accent-text on canvas: 11.1:1 dark (#FFB547), 6.6:1 light (#8A4A06)
+   Accent is for the one main action on a screen, nothing else. */
+
+.mb {
+  color-scheme: dark;
+
+  /* Colour */
+  --mb-canvas: #0b0c0e;
+  --mb-surface: #131418;
+  --mb-raised: #1b1d22;
+  --mb-line: rgb(255 255 255 / 0.08);
+  --mb-line-strong: rgb(255 255 255 / 0.16);
+  --mb-fg: #edeef0;
+  --mb-muted: #9a9da5;
+  --mb-accent: #ffb547;
+  --mb-accent-hover: #ffc56e;
+  --mb-on-accent: #1a1206;
+  --mb-accent-text: #ffb547;
+  --mb-success: #4fd18b;
+  --mb-danger: #ff7a70;
+  --mb-focus: #ffb547;
+  --mb-glow: rgb(255 181 71 / 0.1);
+
+  /* Shadows */
+  --mb-shadow-raised: 0 1px 0 rgb(255 255 255 / 0.04) inset, 0 16px 40px -20px rgb(0 0 0 / 0.7);
+  --mb-shadow-overlay: 0 1px 0 rgb(255 255 255 / 0.06) inset, 0 32px 80px -24px rgb(0 0 0 / 0.8);
+
+  /* Radius */
+  --mb-radius-control: 8px;
+  --mb-radius-button: 10px;
+  --mb-radius-card: 16px;
+
+  /* Spacing (4px base; Tailwind's spacing scale uses the same steps) */
+  --mb-gutter: clamp(16px, 4vw, 40px);
+  --mb-section: clamp(72px, 3rem + 7vw, 160px);
+  --mb-max: 1200px;
+
+  /* Type: five sizes */
+  --mb-text-display: clamp(2.5rem, 1.6rem + 4.5vw, 4.75rem);
+  --mb-text-heading: clamp(1.75rem, 1.3rem + 2vw, 2.75rem);
+  --mb-text-lead: clamp(1.0625rem, 1rem + 0.3vw, 1.25rem);
+  --mb-text-body: clamp(0.9375rem, 0.92rem + 0.1vw, 1rem);
+  --mb-text-small: 0.8125rem;
+
+  /* Motion */
+  --mb-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --mb-fast: 160ms;
+  --mb-base: 280ms;
+}
+
+.mb[data-theme="light"] {
+  color-scheme: light;
+  --mb-canvas: #fafaf9;
+  --mb-surface: #ffffff;
+  --mb-raised: #f2f2ef;
+  --mb-line: rgb(20 21 24 / 0.09);
+  --mb-line-strong: rgb(20 21 24 / 0.18);
+  --mb-fg: #141518;
+  --mb-muted: #5d6068;
+  --mb-accent: #f5a524;
+  --mb-accent-hover: #e8961a;
+  --mb-on-accent: #1a1206;
+  --mb-accent-text: #8a4a06;
+  --mb-success: #13804a;
+  --mb-danger: #c2362b;
+  --mb-focus: #8a4a06;
+  --mb-glow: rgb(245 165 36 / 0.14);
+  --mb-shadow-raised: 0 1px 2px rgb(20 21 24 / 0.06), 0 16px 40px -24px rgb(20 21 24 / 0.25);
+  --mb-shadow-overlay: 0 32px 80px -24px rgb(20 21 24 / 0.35);
+}
+
+.mb {
+  background: var(--mb-canvas);
+  color: var(--mb-fg);
+  font-family: var(--font-onest), system-ui, sans-serif;
+  font-size: var(--mb-text-body);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.mb ::selection {
+  background: var(--mb-accent);
+  color: var(--mb-on-accent);
+}
+
+.mb :where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+  outline: 2px solid var(--mb-focus);
+  outline-offset: 2px;
+}
+
+/* No white flash past the page edges. */
+html:has(.mb) {
+  background: #0b0c0e;
+  scroll-behavior: smooth;
+}
+html:has(.mb[data-theme="light"]) {
+  background: #fafaf9;
+}
+html:has(.mb) body {
+  background: transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html:has(.mb) {
+    scroll-behavior: auto;
+  }
+  .mb *,
+  .mb *::before,
+  .mb *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

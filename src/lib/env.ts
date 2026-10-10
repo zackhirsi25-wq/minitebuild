@@ -52,6 +52,11 @@ export const env = {
   get workerSecret() {
     return read("WORKER_SECRET");
   },
+  /** Public contact email for the Minitebuild site footer; hidden when unset. */
+  get contactEmail() {
+    const value = read("CONTACT_EMAIL");
+    return value && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value) ? value : undefined;
+  },
   get isProduction() {
     return process.env.NODE_ENV === "production";
   },

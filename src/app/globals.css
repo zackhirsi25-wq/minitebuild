@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "../styles/tokens.css";
 
 @theme {
   --color-brand-50: #eef2ff;
@@ -6,6 +7,46 @@
   --color-brand-600: #4f46e5;
   --color-brand-700: #4338ca;
   --color-brand-800: #3730a3;
+}
+
+/* Minitebuild design tokens as Tailwind utilities (bg-canvas, text-muted,
+   rounded-card, text-heading…). Values live in src/styles/tokens.css. */
+@theme inline {
+  --color-canvas: var(--mb-canvas);
+  --color-surface: var(--mb-surface);
+  --color-raised: var(--mb-raised);
+  --color-line: var(--mb-line);
+  --color-line-strong: var(--mb-line-strong);
+  --color-fg: var(--mb-fg);
+  --color-muted: var(--mb-muted);
+  --color-accent: var(--mb-accent);
+  --color-accent-hover: var(--mb-accent-hover);
+  --color-on-accent: var(--mb-on-accent);
+  --color-accent-text: var(--mb-accent-text);
+  --color-success: var(--mb-success);
+  --color-danger: var(--mb-danger);
+
+  --radius-control: var(--mb-radius-control);
+  --radius-button: var(--mb-radius-button);
+  --radius-card: var(--mb-radius-card);
+
+  --shadow-raised: var(--mb-shadow-raised);
+  --shadow-overlay: var(--mb-shadow-overlay);
+
+  --text-display: var(--mb-text-display);
+  --text-display--line-height: 1.02;
+  --text-display--letter-spacing: -0.035em;
+  --text-heading: var(--mb-text-heading);
+  --text-heading--line-height: 1.1;
+  --text-heading--letter-spacing: -0.025em;
+  --text-lead: var(--mb-text-lead);
+  --text-lead--line-height: 1.5;
+  --text-body: var(--mb-text-body);
+  --text-body--line-height: 1.6;
+  --text-small: var(--mb-text-small);
+  --text-small--line-height: 1.45;
+
+  --ease-mb: var(--mb-ease);
 }
 
 html {

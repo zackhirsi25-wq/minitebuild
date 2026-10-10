@@ -1,7 +1,7 @@
-import { TEMPLATE_DEMOS, TEMPLATE_IDS, TEMPLATE_LOADERS, TEMPLATE_METAS } from "./registry.generated";
+import { TEMPLATE_DEMOS, TEMPLATE_IDS, TEMPLATE_LOADERS, TEMPLATE_METAS, TEMPLATE_THUMBS } from "./registry.generated";
 import type { TemplateMeta } from "./_kit/types";
 
-export { TEMPLATE_DEMOS, TEMPLATE_IDS, TEMPLATE_METAS };
+export { TEMPLATE_DEMOS, TEMPLATE_IDS, TEMPLATE_METAS, TEMPLATE_THUMBS };
 export type { TemplateMeta, TemplateProps, TemplateSite, Palette, StyleTag } from "./_kit/types";
 
 export const DEFAULT_TEMPLATE = "cinematic";

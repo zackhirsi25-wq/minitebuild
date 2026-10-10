@@ -1,0 +1,29 @@
+import { Onest } from "next/font/google";
+import { SiteFooter } from "@/components/site-shell/site-footer";
+import { SiteNav } from "@/components/site-shell/site-nav";
+import { THEME_SCRIPT } from "@/components/site-shell/theme-toggle";
+
+// Minitebuild's own public pages: home, templates, build, credits. The .mb
+// root scopes the design tokens (src/styles/tokens.css); dark by default.
+
+const onest = Onest({ subsets: ["latin"], variable: "--font-onest" });
+
+export default function SiteLayout({ children }: LayoutProps<"/">) {
+  return (
+    // THEME_SCRIPT may switch data-theme before hydration, hence suppressHydrationWarning.
+    <div className={`mb ${onest.variable} flex min-h-dvh flex-col`} data-theme="dark" suppressHydrationWarning>
+      <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
+      <a
+        href="#main"
+        className="absolute top-3 left-3 z-[70] rounded-button bg-fg px-4 py-2 text-small font-semibold text-canvas [clip-path:inset(50%)] focus-visible:[clip-path:none]"
+      >
+        Skip to content
+      </a>
+      <SiteNav />
+      <main id="main" className="flex-1">
+        {children}
+      </main>
+      <SiteFooter />
+    </div>
+  );
+}

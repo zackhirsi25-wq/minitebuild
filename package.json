@@ -22,7 +22,8 @@
     "stock:upload": "node --env-file=.env.local scripts/stock/upload-stock.mjs",
     "stock:list": "node scripts/stock/shopping-list.mjs",
     "stock:prepare": "node scripts/stock/ingest-manual.mjs prepare",
-    "stock:ingest": "node scripts/stock/ingest-manual.mjs ingest"
+    "stock:ingest": "node scripts/stock/ingest-manual.mjs ingest",
+    "templates:thumbs": "node scripts/template-thumbs.mjs"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.132.1",

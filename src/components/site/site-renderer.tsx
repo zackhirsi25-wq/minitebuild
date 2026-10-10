@@ -12,6 +12,7 @@ export async function SiteRenderer({
   template,
   palette,
   jsonLdUrl,
+  demo = false,
 }: {
   site: PublicSite;
   template?: string;
@@ -19,6 +20,8 @@ export async function SiteRenderer({
   palette?: string;
   /** Absolute URL of the live site; when set, LocalBusiness JSON-LD is included. */
   jsonLdUrl?: string;
+  /** Demo business in the template gallery: gallery slots may use stock photos. */
+  demo?: boolean;
 }) {
   const id = resolveTemplateId(template ?? site.template);
   const meta = templateMeta(id);
@@ -27,6 +30,7 @@ export async function SiteRenderer({
     site,
     meta.slots.map((s) => s.slot),
     env.supabaseUrl,
+    { demo },
   );
   const hero = images.hero;
   const imageUrl = hero ? (hero.src.startsWith("http") ? hero.src : `${jsonLdUrl}${hero.src}`) : undefined;
