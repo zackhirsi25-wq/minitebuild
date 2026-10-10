@@ -1,4 +1,5 @@
-import { formatIssues, siteContentSchema, type SiteContent, type Trade } from "@/lib/content/schema";
+import type { BusinessType } from "@/lib/business-type";
+import { formatIssues, LIMITS, siteContentSchema, type SiteContent, type Trade } from "@/lib/content/schema";
 import { inferSpecialty, serviceKey } from "@/lib/content/services";
 
 /** Everything the copywriter is told about a business. */
@@ -9,6 +10,8 @@ export type BusinessFacts = {
   address: string | null;
   category: string | null;
   trade: Trade;
+  /** Defaults to contractor wording when absent. */
+  businessType?: BusinessType;
   hours: string[];
   /** Services the owner listed (CSV "services" column). Used as the exact titles. */
   services?: string[];
@@ -31,16 +34,35 @@ export class CopyValidationError extends Error {
   }
 }
 
-export const SYSTEM_PROMPT = `You write the text for one-page websites for local trade businesses in the United States. Visitors are homeowners, mostly on phones, deciding whether to call.
+export const SYSTEM_PROMPT = `You write the text for one-page websites for local businesses in the United States. Visitors are mostly on phones, deciding whether to call. The site is designed like a studio made it by hand, so the words have to be as sharp as the design.
 
-Write in plain, confident, specific language a good local contractor would use. Mention the city and the kind of work naturally. Every service, area and answer must be something this business could plausibly offer given its trade.
+Voice: plain, confident and specific, the way a good owner talks about their own work. Short sentences. Concrete nouns over adjectives. Sentence case everywhere.
+
+Headline: at most 8 words. Say something specific to this business: what it does, and where or for whom. Name the city or a real detail of the work. It should only make sense for this kind of business in this place, never for any business anywhere. No question headlines, no puns, no exclamation marks. Good: "Roofs built for Denver hail." Bad: "Your trusted roofing partner."
+
+Never use these or anything like them: trusted partner, quality you can count on, second to none, look no further, one-stop shop, we've got you covered, your satisfaction, top-notch, unmatched, best in town, family owned (unless given), passion for excellence, elevate, seamless, state of the art, nestled.
+
+Buttons say exactly what happens when tapped. The call-to-action button dials the phone, so its label is "Call now" or "Call for a quote".
+
+How it works: three steps a customer goes through, starting with getting in touch. Describe only what any customer of this kind of business does (call, describe what they need, a visit or appointment, the work). Never promise prices, free estimates, timings or response times.
 
 Only state facts you were given. Never invent years in business, license or insurance numbers, awards, ratings, reviews, testimonials or review quotes, prices, guarantees or warranties, team size or number of employees, team names, certifications, or promises about results, response times or cleanup. Where a detail would help (licensing, estimates, timelines), describe it in general terms the owner can confirm, for example "Ask us about licensing and insurance when you call."
 
 Output plain text only: no HTML, no Markdown, no emoji, no square-bracket placeholders. Respect every length limit in the schema.`;
 
-function tradeLabel(trade: Trade): string {
-  return trade === "remodeling" ? "home remodeling" : "general contracting";
+const BUSINESS_DESCRIPTIONS: Record<BusinessType, string> = {
+  contractor: "a contractor or home-services trade",
+  restaurant: "a restaurant, cafe or food business",
+  salon: "a salon, barber or beauty business",
+  clinic: "a health or medical clinic",
+  "real-estate": "a real estate business",
+  shop: "a local shop",
+  professional: "a professional services firm",
+};
+
+function tradeLabel(facts: BusinessFacts): string {
+  if (facts.businessType && facts.businessType !== "contractor") return BUSINESS_DESCRIPTIONS[facts.businessType];
+  return facts.trade === "remodeling" ? "home remodeling" : "general contracting";
 }
 
 export function buildUserPrompt(facts: BusinessFacts): string {
@@ -50,7 +72,7 @@ export function buildUserPrompt(facts: BusinessFacts): string {
     `Business name: ${facts.name}`,
     `City: ${facts.city}`,
     `Phone: ${facts.phone}`,
-    `Trade: ${tradeLabel(facts.trade)}`,
+    `Kind of business: ${tradeLabel(facts)}`,
   ];
   if (facts.category) lines.push(`Google category: ${facts.category}`);
   if (facts.address) lines.push(`Address: ${facts.address}`);
@@ -58,12 +80,15 @@ export function buildUserPrompt(facts: BusinessFacts): string {
   lines.push(``, servicesInstruction(facts));
   lines.push(
     `Service areas: start with ${facts.city}, then nearby towns and neighborhoods a business there would realistically serve.`,
-    `The call-to-action button calls ${facts.phone}, so its label should invite a phone call.`,
+    `The call-to-action button calls ${facts.phone}.`,
   );
   return lines.join("\n");
 }
 
 function servicesInstruction(facts: BusinessFacts): string {
+  if (facts.businessType && facts.businessType !== "contractor" && !facts.services?.length) {
+    return `Services: list ${MIN_GENERATED_SERVICES} to 6 things ${tradeLabel(facts)} like this one offers, guided by the Google category. Keep them specific (for a barber: "Skin fades", not "Hair services").`;
+  }
   if (facts.services?.length) {
     return [
       `Services: the owner lists exactly these: ${facts.services.join("; ")}.`,
@@ -77,8 +102,12 @@ function servicesInstruction(facts: BusinessFacts): string {
       `List ${MIN_GENERATED_SERVICES} to 6 ${specialty.label} services only. Do not list unrelated work (for example kitchens or additions for a roofer).`,
     ].join(" ");
   }
-  return `Services: nothing in the name or category points to a specialty, so list ${MIN_GENERATED_SERVICES} to 6 common ${tradeLabel(facts.trade)} services.`;
+  return `Services: nothing in the name or category points to a specialty, so list ${MIN_GENERATED_SERVICES} to 6 common ${tradeLabel(facts)} services.`;
 }
+
+/** Stock phrases the prompt bans; checked in headlines, sublines and the closing section. */
+const CLICHES =
+  /\btrusted (?:local )?partner|\bquality you can (?:count|rely|trust)|\bsecond to none|\blook no further|\bone[- ]stop[- ]shop|\b(?:we'?ve|we have) got you covered|\btop[- ]notch|\bunmatched|\bbest in (?:town|the business)|\bpassion for excellence|\belevate|\bseamless|\bstate[- ]of[- ]the[- ]art|\bnestled/i;
 
 /**
  * Wording that can only be an invented fact: the facts we send never include
@@ -112,6 +141,20 @@ export function contentIssues(content: SiteContent, facts: BusinessFacts): strin
     issues.push(`services: list at least ${MIN_GENERATED_SERVICES} services`);
   }
 
+  const words = content.headline.trim().split(/\s+/).length;
+  if (words > LIMITS.headlineWords) {
+    issues.push(`headline: has ${words} words; use at most ${LIMITS.headlineWords}`);
+  }
+  for (const [path, value] of [
+    ["headline", content.headline],
+    ["subheadline", content.subheadline],
+    ["cta.heading", content.cta.heading],
+    ["cta.body", content.cta.body],
+  ] as const) {
+    const hit = value.match(CLICHES);
+    if (hit) issues.push(`${path}: "${hit[0]}" is a stock phrase. Say something specific to this business instead.`);
+  }
+
   const texts: [string, string][] = [
     ["headline", content.headline],
     ["subheadline", content.subheadline],
@@ -126,6 +169,10 @@ export function contentIssues(content: SiteContent, facts: BusinessFacts): strin
     ]),
     ["cta.heading", content.cta.heading],
     ["cta.body", content.cta.body],
+    ...(content.process ?? []).flatMap((p, i): [string, string][] => [
+      [`process[${i}].title`, p.title],
+      [`process[${i}].body`, p.body],
+    ]),
   ];
   // The business's own name ("5 Star Roofing") and the owner's services are facts.
   const given = [facts.name, ...(facts.services ?? [])].filter(Boolean).sort((a, b) => b.length - a.length);

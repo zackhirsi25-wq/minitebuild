@@ -1,0 +1,424 @@
+{
+  "version": 1,
+  "source": "pexels",
+  "output_dir": "public/stock",
+  "credits_file": "CREDITS.md",
+  "slots": {
+    "hero": { "orientation": "landscape", "min_width": 2400, "keep_per_niche": 3, "use": "Full-bleed first screen. Needs calm space for a headline on one side." },
+    "about": { "orientation": "landscape", "min_width": 1600, "keep_per_niche": 2, "use": "People at work or the place itself. Natural, unposed." },
+    "gallery": { "orientation": "any", "min_width": 1600, "keep_per_niche": 6, "use": "Finished work, products or the space. Varied subjects, consistent quality." },
+    "detail": { "orientation": "square", "min_width": 1200, "keep_per_niche": 2, "use": "Close-up of material, tool, texture or product." }
+  },
+  "selection_rules": [
+    "Look at every candidate before keeping it. Reject anything that looks like a cliche stock photo: handshakes, thumbs up, people smiling at the camera, white-background cutouts.",
+    "Prefer photos where faces are not clearly identifiable (hands at work, backs, wide shots). A stock person on a business site can look like a staff member or an endorsement.",
+    "Reject photos with visible brand logos, watermarks, text overlays, licence plates or shop signs.",
+    "Reject heavy filters, HDR, fake lens flares and obvious AI-generated images.",
+    "Prefer natural light, real locations and a calm composition.",
+    "Within one niche, keep photos that look like they belong to the same business: similar colour temperature and style.",
+    "Never keep the same photo for two niches or two slots.",
+    "Record photo id, photographer name, photographer URL and photo page URL for every kept photo."
+  ],
+  "niches": [
+    {
+      "id": "general-contractor", "label": "General contractors and remodeling",
+      "google_types": ["general_contractor"], "keywords": ["contractor", "remodel", "renovation", "construction", "builder"],
+      "queries": {
+        "hero": ["modern home exterior", "renovated kitchen interior", "house under construction"],
+        "about": ["contractor reviewing blueprints", "construction worker tools"],
+        "gallery": ["kitchen renovation", "modern bathroom", "home addition framing", "hardwood living room"],
+        "detail": ["carpenter measuring wood", "tool belt close up"]
+      }
+    },
+    {
+      "id": "roofing", "label": "Roofers",
+      "google_types": ["roofing_contractor"], "keywords": ["roof", "roofing", "roofer", "gutter"],
+      "queries": {
+        "hero": ["roofer working on roof", "house roof blue sky", "new shingle roof"],
+        "about": ["roofer installing shingles", "worker on roof safety harness"],
+        "gallery": ["metal roof house", "tile roof", "roof repair", "gutter installation"],
+        "detail": ["roof shingles close up", "roof tiles texture"]
+      }
+    },
+    {
+      "id": "plumbing", "label": "Plumbers",
+      "google_types": ["plumber"], "keywords": ["plumb", "plumber", "drain", "pipe", "water heater"],
+      "queries": {
+        "hero": ["plumber fixing sink", "modern bathroom faucet", "plumber working under sink"],
+        "about": ["plumber with tools", "plumber repairing pipe"],
+        "gallery": ["bathroom sink faucet", "copper pipes", "water heater", "modern shower"],
+        "detail": ["wrench pipe close up", "chrome faucet close up"]
+      }
+    },
+    {
+      "id": "electrical", "label": "Electricians",
+      "google_types": ["electrician"], "keywords": ["electric", "electrician", "wiring", "lighting"],
+      "queries": {
+        "hero": ["electrician working on panel", "modern home lighting interior", "electrician installing light"],
+        "about": ["electrician with tools", "electrician testing wires"],
+        "gallery": ["pendant lights kitchen", "electrical panel", "outdoor house lighting night", "ceiling lights installation"],
+        "detail": ["electrical wires close up", "light switch wall"]
+      }
+    },
+    {
+      "id": "hvac", "label": "Heating and air conditioning",
+      "google_types": ["hvac_contractor"], "keywords": ["hvac", "heating", "cooling", "air conditioning", "furnace"],
+      "queries": {
+        "hero": ["air conditioner unit outside house", "technician repairing air conditioner", "comfortable living room"],
+        "about": ["hvac technician working", "technician checking air conditioner"],
+        "gallery": ["air conditioning unit", "thermostat on wall", "ventilation ducts", "wall mounted air conditioner"],
+        "detail": ["thermostat close up", "air vent ceiling"]
+      }
+    },
+    {
+      "id": "painting", "label": "Painters",
+      "google_types": ["painter"], "keywords": ["paint", "painter", "painting", "decorating"],
+      "queries": {
+        "hero": ["painter painting wall", "freshly painted room", "painting house exterior"],
+        "about": ["painter with roller", "painter on ladder"],
+        "gallery": ["colorful painted wall interior", "white painted living room", "painted front door", "paint cans brushes"],
+        "detail": ["paint roller close up", "paint brush stroke wall"]
+      }
+    },
+    {
+      "id": "flooring", "label": "Flooring and tiling",
+      "google_types": [], "keywords": ["floor", "flooring", "tile", "tiling", "carpet", "hardwood"],
+      "queries": {
+        "hero": ["hardwood floor living room", "worker installing floor", "modern tiled bathroom"],
+        "about": ["installing laminate flooring", "tiler laying tiles"],
+        "gallery": ["herringbone wood floor", "marble floor", "kitchen tile floor", "patterned tiles"],
+        "detail": ["wood floor texture", "ceramic tile close up"]
+      }
+    },
+    {
+      "id": "landscaping", "label": "Landscaping and lawn care",
+      "google_types": ["landscaper"], "keywords": ["landscap", "lawn", "garden", "yard", "tree service"],
+      "queries": {
+        "hero": ["beautiful garden backyard", "landscaped front yard house", "gardener mowing lawn"],
+        "about": ["gardener planting", "landscaper trimming hedge"],
+        "gallery": ["stone garden path", "backyard patio garden", "flower bed garden", "green lawn house"],
+        "detail": ["garden tools close up", "green leaves close up"]
+      }
+    },
+    {
+      "id": "cleaning", "label": "Cleaning services",
+      "google_types": [], "keywords": ["clean", "cleaning", "maid", "janitorial", "pressure wash"],
+      "queries": {
+        "hero": ["clean bright living room", "person cleaning kitchen counter", "spotless modern kitchen"],
+        "about": ["cleaner wiping surface", "cleaning supplies bucket"],
+        "gallery": ["clean bathroom", "tidy bedroom", "cleaning window", "vacuum carpet"],
+        "detail": ["spray bottle cloth", "hands cleaning glove"]
+      }
+    },
+    {
+      "id": "moving", "label": "Movers",
+      "google_types": ["moving_company"], "keywords": ["mover", "moving", "relocation", "storage"],
+      "queries": {
+        "hero": ["movers carrying boxes", "moving boxes new home", "moving truck"],
+        "about": ["movers loading truck", "movers carrying sofa"],
+        "gallery": ["cardboard boxes room", "packing boxes tape", "empty new apartment", "moving van street"],
+        "detail": ["cardboard box close up", "packing tape box"]
+      }
+    },
+    {
+      "id": "carpentry", "label": "Carpenters and woodwork",
+      "google_types": [], "keywords": ["carpent", "woodwork", "cabinet", "joinery", "millwork"],
+      "queries": {
+        "hero": ["carpenter workshop", "custom wood cabinets kitchen", "woodworker at workbench"],
+        "about": ["carpenter sanding wood", "woodworker using chisel"],
+        "gallery": ["custom wooden shelves", "wood dining table", "built in wardrobe", "wooden staircase"],
+        "detail": ["wood grain close up", "wood shavings plane"]
+      }
+    },
+    {
+      "id": "pest-control", "label": "Pest control",
+      "google_types": [], "keywords": ["pest", "exterminat", "termite", "fumigation"],
+      "queries": {
+        "hero": ["clean family home exterior", "pest control worker spraying", "tidy home kitchen"],
+        "about": ["pest control technician", "worker inspecting house"],
+        "gallery": ["house garden exterior", "clean basement", "suburban home", "home inspection"],
+        "detail": ["sprayer equipment", "protective gloves"]
+      }
+    },
+    {
+      "id": "interior-design", "label": "Interior designers",
+      "google_types": [], "keywords": ["interior", "design studio", "decor", "fit-out", "fit out"],
+      "queries": {
+        "hero": ["luxury living room interior", "modern interior design", "elegant minimalist interior"],
+        "about": ["interior designer material samples", "designer mood board"],
+        "gallery": ["modern bedroom interior", "designer kitchen", "elegant dining room", "stylish home office", "luxury bathroom"],
+        "detail": ["fabric swatches", "marble texture"]
+      }
+    },
+    {
+      "id": "architecture", "label": "Architects",
+      "google_types": [], "keywords": ["architect", "architecture", "design build"],
+      "queries": {
+        "hero": ["modern architecture house", "minimalist building exterior", "contemporary villa"],
+        "about": ["architect drawing plans", "architectural model"],
+        "gallery": ["concrete house architecture", "glass facade building", "modern staircase architecture", "courtyard house"],
+        "detail": ["blueprint close up", "concrete texture"]
+      }
+    },
+    {
+      "id": "furniture", "label": "Furniture stores",
+      "google_types": ["furniture_store"], "keywords": ["furniture", "sofa", "mattress", "home decor"],
+      "queries": {
+        "hero": ["luxury sofa living room", "furniture showroom", "modern armchair interior"],
+        "about": ["furniture craftsman workshop", "upholsterer working"],
+        "gallery": ["velvet sofa", "wooden dining table chairs", "modern bed bedroom", "designer armchair", "coffee table living room"],
+        "detail": ["leather sofa close up", "upholstery fabric texture"]
+      }
+    },
+    {
+      "id": "real-estate", "label": "Real estate",
+      "google_types": ["real_estate_agency"], "keywords": ["real estate", "realty", "realtor", "properties", "homes"],
+      "queries": {
+        "hero": ["luxury house exterior", "modern apartment living room view", "house with pool"],
+        "about": ["house keys hand", "front door home"],
+        "gallery": ["modern kitchen home", "bright bedroom", "apartment building exterior", "backyard patio", "home entrance hallway"],
+        "detail": ["keys on table", "door handle close up"]
+      }
+    },
+    {
+      "id": "restaurant", "label": "Restaurants",
+      "google_types": ["restaurant"], "keywords": ["restaurant", "grill", "kitchen", "bistro", "diner", "eatery"],
+      "queries": {
+        "hero": ["restaurant interior evening", "chef plating dish", "dinner table food"],
+        "about": ["chef cooking kitchen", "restaurant kitchen flame"],
+        "gallery": ["gourmet dish plate", "pasta dish", "grilled steak", "dessert plate", "cocktail bar"],
+        "detail": ["fresh herbs close up", "table setting close up"]
+      }
+    },
+    {
+      "id": "cafe", "label": "Cafes and coffee shops",
+      "google_types": ["cafe", "coffee_shop"], "keywords": ["cafe", "coffee", "espresso", "tea house"],
+      "queries": {
+        "hero": ["cozy coffee shop interior", "barista making coffee", "latte art cup"],
+        "about": ["barista pouring milk", "espresso machine"],
+        "gallery": ["cappuccino table", "croissant coffee", "coffee shop counter", "iced coffee"],
+        "detail": ["coffee beans close up", "espresso pouring"]
+      }
+    },
+    {
+      "id": "bakery", "label": "Bakeries",
+      "google_types": ["bakery"], "keywords": ["bakery", "bake", "pastry", "cake", "donut"],
+      "queries": {
+        "hero": ["bakery display bread", "baker kneading dough", "fresh pastries"],
+        "about": ["baker hands flour", "bread oven"],
+        "gallery": ["sourdough bread", "croissants tray", "decorated cake", "cupcakes"],
+        "detail": ["flour dough close up", "bread crust close up"]
+      }
+    },
+    {
+      "id": "clothing", "label": "Clothing and fashion stores",
+      "google_types": ["clothing_store"], "keywords": ["clothing", "boutique", "fashion", "apparel", "tailor"],
+      "queries": {
+        "hero": ["clothing boutique interior", "clothes rack minimal", "fashion store display"],
+        "about": ["tailor sewing", "folding clothes store"],
+        "gallery": ["dresses hanging rack", "folded sweaters shelf", "shoes display", "denim jeans stack", "accessories display"],
+        "detail": ["fabric texture close up", "clothes hanger close up"]
+      }
+    },
+    {
+      "id": "jewelry", "label": "Jewelry stores",
+      "google_types": ["jewelry_store"], "keywords": ["jewel", "gold", "diamond", "watch"],
+      "queries": {
+        "hero": ["jewelry display elegant", "gold rings dark background", "jeweler workshop"],
+        "about": ["jeweler crafting ring", "jeweler tools bench"],
+        "gallery": ["diamond ring", "gold necklace", "pearl earrings", "luxury watch"],
+        "detail": ["gemstone close up", "gold chain close up"]
+      }
+    },
+    {
+      "id": "florist", "label": "Florists",
+      "google_types": ["florist"], "keywords": ["florist", "flower", "floral", "bouquet"],
+      "queries": {
+        "hero": ["flower shop interior", "florist arranging bouquet", "fresh flowers bucket"],
+        "about": ["florist hands flowers", "florist wrapping bouquet"],
+        "gallery": ["rose bouquet", "wedding flowers", "tulips", "dried flowers arrangement"],
+        "detail": ["flower petals close up", "peony close up"]
+      }
+    },
+    {
+      "id": "car-dealer", "label": "Car dealers",
+      "google_types": ["car_dealer"], "keywords": ["motors", "auto sales", "car sales", "dealership", "cars"],
+      "queries": {
+        "hero": ["luxury car showroom", "sports car road", "car dealership"],
+        "about": ["car keys handover", "car interior steering wheel"],
+        "gallery": ["suv parked", "sedan city street", "car headlights close", "car interior leather"],
+        "detail": ["car wheel close up", "dashboard close up"]
+      }
+    },
+    {
+      "id": "auto-repair", "label": "Auto repair",
+      "google_types": ["car_repair"], "keywords": ["auto repair", "mechanic", "garage", "tire", "brake", "collision"],
+      "queries": {
+        "hero": ["mechanic working on car", "auto repair garage", "car on lift workshop"],
+        "about": ["mechanic under hood", "mechanic hands wrench"],
+        "gallery": ["car engine", "tire change", "brake repair", "garage tools wall"],
+        "detail": ["wrench set close up", "engine detail"]
+      }
+    },
+    {
+      "id": "car-detailing", "label": "Car wash and detailing",
+      "google_types": ["car_wash"], "keywords": ["detailing", "car wash", "ceramic coating", "valet"],
+      "queries": {
+        "hero": ["car detailing polishing", "shiny clean car", "car wash foam"],
+        "about": ["polishing car paint", "washing car sponge"],
+        "gallery": ["car interior cleaning", "water beads car paint", "clean wheels", "black car reflection"],
+        "detail": ["water drops car", "microfiber cloth car"]
+      }
+    },
+    {
+      "id": "hair-salon", "label": "Hair salons",
+      "google_types": ["hair_salon", "beauty_salon"], "keywords": ["salon", "hair", "stylist", "beauty"],
+      "queries": {
+        "hero": ["modern hair salon interior", "hairdresser styling hair", "salon chairs mirrors"],
+        "about": ["hairdresser cutting hair", "hair coloring salon"],
+        "gallery": ["hair styling back view", "salon wash station", "hair products shelf", "blow dry salon"],
+        "detail": ["scissors comb close up", "hair brush close up"]
+      }
+    },
+    {
+      "id": "barber", "label": "Barbershops",
+      "google_types": ["barber_shop"], "keywords": ["barber", "barbershop", "fade", "shave"],
+      "queries": {
+        "hero": ["barbershop interior", "barber cutting hair", "vintage barber chair"],
+        "about": ["barber shaving beard", "barber clippers fade"],
+        "gallery": ["barber tools", "barber pole", "beard trim", "barbershop mirror"],
+        "detail": ["straight razor close up", "hair clippers close up"]
+      }
+    },
+    {
+      "id": "spa-nails", "label": "Spas and nail salons",
+      "google_types": ["spa", "nail_salon"], "keywords": ["spa", "nail", "massage", "wellness", "lash", "skin"],
+      "queries": {
+        "hero": ["spa interior calm", "massage therapy room", "spa candles towels"],
+        "about": ["massage hands back", "manicure hands"],
+        "gallery": ["nail polish manicure", "facial treatment", "spa stones", "essential oils"],
+        "detail": ["towel flower spa", "nail polish bottles"]
+      }
+    },
+    {
+      "id": "gym", "label": "Gyms and fitness",
+      "google_types": ["gym", "fitness_center"], "keywords": ["gym", "fitness", "crossfit", "yoga", "pilates", "training"],
+      "queries": {
+        "hero": ["modern gym interior", "weights gym dark", "person lifting barbell"],
+        "about": ["personal trainer coaching", "group fitness class"],
+        "gallery": ["dumbbells rack", "yoga studio", "boxing gym", "treadmills gym"],
+        "detail": ["barbell plates close up", "kettlebell close up"]
+      }
+    },
+    {
+      "id": "dentist", "label": "Dentists",
+      "google_types": ["dentist", "dental_clinic"], "keywords": ["dental", "dentist", "orthodont", "smile"],
+      "queries": {
+        "hero": ["modern dental clinic", "dentist chair bright", "dental office reception"],
+        "about": ["dentist with patient", "dentist gloves tools"],
+        "gallery": ["dental equipment", "clinic waiting room", "dental x-ray", "toothbrush bathroom"],
+        "detail": ["dental tools close up", "dental model teeth"]
+      }
+    },
+    {
+      "id": "medical-clinic", "label": "Clinics and doctors",
+      "google_types": ["doctor", "medical_clinic"], "keywords": ["clinic", "medical", "health", "physio", "chiropract", "pharmacy"],
+      "queries": {
+        "hero": ["modern clinic interior", "doctor consultation room", "medical reception bright"],
+        "about": ["doctor stethoscope", "doctor talking patient"],
+        "gallery": ["clinic waiting room", "physiotherapy session", "medical equipment", "pharmacy shelves"],
+        "detail": ["stethoscope close up", "clipboard medical"]
+      }
+    },
+    {
+      "id": "law", "label": "Law firms",
+      "google_types": ["lawyer"], "keywords": ["law", "attorney", "legal", "advocate", "solicitor"],
+      "queries": {
+        "hero": ["law office interior", "city skyline office window", "library law books"],
+        "about": ["lawyer signing documents", "meeting conference table"],
+        "gallery": ["office desk documents", "courthouse columns", "bookshelf office", "conference room"],
+        "detail": ["fountain pen signature", "law books close up"]
+      }
+    },
+    {
+      "id": "accounting", "label": "Accountants and financial services",
+      "google_types": ["accounting"], "keywords": ["account", "tax", "bookkeep", "financial", "insurance", "consult"],
+      "queries": {
+        "hero": ["modern office workspace", "desk laptop documents", "office meeting bright"],
+        "about": ["accountant calculator documents", "team meeting office"],
+        "gallery": ["office desk plants", "laptop charts", "notebook pen desk", "glass office"],
+        "detail": ["calculator close up", "pen paper close up"]
+      }
+    },
+    {
+      "id": "photography", "label": "Photographers and studios",
+      "google_types": [], "keywords": ["photo", "photography", "studio", "videograph"],
+      "queries": {
+        "hero": ["photography studio lights", "photographer holding camera", "camera on tripod landscape"],
+        "about": ["photographer shooting", "photographer editing computer"],
+        "gallery": ["camera lenses", "studio backdrop", "wedding photographer", "film camera"],
+        "detail": ["camera lens close up", "camera dial close up"]
+      }
+    },
+    {
+      "id": "pets", "label": "Vets, groomers and pet stores",
+      "google_types": ["veterinary_care", "pet_store"], "keywords": ["vet", "pet", "groom", "dog", "animal", "kennel"],
+      "queries": {
+        "hero": ["dog grooming salon", "veterinarian with dog", "happy dog portrait"],
+        "about": ["groomer brushing dog", "vet examining cat"],
+        "gallery": ["dog bath", "cat on table", "puppy playing", "pet store shelves"],
+        "detail": ["dog paw close up", "pet collar leash"]
+      }
+    },
+    {
+      "id": "hotel", "label": "Hotels and guest houses",
+      "google_types": ["hotel", "lodging"], "keywords": ["hotel", "lodge", "guest house", "resort", "inn", "bnb"],
+      "queries": {
+        "hero": ["luxury hotel room", "hotel lobby", "resort pool"],
+        "about": ["hotel reception desk", "housekeeping bed"],
+        "gallery": ["hotel bed white linen", "hotel bathroom", "breakfast hotel", "hotel terrace view"],
+        "detail": ["pillows bed close up", "room key hotel"]
+      }
+    },
+    {
+      "id": "events", "label": "Event and wedding services",
+      "google_types": ["event_venue", "wedding_venue"], "keywords": ["event", "wedding", "catering", "planner", "decor", "venue"],
+      "queries": {
+        "hero": ["wedding reception venue", "elegant event table setting", "outdoor wedding ceremony"],
+        "about": ["event planner decorating", "catering staff serving"],
+        "gallery": ["wedding table flowers", "banquet hall", "party lights", "catering buffet"],
+        "detail": ["place setting close up", "champagne glasses"]
+      }
+    },
+    {
+      "id": "education", "label": "Schools, tutors and daycare",
+      "google_types": ["school", "preschool"], "keywords": ["school", "academy", "tutor", "daycare", "learning", "training"],
+      "queries": {
+        "hero": ["bright classroom", "students studying library", "teacher whiteboard"],
+        "about": ["teacher helping student", "kids learning classroom"],
+        "gallery": ["books desk", "school hallway", "art class", "laptop studying"],
+        "detail": ["pencils close up", "open book close up"]
+      }
+    },
+    {
+      "id": "retail", "label": "Shops and general retail",
+      "google_types": ["store"], "keywords": ["shop", "store", "market", "mart", "supplies"],
+      "queries": {
+        "hero": ["small shop interior", "store shelves products", "shop front window"],
+        "about": ["shop owner counter", "shopkeeper arranging products"],
+        "gallery": ["product display shelf", "gift shop", "market stall", "shopping bags"],
+        "detail": ["price tag close up", "wrapping paper package"]
+      }
+    },
+    {
+      "id": "general-business", "label": "Fallback for any other business",
+      "google_types": [], "keywords": [],
+      "queries": {
+        "hero": ["modern office interior", "city street storefront", "team working office"],
+        "about": ["small business owner", "colleagues meeting"],
+        "gallery": ["workspace desk", "office plants", "reception area", "handshake office door"],
+        "detail": ["notebook coffee desk", "keyboard close up"]
+      }
+    }
+  ]
+}

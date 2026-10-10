@@ -1,0 +1,112 @@
+/* Shared mechanics for every template: motion, focus, selection, FAQ.
+   Templates style everything else from their own tokens.css. Each template
+   root has data-site and defines --focus, --selection-bg, --selection-fg. */
+
+[data-site] {
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-fast: 200ms;
+  --dur-base: 400ms;
+  --dur-slow: 600ms;
+  interpolate-size: allow-keywords;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+html:has([data-site]) {
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--site-offset, 0px) + 88px);
+}
+
+[data-site] ::selection {
+  background: var(--selection-bg);
+  color: var(--selection-fg);
+}
+
+[data-site] :where(a, button, summary, input, select, textarea):focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
+/* Hero entrance: up to four parts, all in by 800ms. */
+@keyframes kit-rise {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+[data-enter] {
+  animation: kit-rise 520ms var(--ease-out) both;
+}
+[data-enter="2"] {
+  animation-delay: 110ms;
+}
+[data-enter="3"] {
+  animation-delay: 200ms;
+}
+[data-enter="4"] {
+  animation-delay: 280ms;
+}
+
+/* Sections ease in once. */
+@keyframes kit-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(36px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.motion-sd [data-reveal] {
+  animation: kit-reveal linear both;
+  animation-timing-function: var(--ease-out);
+  animation-timeline: view();
+  animation-range: entry 0% entry 70%;
+}
+.motion-io [data-reveal] {
+  transition:
+    opacity var(--dur-slow) var(--ease-out),
+    transform var(--dur-slow) var(--ease-out);
+}
+.motion-io [data-reveal]:not(.is-in) {
+  opacity: 0;
+  transform: translateY(36px);
+}
+
+/* FAQ: smooth open and close where ::details-content exists; instant elsewhere. */
+[data-site] details::details-content {
+  block-size: 0;
+  overflow-y: clip;
+  transition:
+    block-size var(--dur-base) var(--ease-out),
+    content-visibility var(--dur-base) allow-discrete;
+}
+[data-site] details[open]::details-content {
+  block-size: auto;
+}
+[data-site] summary {
+  list-style: none;
+  cursor: pointer;
+}
+[data-site] summary::-webkit-details-marker {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html:has([data-site]) {
+    scroll-behavior: auto;
+  }
+  [data-site] *,
+  [data-site] *::before,
+  [data-site] *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}

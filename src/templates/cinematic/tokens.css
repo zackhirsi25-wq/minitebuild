@@ -1,0 +1,59 @@
+/* Cinematic tokens: colour, spacing, radius, type. Palette variables
+   (--accent, --accent-soft) are set inline on .cin from meta.ts. */
+
+.cin {
+  /* Colour */
+  --ink: #0e0f11;
+  --graphite: #1a1c20;
+  --bone: #ede8e0;
+  --ash: #9a968f; /* 6.5:1 on ink, 5.9:1 on graphite */
+  --paper: #f3efe8;
+  --paper-muted: #57534c; /* 6.5:1 on paper */
+  --line-dark: rgb(237 232 224 / 0.14);
+  --line-light: rgb(14 15 17 / 0.14);
+  --accent: #c8a46a;
+  --accent-soft: rgb(200 164 106 / 0.16);
+  --on-accent: var(--ink);
+  --focus: var(--accent);
+  --selection-bg: var(--accent);
+  --selection-fg: var(--ink);
+
+  /* Spacing (4px base) */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 24px;
+  --sp-6: 32px;
+  --sp-7: 48px;
+  --sp-8: 64px;
+  --sp-9: 96px;
+  --sp-10: 128px;
+  --sp-11: 192px;
+  --gutter: clamp(20px, 5vw, 72px);
+  --section-y: clamp(64px, 3rem + 6vw, 168px);
+  --max: 1360px;
+  --measure: 62ch;
+  --header-h: 84px;
+  --header-h-compact: 64px;
+
+  /* Radius: almost none. Film stills have square corners. */
+  --r-0: 0;
+  --r-1: 2px;
+  --r-2: 6px;
+  --r-full: 999px;
+
+  /* Type: five sizes per page */
+  --font-display: var(--cin-font-display), "Iowan Old Style", Georgia, serif;
+  --font-body: var(--cin-font-body), system-ui, sans-serif;
+  --fs-display: clamp(2.75rem, 1.6rem + 5.8vw, 7rem);
+  --fs-h2: clamp(2rem, 1.4rem + 3vw, 4rem);
+  --fs-lead: clamp(1.125rem, 1rem + 0.6vw, 1.5rem);
+  --fs-body: clamp(1rem, 0.96rem + 0.2vw, 1.125rem);
+  --fs-small: 0.875rem;
+  --lh-display: 0.95;
+  --lh-h2: 1.02;
+  --lh-lead: 1.45;
+  --lh-body: 1.65;
+  --lh-small: 1.5;
+}

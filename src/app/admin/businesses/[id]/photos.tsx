@@ -9,7 +9,18 @@ import type { ImageSlot } from "@/lib/content/schema";
 import type { SiteImage } from "@/lib/images/stock";
 import { resetPhoto, uploadPhoto } from "../../actions";
 
-const SLOT_LABELS: Record<ImageSlot, string> = { hero: "Hero photo", about: "About photo" };
+const SLOT_LABELS: Record<ImageSlot, string> = {
+  hero: "Hero photo",
+  about: "About photo",
+  feature: "Closing photo",
+  detail: "Close-up photo",
+  "gallery-1": "Work photo 1",
+  "gallery-2": "Work photo 2",
+  "gallery-3": "Work photo 3",
+  "gallery-4": "Work photo 4",
+  "gallery-5": "Work photo 5",
+  "gallery-6": "Work photo 6",
+};
 
 export function Photos({
   id,
@@ -20,7 +31,7 @@ export function Photos({
   id: string;
   name: string;
   city: string;
-  slots: { slot: ImageSlot; image: SiteImage; uploaded: boolean }[];
+  slots: { slot: ImageSlot; image: SiteImage | null; uploaded: boolean }[];
 }) {
   return (
     <section className="rounded-xl border border-slate-200 bg-white p-5">
@@ -46,7 +57,7 @@ function PhotoSlot({
 }: {
   id: string;
   slot: ImageSlot;
-  image: SiteImage;
+  image: SiteImage | null;
   uploaded: boolean;
   defaultAlt: string;
 }) {
@@ -58,7 +69,11 @@ function PhotoSlot({
   return (
     <div className="grid gap-4 sm:grid-cols-[10rem_1fr]">
       <div className="relative aspect-[4/3] overflow-hidden rounded-lg bg-slate-100">
-        <Image src={image.src} alt={image.alt} fill sizes="160px" className="object-cover" />
+        {image ? (
+          <Image src={image.src} alt={image.alt} fill sizes="160px" className="object-cover" />
+        ) : (
+          <span className="grid h-full place-items-center text-xs text-slate-500">Hidden until uploaded</span>
+        )}
       </div>
       <form
         className="space-y-2"
@@ -80,7 +95,8 @@ function PhotoSlot({
         }}
       >
         <p className="text-sm font-semibold text-slate-800">
-          {SLOT_LABELS[slot]} <span className="font-normal text-slate-500">· {uploaded ? "uploaded" : "stock"}</span>
+          {SLOT_LABELS[slot]}{" "}
+          <span className="font-normal text-slate-500">· {uploaded ? "uploaded" : image ? "stock" : "empty"}</span>
         </p>
         <input
           name="file"
@@ -97,7 +113,7 @@ function PhotoSlot({
             required
             minLength={5}
             maxLength={200}
-            defaultValue={uploaded ? image.alt : defaultAlt}
+            defaultValue={uploaded && image ? image.alt : defaultAlt}
             className="mt-1 block min-h-11 w-full rounded-lg border border-slate-300 px-3 text-base"
           />
         </label>

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound, redirect } from "next/navigation";
-import { PreviewBanner } from "@/components/preview-banner";
+import { PreviewBanner, PreviewFrame } from "@/components/preview-banner";
 import { SiteRenderer } from "@/components/site/site-renderer";
 import { env } from "@/lib/env";
 import { liveSiteUrl } from "@/lib/routing/hostname";
@@ -27,9 +27,9 @@ export default async function PreviewPage({ params }: PageProps<"/p/[slug]">) {
   if (site.status === "live") redirect(liveSiteUrl(site.slug, env.rootDomain));
 
   return (
-    <>
+    <PreviewFrame>
       <PreviewBanner name={site.name} slug={site.slug} />
       <SiteRenderer site={site} />
-    </>
+    </PreviewFrame>
   );
 }

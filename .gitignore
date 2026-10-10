@@ -44,3 +44,10 @@ next-env.d.ts
 # supabase local
 supabase/.branches
 supabase/.temp
+
+# stock photo kit: search state, review pages and raw downloads
+/stock-work/
+# photos downloaded by hand from pexels.com, before ingest
+/stock-src/
+# stock images live in the Supabase "stock" bucket; public/stock/index.json stays in git
+/public/stock/*/

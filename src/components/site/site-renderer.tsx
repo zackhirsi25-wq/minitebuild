@@ -1,36 +1,43 @@
 import { env } from "@/lib/env";
-import { siteImage } from "@/lib/images/stock";
+import { businessTypeOf, siteImages } from "@/lib/images/stock";
 import { localBusinessJsonLd } from "@/lib/sites/seo";
 import type { PublicSite } from "@/lib/sites/public";
-import type { TemplateId } from "@/lib/content/schema";
+import { loadTemplate, resolveTemplateId, templateMeta } from "@/templates";
+import { pickPalette } from "@/templates/_kit/palette";
 import { JsonLd } from "./parts";
-import { BoldTemplate } from "./templates/bold";
-import { ClassicTemplate } from "./templates/classic";
-import { SplitTemplate } from "./templates/split";
-
-const TEMPLATES = { bold: BoldTemplate, classic: ClassicTemplate, split: SplitTemplate } as const;
 
 /** Renders a business site with its template. `template` overrides the saved one (admin preview). */
-export function SiteRenderer({
+export async function SiteRenderer({
   site,
   template,
+  palette,
   jsonLdUrl,
 }: {
   site: PublicSite;
-  template?: TemplateId;
+  template?: string;
+  /** Palette id; overrides the saved one (admin preview). */
+  palette?: string;
   /** Absolute URL of the live site; when set, LocalBusiness JSON-LD is included. */
   jsonLdUrl?: string;
 }) {
-  const images = {
-    hero: siteImage(site, "hero", env.supabaseUrl),
-    about: siteImage(site, "about", env.supabaseUrl),
-  };
-  const Template = TEMPLATES[template ?? site.template];
-  const imageUrl = images.hero.src.startsWith("http") ? images.hero.src : `${jsonLdUrl}${images.hero.src}`;
+  const id = resolveTemplateId(template ?? site.template);
+  const meta = templateMeta(id);
+  const Template = await loadTemplate(id);
+  const images = siteImages(
+    site,
+    meta.slots.map((s) => s.slot),
+    env.supabaseUrl,
+  );
+  const hero = images.hero;
+  const imageUrl = hero ? (hero.src.startsWith("http") ? hero.src : `${jsonLdUrl}${hero.src}`) : undefined;
   return (
     <>
       {jsonLdUrl && <JsonLd data={localBusinessJsonLd(site, jsonLdUrl, imageUrl)} />}
-      <Template site={site} images={images} />
+      <Template
+        site={{ ...site, businessType: businessTypeOf(site) }}
+        images={images}
+        palette={pickPalette(meta, site.slug, palette ?? site.palette)}
+      />
     </>
   );
 }

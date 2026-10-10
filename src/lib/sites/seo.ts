@@ -4,7 +4,13 @@ import type { PublicSite } from "./public";
 
 /** "<Name> | <Category> in <City>", trimmed to ~60 characters. */
 export function siteTitle(site: PublicSite): string {
-  const what = site.trade === "remodeling" ? "Remodeling" : "General Contractor";
+  // Google's category ("Roofing contractor") says what the business is; the old
+  // two-value trade is only a fallback for businesses Google couldn't find.
+  const what = site.category
+    ? site.category.charAt(0).toUpperCase() + site.category.slice(1)
+    : site.trade === "remodeling"
+      ? "Remodeling"
+      : "General Contractor";
   const full = `${site.name} | ${what} in ${site.city}`;
   return full.length <= 65 ? full : `${site.name} | ${site.city}`;
 }
@@ -64,7 +70,7 @@ export function openingHoursSpec(hours: string[]): string[] {
   return out;
 }
 
-export function localBusinessJsonLd(site: PublicSite, url: string, imageUrl: string) {
+export function localBusinessJsonLd(site: PublicSite, url: string, imageUrl: string | undefined) {
   const street = site.address?.split(",")[0]?.trim();
   return {
     "@context": "https://schema.org",

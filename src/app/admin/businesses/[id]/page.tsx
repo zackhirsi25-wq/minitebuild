@@ -14,7 +14,7 @@ import {
 import { env } from "@/lib/env";
 import { siteImage } from "@/lib/images/stock";
 import { appUrl, liveSiteUrl } from "@/lib/routing/hostname";
-import { imageOverridesSchema } from "@/lib/content/schema";
+import { IMAGE_SLOTS, imageOverridesSchema } from "@/lib/content/schema";
 import { BusinessActions } from "./business-actions";
 import { Editor } from "./editor";
 import { NotesAndTags } from "./notes-tags";
@@ -38,8 +38,8 @@ export default async function BusinessPage({ params, searchParams }: PageProps<"
   const shareUrl = b.status === "live" ? liveUrl : previewUrl;
   const content = siteContentSchema.safeParse(b.content);
   const images = imageOverridesSchema.parse(b.images);
-  const site = { slug: b.slug, trade: b.trade as Trade, images };
-  const slots = (["hero", "about"] as ImageSlot[]).map((slot) => ({
+  const site = { slug: b.slug, name: b.name, category: b.category, trade: b.trade as Trade, images };
+  const slots = (IMAGE_SLOTS as readonly ImageSlot[]).map((slot) => ({
     slot,
     image: siteImage(site, slot, env.supabaseUrl),
     uploaded: !!images[slot],

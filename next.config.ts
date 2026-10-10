@@ -30,6 +30,13 @@ const nextConfig: NextConfig = {
             port: supabaseUrl.port,
             pathname: "/storage/v1/object/public/site-images/**",
           },
+          {
+            // Stock photo library (scripts/stock/upload-stock.mjs).
+            protocol: supabaseUrl.protocol.replace(":", "") as "http" | "https",
+            hostname: supabaseUrl.hostname,
+            port: supabaseUrl.port,
+            pathname: "/storage/v1/object/public/stock/**",
+          },
         ]
       : [],
     // Local Supabase serves uploads from 127.0.0.1.

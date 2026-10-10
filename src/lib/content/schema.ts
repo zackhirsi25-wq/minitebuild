@@ -54,6 +54,11 @@ export const LIMITS = {
   ctaHeading: [10, 70],
   ctaBody: [20, 200],
   ctaButton: [4, 28],
+  process: 3,
+  processTitle: [3, 40],
+  processBody: [20, 200],
+  /** Generated headlines only; stored ones are not re-checked so older sites keep loading. */
+  headlineWords: 8,
 } as const;
 
 export const serviceSchema = z
@@ -67,6 +72,13 @@ export const faqSchema = z
   .object({
     question: text(...LIMITS.faqQuestion),
     answer: text(...LIMITS.faqAnswer),
+  })
+  .strict();
+
+export const processStepSchema = z
+  .object({
+    title: text(...LIMITS.processTitle),
+    body: text(...LIMITS.processBody),
   })
   .strict();
 
@@ -94,6 +106,11 @@ export const siteContentSchema = z
         buttonLabel: text(...LIMITS.ctaButton),
       })
       .strict(),
+    /** "How it works": three steps. Optional so sites generated before it existed still load. */
+    process: z
+      .array(processStepSchema)
+      .length(LIMITS.process, { message: `needs exactly ${LIMITS.process} steps` })
+      .optional(),
   })
   .strict();
 
@@ -107,9 +124,9 @@ export type SiteContent = z.infer<typeof siteContentSchema>;
 export const siteContentJsonSchema = {
   type: "object",
   additionalProperties: false,
-  required: ["headline", "subheadline", "services", "about", "serviceAreas", "faq", "cta"],
+  required: ["headline", "subheadline", "services", "about", "serviceAreas", "faq", "cta", "process"],
   properties: {
-    headline: { type: "string", description: "Hero headline, 10-70 characters, one line." },
+    headline: { type: "string", description: "Hero headline, 10-70 characters and at most 8 words, one line." },
     subheadline: { type: "string", description: "Supporting sentence under the headline, 30-180 characters." },
     services: {
       type: "array",
@@ -153,7 +170,20 @@ export const siteContentJsonSchema = {
       properties: {
         heading: { type: "string", description: "Closing call-to-action heading, 10-70 characters." },
         body: { type: "string", description: "One sentence, 20-200 characters." },
-        buttonLabel: { type: "string", description: "Call button text, 4-28 characters, e.g. 'Call for a quote'." },
+        buttonLabel: { type: "string", description: "Call button text, 4-28 characters, e.g. 'Call now'." },
+      },
+    },
+    process: {
+      type: "array",
+      description: "Exactly 3 steps of how working with the business goes, starting with getting in touch.",
+      items: {
+        type: "object",
+        additionalProperties: false,
+        required: ["title", "body"],
+        properties: {
+          title: { type: "string", description: "Short step name, 3-40 characters." },
+          body: { type: "string", description: "One sentence, 20-200 characters." },
+        },
       },
     },
   },
@@ -220,13 +250,39 @@ export type TemplateId = (typeof TEMPLATES)[number];
 export const TRADES = ["general_contractor", "remodeling"] as const;
 export type Trade = (typeof TRADES)[number];
 
-export const IMAGE_SLOTS = ["hero", "about"] as const;
+/**
+ * Image slots. hero, about and feature fall back to stock photos; the gallery
+ * slots only ever show the owner's own photos.
+ */
+export const IMAGE_SLOTS = [
+  "hero",
+  "about",
+  "feature",
+  "detail",
+  "gallery-1",
+  "gallery-2",
+  "gallery-3",
+  "gallery-4",
+  "gallery-5",
+  "gallery-6",
+] as const;
 export type ImageSlot = (typeof IMAGE_SLOTS)[number];
+export const GALLERY_SLOTS = IMAGE_SLOTS.filter((s) => s.startsWith("gallery-"));
+
+const imageOverrideSchema = z.object({
+  path: z.string(),
+  alt: z.string(),
+  width: z.number().int().positive().optional(),
+  height: z.number().int().positive().optional(),
+  /** Tiny base64 placeholder made at upload time. */
+  blur: z.string().startsWith("data:image/").optional(),
+  /** Focal point in percent, [x, y]. */
+  focal: z.tuple([z.number().min(0).max(100), z.number().min(0).max(100)]).optional(),
+});
 
 export const imageOverridesSchema = z
-  .object({
-    hero: z.object({ path: z.string(), alt: z.string() }).optional(),
-    about: z.object({ path: z.string(), alt: z.string() }).optional(),
+  .object(Object.fromEntries(IMAGE_SLOTS.map((slot) => [slot, imageOverrideSchema.optional()])) as {
+    [K in ImageSlot]: z.ZodOptional<typeof imageOverrideSchema>;
   })
   .catch({});
 

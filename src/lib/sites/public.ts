@@ -7,7 +7,6 @@ import {
   imageOverridesSchema,
   siteContentSchema,
   STATUSES,
-  TEMPLATES,
   TRADES,
   type ImageOverrides,
 } from "@/lib/content/schema";
@@ -19,7 +18,10 @@ import type { Database } from "@/lib/supabase/database.types";
 const publicSiteSchema = z.object({
   slug: z.string(),
   status: z.enum(STATUSES),
-  template: z.enum(TEMPLATES),
+  // Any string: legacy and unknown ids are resolved by the template registry.
+  template: z.string(),
+  /** Palette id chosen in the admin; null = picked by slug. */
+  palette: z.string().nullable().optional().catch(null),
   trade: z.enum(TRADES),
   name: z.string(),
   city: z.string(),

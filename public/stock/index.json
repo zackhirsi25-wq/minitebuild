@@ -1,0 +1,1310 @@
+{
+  "roofing": {
+    "label": "Roofers",
+    "google_types": [
+      "roofing_contractor"
+    ],
+    "keywords": [
+      "roof",
+      "roofing",
+      "roofer",
+      "gutter"
+    ],
+    "slots": {
+      "hero": [
+        {
+          "order": 1,
+          "file": "roofing/hero-1-29114658.jpg",
+          "width": 2400,
+          "height": 1600,
+          "alt": "Steep orange clay-tile roofs against a clear blue sky",
+          "avg_color": "",
+          "focal": [
+            40,
+            60
+          ],
+          "pexels_id": 29114658,
+          "photographer": "Jan Van Der Wolf",
+          "photographer_url": null,
+          "source_url": "https://www.pexels.com/photo/29114658/",
+          "blur": "data:image/webp;base64,UklGRmwAAABXRUJQVlA4IGAAAAAwAgCdASoQAAsAA4BaJbACdLoAfi6CymSUAAD5/GOO5PZXoPRgJUUhETla+ROlzrNE6IyIrN/cCbvcKkLINAhZeeZ/iZ73SBcP6jXxLQebNkuj9tE+//3zsLWFAW4AAAA="
+        },
+        {
+          "order": 2,
+          "file": "roofing/hero-2-19603110.jpg",
+          "width": 2400,
+          "height": 1602,
+          "alt": "Terracotta tile roof with a white dormer window under a blue sky",
+          "avg_color": "",
+          "focal": [
+            50,
+            65
+          ],
+          "pexels_id": 19603110,
+          "photographer": "Vasily Kleymenov",
+          "photographer_url": null,
+          "source_url": "https://www.pexels.com/photo/19603110/",
+          "blur": "data:image/webp;base64,UklGRmAAAABXRUJQVlA4IFQAAADQAQCdASoQAAsAA4BaJbACdACzNtgIAAD+4Nj+kwPsAJSiznHf944963fhY2Hd3Zhth7SWnfT9tZscOErLACeUQ1awJ2CIDiyvf+lccG+WygrrgAA="
+        },
+        {
+          "order": 3,
+          "file": "roofing/hero-3-31762405.jpg",
+          "width": 2400,
+          "height": 1600,
+          "alt": "Roofer on a lift working on the clay-tile roof of a red brick building",
+          "avg_color": "",
+          "focal": [
+            70,
+            40
+          ],
+          "pexels_id": 31762405,
+          "photographer": "Guvo59",
+          "photographer_url": null,
+          "source_url": "https://www.pexels.com/photo/31762405/",
+          "blur": "data:image/webp;base64,UklGRngAAABXRUJQVlA4IGwAAABwAgCdASoQAAsAA4BaJbACdAYul2Vt6v2dAiKgAP5snPpXsLwuikN7gUdZ0XW6JwkT32yqRjoszUkUtIbpAJ6sYS/oorUSIHDHzat7sFr91qFxqcqPhGXUZCkz4a4qY3kFkKiTPXg7ICHgAAA="
+        }
+      ],
+      "about": [
+        {
+          "order": 1,
+          "file": "roofing/about-1-33404981.jpg",
+          "width": 1600,
+          "height": 1067,
+          "alt": "Roofers tearing off and replacing the roof of a brick house",
+          "avg_color": "",
+          "focal": [
+            50,
+            45
+          ],
+          "pexels_id": 33404981,
+          "photographer": "Rstephens",
+          "photographer_url": null,
+          "source_url": "https://www.pexels.com/photo/33404981/",
+          "blur": "data:image/webp;base64,UklGRlwAAABXRUJQVlA4IFAAAABQAgCdASoQAAsAA4BaJbACdGuAAs0sgoe3FMAA/sAfOs31S8Ayj07CkSxRz9V50dr+rDxVEcLUiwf2KwHuX8N/elqoaC8ls0oZDvwfCSAAAA=="
+        },
+        {
+          "order": 2,
+          "file": "roofing/about-2-16209099.jpg",
+          "width": 1600,
+          "height": 1200,
+          "alt": "Roofer in a harness and hard hat working on a tiled roof, seen from above",
+          "avg_color": "",
+          "focal": [
+            55,
+            50
+          ],
+          "pexels_id": 16209099,
+          "photographer": "Ennis Zhu",
+          "photographer_url": null,
+          "source_url": "https://www.pexels.com/photo/16209099/",
+          "blur": "data:image/webp;base64,UklGRnIAAABXRUJQVlA4IGYAAAAwAgCdASoQAAwAA4BaJYgCsAYvNVOlN9c5gAD+z2XObB40sGBL53lAmDGY6Q151wUdVlLGiwjCAjc+1SN5t3Jfi3d4Bk9/0pgHj5D1T4IVNyvaZsFdrFmu8madB8aWAYJu41KvuAA="
+        }
+      ],
+      "gallery": [
+        {
+          "order": 1,
+          "file": "roofing/gallery-1-33501308.jpg",
+          "width": 1600,
+          "height": 1066,
+          "alt": "Crew replacing the roof of a Victorian house with a wraparound porch",
+          "avg_color": "",
+          "focal": [
+            50,
+            40
+          ],
+          "pexels_id": 33501308,
+          "photographer": "Rstephens",
+          "photographer_url": null,
+          "source_url": "https://www.pexels.com/photo/33501308/",
+          "blur": "data:image/webp;base64,UklGRmwAAABXRUJQVlA4IGAAAAAQAgCdASoQAAsAA4BaJbACdADNHQolkQpAAP48eK2Qalmm/0Jm10k7o5tgkqs/8530znCkuclMIY+3gxNdD5miESRlRTX9K4aVx3nJ+BEaPIfl2ef3PLz+/ua4j0AAAAA="
+        },
+        {
+          "order": 2,
+          "file": "roofing/gallery-2-7601276.jpg",
+          "width": 1600,
+          "height": 899,
+          "alt": "Two-story house with a dark shingle roof, seen from above in spring",
+          "avg_color": "",
+          "focal": [
+            50,
+            45
+          ],
+          "pexels_id": 7601276,
+          "photographer": "Curtis Adams",
+          "photographer_url": null,
+          "source_url": "https://www.pexels.com/photo/7601276/",
+          "blur": "data:image/webp;base64,UklGRl4AAABXRUJQVlA4IFIAAADwAQCdASoQAAkAA4BaJbACdAEPhCY29agA/XjtcMfdcSdif7Wht8IvRnisvNBmIk6iURv7yGqlmC7tzW2jujjsj+h0fqDxxBx52hHK1oGiAAAA"
+        },
+        {
+          "order": 3,
+          "file": "roofing/gallery-3-28460169.jpg",
+          "width": 1600,
+          "height": 1066,
+          "alt": "Row of white gables with red metal roofs against a blue sky",
+          "avg_color": "",
+          "focal": [
+            50,
+            70
+          ],
+          "pexels_id": 28460169,
+          "photographer": "Tommaso",
+          "photographer_url": null,
+          "source_url": "https://www.pexels.com/photo/28460169/",
+          "blur": "data:image/webp;base64,UklGRmIAAABXRUJQVlA4IFYAAABQAgCdASoQAAsAA4BaJbACdAE2R6X4AxuAyQAA7zURe3GrcfoGlIt75jLiIVred93+xuMiSA+/ahLhDV7kVHsbw9yvXDaSbfwlZRc9da44v2C+FgAAAA=="
+        },
+        {
+          "order": 4,
+          "file": "roofing/gallery-4-9431615.jpg",
+          "width": 1600,
+          "height": 1200,
+          "alt": "Roofer kneeling on a shingle roof while laying new shingles",
+          "avg_color": "",
+          "focal": [
+            55,
+            40
+          ],
+          "pexels_id": 9431615,
+          "photographer": "Keith7",
+          "photographer_url": null,
+          "source_url": "https://www.pexels.com/photo/9431615/",
+          "blur": "data:image/webp;base64,UklGRkwAAABXRUJQVlA4IEAAAADQAQCdASoQAAwAA4BaJQAAXF9wnpHYAAD+8KydyXKFETqnE0ezZh+BzyX3WFeG8QlvncO9JXL+KW/5fodQ4AAA"
+        },
+        {
+          "order": 5,
+          "file": "roofing/gallery-5-11467876.jpg",
+          "width": 1600,
+          "height": 1066,
+          "alt": "Roofers laying clay tiles on a roof under a pale sky",
+          "avg_color": "",
+          "focal": [
+            40,
+            50
+          ],
+          "pexels_id": 11467876,
+          "photographer": "Jim Mclain",
+          "photographer_url": null,
+          "source_url": "https://www.pexels.com/photo/11467876/",
+          "blur": "data:image/webp;base64,UklGRlYAAABXRUJQVlA4IEoAAAAQAgCdASoQAAsAA4BaJZwC7AEOAbIqz7AAAP72CYMBRj07s1NT7CaSLwMPVy1FxpC2lX/oHOC/tuF03F4/ofwRtchXhYLiWK9gAA=="
+        },
+        {
+          "order": 6,
+          "file": "roofing/gallery-6-32780059.jpg",
+          "width": 1600,
+          "height": 1067,
+          "alt": "Dark roof edge of a wood-sided house against the evening sky",
+          "avg_color": "",
+          "focal": [
+            45,
+            45
+          ],
+          "pexels_id": 32780059,
+          "photographer": "Francesco Ungaro",
+          "photographer_url": null,
+          "source_url": "https://www.pexels.com/photo/32780059/",
+          "blur": "data:image/webp;base64,UklGRnAAAABXRUJQVlA4IGQAAABQAgCdASoQAAsAA4BaJbACdH8AFxK13ZlvHNAA/tzV7Zpvu7REYrScAVD2RmfKbFVauxyWfWyRgPYzB79vlaS8THFsMaHmWTIgmBrf3VXnU09pcGz3xcMGO9zwCY3OjCKWgAAA"
+        }
+      ],
+      "detail": [
+        {
+          "order": 1,
+          "file": "roofing/detail-1-5401232.jpg",
+          "width": 1200,
+          "height": 800,
+          "alt": "Close-up of rows of red clay roof tiles",
+          "avg_color": "",
+          "focal": [
+            50,
+            50
+          ],
+          "pexels_id": 5401232,
+          "photographer": "Hngstrm",
+          "photographer_url": null,
+          "source_url": "https://www.pexels.com/photo/5401232/",
+          "blur": "data:image/webp;base64,UklGRkQAAABXRUJQVlA4IDgAAADQAQCdASoQAAsAA4BaJagCdAEO+mO0AAD+7FvCZex4+Prfw3mIGlT79utGndh44IcBXn4gngAAAA=="
+        },
+        {
+          "order": 2,
+          "file": "roofing/detail-2-17490213.jpg",
+          "width": 1200,
+          "height": 800,
+          "alt": "Weathered shingle roof with moss between the tiles",
+          "avg_color": "",
+          "focal": [
+            50,
+            50
+          ],
+          "pexels_id": 17490213,
+          "photographer": "Hugosykes",
+          "photographer_url": null,
+          "source_url": "https://www.pexels.com/photo/17490213/",
+          "blur": "data:image/webp;base64,UklGRmAAAABXRUJQVlA4IFQAAADwAQCdASoQAAsAA4BaJYgCdADh4I4FewAA/oKPLfwtvjEDP9EHiRWMyW5u1DDV93e1UqUH9lvMJ6HPw+wOXbY0O6I/wSljxopsb3LSJK5N2BgAAAA="
+        }
+      ]
+    }
+  },
+  "general-contractor": {
+    "label": "General contractors and remodeling",
+    "google_types": [
+      "general_contractor"
+    ],
+    "keywords": [
+      "contractor",
+      "remodel",
+      "renovation",
+      "construction",
+      "builder"
+    ],
+    "slots": {
+      "hero": [
+        {
+          "order": 1,
+          "file": "general-contractor/hero-1-7598376.jpg",
+          "width": 2400,
+          "height": 1602,
+          "alt": "Modern brick and wood house with a stone path across the lawn",
+          "avg_color": "",
+          "focal": [
+            50,
+            45
+          ],
+          "pexels_id": 7598376,
+          "photographer": "Artbovich",
+          "photographer_url": null,
+          "source_url": "https://www.pexels.com/photo/7598376/",
+          "blur": "data:image/webp;base64,UklGRmYAAABXRUJQVlA4IFoAAADwAQCdASoQAAsAA4BaJbAC7AEVIxBEfAAA/soKJSCfby/dqwSxEQiBRKp92oTVhziWTcsNFBbSOKqTN/2Y50Moe0swTD/l0ASZz9MOKikhyg+IP2OFT+kAAAA="
+        },
+        {
+          "order": 2,
+          "file": "general-contractor/hero-2-4626268.jpg",
+          "width": 2400,
+          "height": 1600,
+          "alt": "Modern brick house extension lit up at dusk",
+          "avg_color": "",
+          "focal": [
+            45,
+            50
+          ],
+          "pexels_id": 4626268,
+          "photographer": "Littlehampton Bricks",
+          "photographer_url": null,
+          "source_url": "https://www.pexels.com/photo/4626268/",
+          "blur": "data:image/webp;base64,UklGRnAAAABXRUJQVlA4IGQAAAAwAgCdASoQAAsAA4BaJYgCdADdqnv7DiVyqAD+5olHMO6GwTo4LLbL5dame9KcnyY0J+HpW92dX+E0DF9b5Lg26o71oQ7GTHBF3vUv5ILCEuL6AVgVJPXQ0yNQm36jyzjJAAAA"
+        },
+        {
+          "order": 3,
+          "file": "general-contractor/hero-3-7031594.jpg",
+          "width": 2400,
+          "height": 1602,
+          "alt": "New two-story house with wood cladding under a cloudy blue sky",
+          "avg_color": "",
+          "focal": [
+            50,
+            55
+          ],
+          "pexels_id": 7031594,
+          "photographer": "Artbovich",
+          "photographer_url": null,
+          "source_url": "https://www.pexels.com/photo/7031594/",
+          "blur": "data:image/webp;base64,UklGRmIAAABXRUJQVlA4IFYAAADQAQCdASoQAAsAA4BaJQBOgB8oL9JIgAD+8mHEO+vX91tIUe3lu32TCViU30f/oa0oJIyQb4fP+w9gY+bqy7NuXX2uirLlT4C5YPlYkfYvqFc9YwAAAA=="
+        }
+      ],
+      "about": [
+        {
+          "order": 1,
+          "file": "general-contractor/about-1-30599079.jpg",
+          "width": 1600,
+          "height": 900,
+          "alt": "Builder working on timber framing high against a blue sky",
+          "avg_color": "",
+          "focal": [
+            55,
+            30
+          ],
+          "pexels_id": 30599079,
+          "photographer": "Mahmut Yilmaz",
+          "photographer_url": null,
+          "source_url": "https://www.pexels.com/photo/30599079/",
+          "blur": "data:image/webp;base64,UklGRkYAAABXRUJQVlA4IDoAAACwAQCdASoQAAkAA4BaJbACdAEUnnIAAP0/4fn8JeEt9mfH1QuOf8kcEf3jb4Ka84u3jXF7FrtCAAAA"
+        },
+        {
+          "order": 2,
+          "file": "general-contractor/about-2-14539151.jpg",
+          "width": 1600,
+          "height": 1065,
+          "alt": "Worker in a harness grinding a steel beam on a building site",
+          "avg_color": "",
+          "focal": [
+            35,
+            40
+          ],
+          "pexels_id": 14539151,
+          "photographer": "Traphitho",
+          "photographer_url": null,
+          "source_url": "https://www.pexels.com/photo/14539151/",
+          "blur": "data:image/webp;base64,UklGRlQAAABXRUJQVlA4IEgAAAAQAgCdASoQAAsAA4BaJZQC7AELL1i9H0oAAP70OF5qDyfdjNb9q4A53ATwYrKY17HeMZRGPxX4SCsUn9MfSNNWeyhn8V9AAAA="
+        }
+      ],
+      "gallery": [
+        {
+          "order": 1,
+          "file": "general-contractor/gallery-1-8134820.jpg",
+          "width": 1600,
+          "height": 1068,
+          "alt": "Modern house with a large paved driveway and glass balcony",
+          "avg_color": "",
+          "focal": [
+            50,
+            40
+          ],
+          "pexels_id": 8134820,
+          "photographer": "Artbovich",
+          "photographer_url": null,
+          "source_url": "https://www.pexels.com/photo/8134820/",
+          "blur": "data:image/webp;base64,UklGRmwAAABXRUJQVlA4IGAAAABQAgCdASoQAAsAA4BaJZQC7AYvrgfTc0Vq4AAA/vP7D08fM/nqIh1x7C0N5AeRmp1kykaxVKR0tZhjdPqpw6oDsFsU2Eb/as2E9EfYrp6ybsEM38zQCuFQob4rip24AAA="
+        },
+        {
+          "order": 2,
+          "file": "general-contractor/gallery-2-5563473.jpg",
+          "width": 1600,
+          "height": 1067,
+          "alt": "White modern house with tall corner windows and a covered patio",
+          "avg_color": "",
+          "focal": [
+            50,
+            45
+          ],
+          "pexels_id": 5563473,
+          "photographer": "Jonathanborba",
+          "photographer_url": null,
+          "source_url": "https://www.pexels.com/photo/5563473/",
+          "blur": "data:image/webp;base64,UklGRm4AAABXRUJQVlA4IGIAAAAwAgCdASoQAAsAA4BaJZgCdAYt9thdpR5CUAD+xcnyjwh4GQnumFZND2mxpRe+1eSlX3HjZwj18Pmxc9W34nKBCKVLtnVSI4m8fxZwtrUQfORtkHdKvZCNy4E/+ZyntAAAAA=="
+        },
+        {
+          "order": 3,
+          "file": "general-contractor/gallery-3-323780.jpg",
+          "width": 1600,
+          "height": 1031,
+          "alt": "Contemporary white house with glass balconies and palm trees",
+          "avg_color": "",
+          "focal": [
+            45,
+            45
+          ],
+          "pexels_id": 323780,
+          "photographer": "Expect Best",
+          "photographer_url": null,
+          "source_url": "https://www.pexels.com/photo/323780/",
+          "blur": "data:image/webp;base64,UklGRnAAAABXRUJQVlA4IGQAAABQAgCdASoQAAoAA4BaJZACw7YulbZxcML0HQAA/rEGuVY3PPkYvCP5klU1BpNd7CDC45ksokWQnqIY+Jzga2H8plWa8P5jOIk7os6YHLPsNjT6DKPLoxQmaBrRJkxZpXiPuAAA"
+        },
+        {
+          "order": 4,
+          "file": "general-contractor/gallery-4-6297086.jpg",
+          "width": 1600,
+          "height": 1068,
+          "alt": "Open-plan lounge with a polished stone floor and striped wall panels",
+          "avg_color": "",
+          "focal": [
+            50,
+            55
+          ],
+          "pexels_id": 6297086,
+          "photographer": "Artbovich",
+          "photographer_url": null,
+          "source_url": "https://www.pexels.com/photo/6297086/",
+          "blur": "data:image/webp;base64,UklGRmIAAABXRUJQVlA4IFYAAADwAQCdASoQAAsAA4BaJQBOgBYAcePe/AAA/u/k8fBcbdLwu2yZI8apvbP7Bi5LK1ggk9mE9dSz20NeMN7OvTuJM2Ag+v9B72zgEJoIt7coMeZsdoAAAA=="
+        },
+        {
+          "order": 5,
+          "file": "general-contractor/gallery-5-7534560.jpg",
+          "width": 1600,
+          "height": 1068,
+          "alt": "Living room with a grey sofa, wood floor and recessed ceiling lights",
+          "avg_color": "",
+          "focal": [
+            50,
+            55
+          ],
+          "pexels_id": 7534560,
+          "photographer": "Artbovich",
+          "photographer_url": null,
+          "source_url": "https://www.pexels.com/photo/7534560/",
+          "blur": "data:image/webp;base64,UklGRmYAAABXRUJQVlA4IFoAAADwAQCdASoQAAsAA4BaJQBOgBl6bonBocAA/ls5ilBsyuUFJawwyC1qH9TT4/kl3IpI/ASRjIlFiNxgRs5Vq8YgmH0CKCdAived+2p9SBw+5XqCAaZ4MoNmAAA="
+        },
+        {
+          "order": 6,
+          "file": "general-contractor/gallery-6-32618047.jpg",
+          "width": 1600,
+          "height": 1067,
+          "alt": "Green wooden buildings with scaffolding during renovation",
+          "avg_color": "",
+          "focal": [
+            55,
+            45
+          ],
+          "pexels_id": 32618047,
+          "photographer": "Jiri Ikonomidis",
+          "photographer_url": null,
+          "source_url": "https://www.pexels.com/photo/32618047/",
+          "blur": "data:image/webp;base64,UklGRmoAAABXRUJQVlA4IF4AAABQAgCdASoQAAsAA4BaJZAAD45RenMc6uIbO0AA/vYgGnTghbEvU3INKuzh8S44AM9GTGO9Pp1gdWp0N3BRnliwhndd7RdUEmedm5b/oxUwGhUnbbq8dNVkVmfYmAAA"
+        }
+      ],
+      "detail": [
+        {
+          "order": 1,
+          "file": "general-contractor/detail-1-9606949.jpg",
+          "width": 1200,
+          "height": 800,
+          "alt": "Hands taking a tool from an open toolbox",
+          "avg_color": "",
+          "focal": [
+            40,
+            50
+          ],
+          "pexels_id": 9606949,
+          "photographer": "Anastasia Shuraeva",
+          "photographer_url": null,
+          "source_url": "https://www.pexels.com/photo/9606949/",
+          "blur": "data:image/webp;base64,UklGRmYAAABXRUJQVlA4IFoAAADQAQCdASoQAAsAA4BaJZgCdADWTBpWAAD+o3c2iKl/3PS7z5pytNORCe+BAz4vfvq0VQOUnlARZ5d3NmF5pvEbhyqRmUXsH181JisgHvqNmEA98HAtnbwAAAA="
+        }
+      ]
+    }
+  },
+  "plumbing": {
+    "label": "Plumbers",
+    "google_types": [
+      "plumber"
+    ],
+    "keywords": [
+      "plumb",
+      "plumber",
+      "drain",
+      "pipe",
+      "water heater"
+    ],
+    "slots": {
+      "hero": [
+        {
+          "order": 1,
+          "file": "plumbing/hero-1-12196323.jpg",
+          "width": 2400,
+          "height": 1600,
+          "alt": "Brushed nickel faucet on a bathroom sink",
+          "avg_color": "",
+          "focal": [
+            50,
+            50
+          ],
+          "pexels_id": 12196323,
+          "photographer": "Newmanphotographs",
+          "photographer_url": null,
+          "source_url": "https://www.pexels.com/photo/12196323/",
+          "blur": "data:image/webp;base64,UklGRlYAAABXRUJQVlA4IEoAAAAQAgCdASoQAAsAA4BaJQBOgCHrUX/YOhfYAM2XDwyE10QLWDy6Sgpy/vKnP2xtNONSvYe8ohKzmEI/AklXK4VbW2Dt4Z3CpM/AAA=="
+        },
+        {
+          "order": 2,
+          "file": "plumbing/hero-2-8804978.jpg",
+          "width": 2400,
+          "height": 1600,
+          "alt": "Hands under running water at a chrome bathroom faucet",
+          "avg_color": "",
+          "focal": [
+            55,
+            50
+          ],
+          "pexels_id": 8804978,
+          "photographer": "Mike Jones",
+          "photographer_url": null,
+          "source_url": "https://www.pexels.com/photo/8804978/",
+          "blur": "data:image/webp;base64,UklGRlIAAABXRUJQVlA4IEYAAACwAQCdASoQAAsAA4BaJQAAPDcTLoRAAPxa3bU/r5WnGjJq5p1fCzgASGEv9a05p3N12dzIxxAG7lTo4QyMlIDGk9bgAAAA"
+        }
+      ],
+      "about": [
+        {
+          "order": 1,
+          "file": "plumbing/about-1-29226620.jpg",
+          "width": 1600,
+          "height": 1067,
+          "alt": "Gloved hands fitting a pipe connection to a radiator",
+          "avg_color": "",
+          "focal": [
+            45,
+            45
+          ],
+          "pexels_id": 29226620,
+          "photographer": "Sejio402",
+          "photographer_url": null,
+          "source_url": "https://www.pexels.com/photo/29226620/",
+          "blur": "data:image/webp;base64,UklGRnYAAABXRUJQVlA4IGoAAAAQAgCdASoQAAsAA4BaJagC7ADp2V0qLOMAAP7RhnwPFYE80XxOYhwReEfr3LpwshSwmrwXnvrVdNwi5KeUMByfDNTwYWfKUFnah+U2OqwP4bPoZruDdhU9FCjAGbJd/fgmyvRNRarnAAAA"
+        }
+      ],
+      "gallery": [
+        {
+          "order": 1,
+          "file": "plumbing/gallery-1-4194982.jpg",
+          "width": 1600,
+          "height": 2400,
+          "alt": "Gold faucet running into a white basin",
+          "avg_color": "",
+          "focal": [
+            50,
+            50
+          ],
+          "pexels_id": 4194982,
+          "photographer": "Karola G",
+          "photographer_url": null,
+          "source_url": "https://www.pexels.com/photo/4194982/",
+          "blur": "data:image/webp;base64,UklGRoYAAABXRUJQVlA4IHoAAABQBACdASoQABgAPu1iqU2ppaOiMAgBMB2JZQDA3CPcMEFDM8Dm46ly2dgAAP7tYcE6qsX4ekKjnMpLQfT4tVRmDeZrHV6br0dyKsHnqzx1ZmYqRCqIT75H7trfHS54p2xMdGXXQnEglSDh+ZP9B+YA/5RHJCIAKqoAAA=="
+        },
+        {
+          "order": 2,
+          "file": "plumbing/gallery-2-28806925.jpg",
+          "width": 1600,
+          "height": 2125,
+          "alt": "White-painted pipes running under a ceiling",
+          "avg_color": "",
+          "focal": [
+            50,
+            50
+          ],
+          "pexels_id": 28806925,
+          "photographer": "Declan Wright",
+          "photographer_url": null,
+          "source_url": "https://www.pexels.com/photo/28806925/",
+          "blur": "data:image/webp;base64,UklGRpIAAABXRUJQVlA4IIYAAAAwBACdASoQABUAPu1iqU2ppaOiMAgBMB2JZQCdAYvW1Ulq+w8CZ1F6UQAA/U4t+rRN2FmIUTABNrgIGe7goLFGaqa+hpzalwZkdDb/8S0TxumxbX1irzjq8Rr81kLniBVzGHj80WBR8oGUjKH0gTeF4/IQIR9u3tn0FFaRu4aR1kK/45QAAA=="
+        },
+        {
+          "order": 3,
+          "file": "plumbing/gallery-3-15528965.jpg",
+          "width": 1600,
+          "height": 1600,
+          "alt": "Old brass taps pouring water into a marble basin",
+          "avg_color": "",
+          "focal": [
+            50,
+            40
+          ],
+          "pexels_id": 15528965,
+          "photographer": "Jpgata",
+          "photographer_url": null,
+          "source_url": "https://www.pexels.com/photo/15528965/",
+          "blur": "data:image/webp;base64,UklGRm4AAABXRUJQVlA4IGIAAADwAQCdASoQABAAA4BaJYwC7ACy/c/0L4AA/rdLSt+OvydqUpwVZ6Ffy8+dtg2ZfDf6j59VoSJ5GYrT4+AbtJOOgvq5KLBS/Ct3cKkFPNB2IlT1lfcdxetfdVTLIFG1EAAAAA=="
+        }
+      ],
+      "detail": [
+        {
+          "order": 1,
+          "file": "plumbing/detail-1-38028966.jpg",
+          "width": 1200,
+          "height": 1200,
+          "alt": "Close-up of a threaded iron pipe fitting",
+          "avg_color": "",
+          "focal": [
+            45,
+            40
+          ],
+          "pexels_id": 38028966,
+          "photographer": "Benedicto 13",
+          "photographer_url": null,
+          "source_url": "https://www.pexels.com/photo/38028966/",
+          "blur": "data:image/webp;base64,UklGRnoAAABXRUJQVlA4IG4AAABwAgCdASoQABAAA4BaJZwAD5MwOOmkOzW2rTAAAP7u8x6cQz3N6NqRq4Ticyzvh4EVZb6K+ZJiXzGzJDKCRSetL5uM9Z6eEsaEGJiCkNc1nK9Ij+pVo6XYpJieBdDPcD1m+bJnrOd+eXw+xNAgAA=="
+        }
+      ]
+    }
+  },
+  "electrical": {
+    "label": "Electricians",
+    "google_types": [
+      "electrician"
+    ],
+    "keywords": [
+      "electric",
+      "electrician",
+      "wiring",
+      "lighting"
+    ],
+    "slots": {
+      "hero": [
+        {
+          "order": 1,
+          "file": "electrical/hero-1-16811460.jpg",
+          "width": 2400,
+          "height": 1600,
+          "alt": "Houses on a hill with every window lit at dusk",
+          "avg_color": "",
+          "focal": [
+            60,
+            55
+          ],
+          "pexels_id": 16811460,
+          "photographer": "Ninobur",
+          "photographer_url": null,
+          "source_url": "https://www.pexels.com/photo/16811460/",
+          "blur": "data:image/webp;base64,UklGRkgAAABXRUJQVlA4IDwAAAAQAgCdASoQAAsAA4BaJQBOj+ADBN6YxfJAAP65Af1pOKP25ai+B53yiwfIbw8KdJ7aapn71e2/OafZAAA="
+        },
+        {
+          "order": 2,
+          "file": "electrical/hero-2-4792521.jpg",
+          "width": 2400,
+          "height": 1602,
+          "alt": "Electrician fitting a geometric pendant light to a white ceiling",
+          "avg_color": "",
+          "focal": [
+            70,
+            45
+          ],
+          "pexels_id": 4792521,
+          "photographer": "Anete Lusina",
+          "photographer_url": null,
+          "source_url": "https://www.pexels.com/photo/4792521/",
+          "blur": "data:image/webp;base64,UklGRkgAAABXRUJQVlA4IDwAAACwAQCdASoQAAsAA4BaJZwAAujSbzFIAP7oEC9BSURNKRQSWmec0N0PyYil7F6s2qhM0wUTv+AAHCB8AAA="
+        },
+        {
+          "order": 3,
+          "file": "electrical/hero-3-30644177.jpg",
+          "width": 2400,
+          "height": 1600,
+          "alt": "Rows of warm ceiling lights on a curved ceiling",
+          "avg_color": "",
+          "focal": [
+            50,
+            50
+          ],
+          "pexels_id": 30644177,
+          "photographer": "Oktay Koseoglu",
+          "photographer_url": null,
+          "source_url": "https://www.pexels.com/photo/30644177/",
+          "blur": "data:image/webp;base64,UklGRnQAAABXRUJQVlA4IGgAAABQAgCdASoQAAsAA4BaJaACdLoAArsXMKHFDwAA++xv05k6aIAvv6E0tudgIj5EYHeojKztt7HIw7jjsBYsuEyDvGB0Hd6gZ3F4DIAUaJ5DJ25RpfbwwBYTG/edTvw/v4l325Wg+AAAAA=="
+        }
+      ],
+      "about": [
+        {
+          "order": 1,
+          "file": "electrical/about-1-17842832.jpg",
+          "width": 1600,
+          "height": 1067,
+          "alt": "Electrician in a hard hat working inside an open electrical cabinet",
+          "avg_color": "",
+          "focal": [
+            50,
+            45
+          ],
+          "pexels_id": 17842832,
+          "photographer": "Fatihyurtman",
+          "photographer_url": null,
+          "source_url": "https://www.pexels.com/photo/17842832/",
+          "blur": "data:image/webp;base64,UklGRoAAAABXRUJQVlA4IHQAAADwAQCdASoQAAsAA4BaJbACdAD2Afqsr4AA/XgAlhObt9oho2nMS/MzWBlqlyhucMmW0SMstaaL1JtqkvL2jsU2vWu3Eoi4cHf7YTxD1TtkK1+A94Z7SNAtdmzFyRBx9hz8iz93LVfsh4dSOEtX1nrNogAAAA=="
+        },
+        {
+          "order": 2,
+          "file": "electrical/about-2-27928760.jpg",
+          "width": 1600,
+          "height": 1200,
+          "alt": "Electrician adjusting breakers in an open panel",
+          "avg_color": "",
+          "focal": [
+            45,
+            40
+          ],
+          "pexels_id": 27928760,
+          "photographer": "Ranjeet",
+          "photographer_url": null,
+          "source_url": "https://www.pexels.com/photo/27928760/",
+          "blur": "data:image/webp;base64,UklGRnIAAABXRUJQVlA4IGYAAADQAQCdASoQAAwAA4BaJQBOgMX6sUVXIAD3iHX0mN1A4o5EFeMmFK/jTIm0SFK7m24WM/oMaRMhnpWERxvWEzPPpdaAzJ76g0noGACb5Z6Mv2rYhM03W5qReYXuwOn71uHlc42gAAA="
+        }
+      ],
+      "gallery": [
+        {
+          "order": 1,
+          "file": "electrical/gallery-1-14680170.jpg",
+          "width": 1600,
+          "height": 1067,
+          "alt": "Red glass pendant lights hanging by a window",
+          "avg_color": "",
+          "focal": [
+            50,
+            40
+          ],
+          "pexels_id": 14680170,
+          "photographer": "Efrem Efre",
+          "photographer_url": null,
+          "source_url": "https://www.pexels.com/photo/14680170/",
+          "blur": "data:image/webp;base64,UklGRmAAAABXRUJQVlA4IFQAAAAQAgCdASoQAAsAA4BaJbAC7AD8WdhGzr8AAP7215pGxc+y5CoMFAnxjVjGCuv3dfmM1Nuvs5mJCz7WeBRMzoAGMD1UMCUCH6j9dchUHeqsBX7NAAA="
+        },
+        {
+          "order": 2,
+          "file": "electrical/gallery-2-34294490.jpg",
+          "width": 1600,
+          "height": 1068,
+          "alt": "Rows of glowing filament bulbs on red cords",
+          "avg_color": "",
+          "focal": [
+            55,
+            40
+          ],
+          "pexels_id": 34294490,
+          "photographer": "Novkov Visuals",
+          "photographer_url": null,
+          "source_url": "https://www.pexels.com/photo/34294490/",
+          "blur": "data:image/webp;base64,UklGRmwAAABXRUJQVlA4IGAAAAAwAgCdASoQAAsAA4BaJbACdAEaty5SzcdcwADOP+qN45SzG9+SGQ1fJw5PKe4ZnvRitAOno3DiiXZeXCA5B8kJwadADy4MKfpt5bMSPxhZBqjEY5Bx7vkeHj1JrfafAAA="
+        },
+        {
+          "order": 3,
+          "file": "electrical/gallery-3-5863648.jpg",
+          "width": 1600,
+          "height": 1067,
+          "alt": "Cylinder pendant lamps hanging in a dark room",
+          "avg_color": "",
+          "focal": [
+            50,
+            50
+          ],
+          "pexels_id": 5863648,
+          "photographer": "Rachel Claire",
+          "photographer_url": null,
+          "source_url": "https://www.pexels.com/photo/5863648/",
+          "blur": "data:image/webp;base64,UklGRkoAAABXRUJQVlA4ID4AAAAQAgCdASoQAAsAA4BaJZwAAp14MYa2LW8AAP70utFbf8m027odmrlwK4emtDVhfjhXfcstkYLNVjuty8AAAA=="
+        },
+        {
+          "order": 4,
+          "file": "electrical/gallery-4-5667685.jpg",
+          "width": 1600,
+          "height": 1058,
+          "alt": "Two electricians installing a meter stand at a building site",
+          "avg_color": "",
+          "focal": [
+            50,
+            55
+          ],
+          "pexels_id": 5667685,
+          "photographer": "Themightynelson",
+          "photographer_url": null,
+          "source_url": "https://www.pexels.com/photo/5667685/",
+          "blur": "data:image/webp;base64,UklGRmYAAABXRUJQVlA4IFoAAADwAQCdASoQAAsAA4BaJQBdgBjw3x9lYUAA/rgA1WZsYeQhsGxY1uwV+zmkv3KwG82MP9u1ad4JozY879yX+pp9OMuw32NHFhPRC8OAr4bwuJ6Y6n1eLPveqAA="
+        },
+        {
+          "order": 5,
+          "file": "electrical/gallery-5-26830921.jpg",
+          "width": 1600,
+          "height": 1600,
+          "alt": "Wooden utility pole with wires against a blue sky",
+          "avg_color": "",
+          "focal": [
+            50,
+            50
+          ],
+          "pexels_id": 26830921,
+          "photographer": "Photo Spectre",
+          "photographer_url": null,
+          "source_url": "https://www.pexels.com/photo/26830921/",
+          "blur": "data:image/webp;base64,UklGRmIAAABXRUJQVlA4IFYAAAAwAgCdASoQABAAA4BaJbACdLoAAzv/dP9lAAD+6U95r6wO/N4g0sEhQzD/ypHjKd6El0lVNhmC2CxtjUM2fyPeoIW7EBft4E2PmEv3xX00rDyHH3Y0AA=="
+        }
+      ],
+      "detail": [
+        {
+          "order": 1,
+          "file": "electrical/detail-1-37359771.jpg",
+          "width": 1200,
+          "height": 800,
+          "alt": "Bare filament bulbs hanging from a wooden branch",
+          "avg_color": "",
+          "focal": [
+            50,
+            55
+          ],
+          "pexels_id": 37359771,
+          "photographer": "Vu Nguy N",
+          "photographer_url": null,
+          "source_url": "https://www.pexels.com/photo/37359771/",
+          "blur": "data:image/webp;base64,UklGRmIAAABXRUJQVlA4IFYAAAAQAgCdASoQAAsAA4BaJZACdAELzaLeUDAAAP7Q3Li3xmzoRgEzSGxxh8I6YvJc8swFQv09vEg75hbClGAZBdf//Xe1jb/qFpm1I6/MrtcMlb4O3jnQAA=="
+        }
+      ]
+    }
+  },
+  "hvac": {
+    "label": "Heating and air conditioning",
+    "google_types": [
+      "hvac_contractor"
+    ],
+    "keywords": [
+      "hvac",
+      "heating",
+      "cooling",
+      "air conditioning",
+      "furnace"
+    ],
+    "slots": {
+      "hero": [
+        {
+          "order": 1,
+          "file": "hvac/hero-1-6782362.jpg",
+          "width": 2400,
+          "height": 1602,
+          "alt": "Bright living room with a wall-mounted air conditioner",
+          "avg_color": "",
+          "focal": [
+            50,
+            45
+          ],
+          "pexels_id": 6782362,
+          "photographer": "Artbovich",
+          "photographer_url": null,
+          "source_url": "https://www.pexels.com/photo/6782362/",
+          "blur": "data:image/webp;base64,UklGRmgAAABXRUJQVlA4IFwAAADwAQCdASoQAAsAA4BaJZQCdADJuxYouaAA+XDZlBnTrkeYiuh17K5DXiuZR+mIVx/DCdbklwfcnPXLSovggon8dZHS85V4jwy4e7djK6eKbSxoYdRIg4DOjPAAAA=="
+        },
+        {
+          "order": 2,
+          "file": "hvac/hero-2-6316065.jpg",
+          "width": 2400,
+          "height": 1602,
+          "alt": "Open living space with an air conditioner above the window",
+          "avg_color": "",
+          "focal": [
+            55,
+            40
+          ],
+          "pexels_id": 6316065,
+          "photographer": "Artbovich",
+          "photographer_url": null,
+          "source_url": "https://www.pexels.com/photo/6316065/",
+          "blur": "data:image/webp;base64,UklGRm4AAABXRUJQVlA4IGIAAAAQAgCdASoQAAsAA4BaJaQAD49ujrVTxwzAAP7n7kNzLDJh6nrervwYX1944tOPQsGsMBrV+acyy1o2RKRVAflkzgNwyASFHjLLZS7Qsq3a8Mg37L7sLIkTFG5HIVkddgKAAA=="
+        },
+        {
+          "order": 3,
+          "file": "hvac/hero-3-38788452.jpg",
+          "width": 2400,
+          "height": 1600,
+          "alt": "White wall-mounted air conditioner close to the ceiling",
+          "avg_color": "",
+          "focal": [
+            60,
+            35
+          ],
+          "pexels_id": 38788452,
+          "photographer": "Neosiam",
+          "photographer_url": null,
+          "source_url": "https://www.pexels.com/photo/38788452/",
+          "blur": "data:image/webp;base64,UklGRkYAAABXRUJQVlA4IDoAAACwAQCdASoQAAsAA4BaJZQAAuojn0wAAP7H3/r7fuDBZAOM+lAb7C4mctShFAXeNa/tbaOjIrJ8vAAA"
+        }
+      ],
+      "about": [
+        {
+          "order": 1,
+          "file": "hvac/about-1-5463581.jpg",
+          "width": 1600,
+          "height": 1274,
+          "alt": "Technician servicing a rooftop air conditioning unit",
+          "avg_color": "",
+          "focal": [
+            45,
+            55
+          ],
+          "pexels_id": 5463581,
+          "photographer": "Jose Andres Pacheco Cortes",
+          "photographer_url": null,
+          "source_url": "https://www.pexels.com/photo/5463581/",
+          "blur": "data:image/webp;base64,UklGRlIAAABXRUJQVlA4IEYAAADwAQCdASoQAA0AA4BaJaQAAiI5HkA6nQAA/vV75/xUvpLB9qAz5JQYphgwOzG61USv9FEE1eBSronJibfX7ZUKiQO2LAAA"
+        },
+        {
+          "order": 2,
+          "file": "hvac/about-2-5463587.jpg",
+          "width": 1600,
+          "height": 1322,
+          "alt": "Technician testing the wiring of an outdoor condenser",
+          "avg_color": "",
+          "focal": [
+            45,
+            55
+          ],
+          "pexels_id": 5463587,
+          "photographer": "Jose Andres Pacheco Cortes",
+          "photographer_url": null,
+          "source_url": "https://www.pexels.com/photo/5463587/",
+          "blur": "data:image/webp;base64,UklGRl4AAABXRUJQVlA4IFIAAADQAQCdASoQAA0AA4BaJZwAAi9BqCLPAAD+8yqC16avXthDMdGosbJkeXLWY2wQsN42bGVzOUmQBI+4ufLs7UDLqRsEgPSOK6GTtUx9WrJAQAAA"
+        }
+      ],
+      "gallery": [
+        {
+          "order": 1,
+          "file": "hvac/gallery-1-6316067.jpg",
+          "width": 1600,
+          "height": 1068,
+          "alt": "Living room with a sectional sofa and an air conditioner high on the wall",
+          "avg_color": "",
+          "focal": [
+            55,
+            45
+          ],
+          "pexels_id": 6316067,
+          "photographer": "Artbovich",
+          "photographer_url": null,
+          "source_url": "https://www.pexels.com/photo/6316067/",
+          "blur": "data:image/webp;base64,UklGRm4AAABXRUJQVlA4IGIAAAAQAgCdASoQAAsAA4BaJZwAD5AuLUvuLEkAAPsjy3WS123NeTgGS4nEKdFO0LciW+oqaXUoG4vyfLSW0c9y+YVg6U5qnQHLTVlQvs5FR+SDDFDEpd4imfQLywje1cYYLvAAAA=="
+        },
+        {
+          "order": 2,
+          "file": "hvac/gallery-2-7019023.jpg",
+          "width": 1600,
+          "height": 1068,
+          "alt": "Kitchen and dining area with a wall-mounted air conditioner",
+          "avg_color": "",
+          "focal": [
+            50,
+            45
+          ],
+          "pexels_id": 7019023,
+          "photographer": "Artbovich",
+          "photographer_url": null,
+          "source_url": "https://www.pexels.com/photo/7019023/",
+          "blur": "data:image/webp;base64,UklGRmgAAABXRUJQVlA4IFwAAADwAQCdASoQAAsAA4BaJbACdAED86ZnMlAA/ueoqEbJOhcjSPDNhs6+QU96xSSlyuv/pUff9Ny07TdP80nUvkDK8+WtjU4qn1PfyhbqWknPCUzdt4ijMPo5fIyAAA=="
+        },
+        {
+          "order": 3,
+          "file": "hvac/gallery-3-7535057.jpg",
+          "width": 1600,
+          "height": 1067,
+          "alt": "White kitchen with a dining table and an air conditioner above the cabinets",
+          "avg_color": "",
+          "focal": [
+            50,
+            45
+          ],
+          "pexels_id": 7535057,
+          "photographer": "Artbovich",
+          "photographer_url": null,
+          "source_url": "https://www.pexels.com/photo/7535057/",
+          "blur": "data:image/webp;base64,UklGRnQAAABXRUJQVlA4IGgAAAAwAgCdASoQAAsAA4BaJQBWAMXmm6NBGfWgwAD83XYLFg29qx8v9u2XQeNef9leFJG97spoZCmHSIXStJnMW1mc1abii792AP6LQ4kdVlOKoh+yFV5R4a/HSAU1KBkG/1kD4wR424AAAA=="
+        },
+        {
+          "order": 4,
+          "file": "hvac/gallery-4-2464420.jpg",
+          "width": 1600,
+          "height": 1067,
+          "alt": "Exposed ventilation ducts and an orange pendant light on a dark ceiling",
+          "avg_color": "",
+          "focal": [
+            50,
+            50
+          ],
+          "pexels_id": 2464420,
+          "photographer": "Adrien Olichon",
+          "photographer_url": null,
+          "source_url": "https://www.pexels.com/photo/2464420/",
+          "blur": "data:image/webp;base64,UklGRmIAAABXRUJQVlA4IFYAAADQAQCdASoQAAsAA4BaJQBdgCHHIJxQAAD+938vStoI1Eu5HoFM9kKQsmLpwChIg00KiSOR1eycxPS6itcfV70RYmG/Ac7Ygzy+q+dvRV1fBrZKJZuWAA=="
+        },
+        {
+          "order": 5,
+          "file": "hvac/gallery-5-24551564.jpg",
+          "width": 1600,
+          "height": 900,
+          "alt": "Building facade with an air conditioning unit under each window",
+          "avg_color": "",
+          "focal": [
+            50,
+            50
+          ],
+          "pexels_id": 24551564,
+          "photographer": "Mibernaa",
+          "photographer_url": null,
+          "source_url": "https://www.pexels.com/photo/24551564/",
+          "blur": "data:image/webp;base64,UklGRkoAAABXRUJQVlA4ID4AAADQAQCdASoQAAkAA4BaJZQCdAChnQjUwAD90oC9jtI2UPOYzp1HALCvVAbEei7GRACIpz7JxmzobXx+ZWAAAA=="
+        },
+        {
+          "order": 6,
+          "file": "hvac/gallery-6-34803483.jpg",
+          "width": 1600,
+          "height": 1067,
+          "alt": "Ornate apartment building with air conditioning units on its balconies",
+          "avg_color": "",
+          "focal": [
+            50,
+            50
+          ],
+          "pexels_id": 34803483,
+          "photographer": "Panditwiguna",
+          "photographer_url": null,
+          "source_url": "https://www.pexels.com/photo/34803483/",
+          "blur": "data:image/webp;base64,UklGRlwAAABXRUJQVlA4IFAAAACQAQCdASoQAAsAA4BaJZACdADP4AAA/es4QS0CC1c8tdFU9+4ZaEivig3fPBzZ5xFo+/UlIOtR1mQDotN1UuW5FqAQNQ+DQLIw0rSbSlgAAA=="
+        }
+      ],
+      "detail": [
+        {
+          "order": 1,
+          "file": "hvac/detail-1-27638181.jpg",
+          "width": 1200,
+          "height": 1800,
+          "alt": "Digital thermostat on a wall",
+          "avg_color": "",
+          "focal": [
+            50,
+            45
+          ],
+          "pexels_id": 27638181,
+          "photographer": "Rebornfilmes",
+          "photographer_url": null,
+          "source_url": "https://www.pexels.com/photo/27638181/",
+          "blur": "data:image/webp;base64,UklGRoYAAABXRUJQVlA4IHoAAAAQBACdASoQABgAPu1iqU2ppaOiMAgBMB2JQBOkBshVk4AdxvjaHn3lgAD9SCEmvlGd8L0RgQXD4cm3To3eUccykuu7HRD5IcYEs0uzpJLuvKpYYTy2EZkvSbIiFT/Q4b4PZkMVjVu9lcIdjiVhVQ6mUsrDrF9AApYAAA=="
+        },
+        {
+          "order": 2,
+          "file": "hvac/detail-2-32032996.jpg",
+          "width": 1200,
+          "height": 800,
+          "alt": "Close-up of silver ventilation ducts on a ceiling",
+          "avg_color": "",
+          "focal": [
+            50,
+            50
+          ],
+          "pexels_id": 32032996,
+          "photographer": "Bingqian Li",
+          "photographer_url": null,
+          "source_url": "https://www.pexels.com/photo/32032996/",
+          "blur": "data:image/webp;base64,UklGRngAAABXRUJQVlA4IGwAAABwAgCdASoQAAsAA4BaJaACdAYt9uOZf9UFVzIAAP7Ch7ibnlfWaTe3HYTuZ+EpB2QC9zjCrfDQ4R9xnKHYQWUx1/FAiQG+Yg6n+rUeTs6PnIs87pyv/4ZNA+dB+5gegYVDI7mICR6AjFDAAAA="
+        }
+      ]
+    }
+  },
+  "painting": {
+    "label": "Painters",
+    "google_types": [
+      "painter"
+    ],
+    "keywords": [
+      "paint",
+      "painter",
+      "painting",
+      "decorating"
+    ],
+    "slots": {
+      "hero": [
+        {
+          "order": 1,
+          "file": "painting/hero-1-5583116.jpg",
+          "width": 2400,
+          "height": 1600,
+          "alt": "Hand rolling white paint onto a clean wall",
+          "avg_color": "",
+          "focal": [
+            70,
+            55
+          ],
+          "pexels_id": 5583116,
+          "photographer": "Polina Tankilevitch",
+          "photographer_url": null,
+          "source_url": "https://www.pexels.com/photo/5583116/",
+          "blur": "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAADQAQCdASoQAAsAA4BaJZwAAudcYZokAAD+78If4Gap3RFN0wUd9qmsq834QAAA"
+        },
+        {
+          "order": 2,
+          "file": "painting/hero-2-1669754.jpg",
+          "width": 2400,
+          "height": 1600,
+          "alt": "Paint roller pressed against a grey wall",
+          "avg_color": "",
+          "focal": [
+            45,
+            50
+          ],
+          "pexels_id": 1669754,
+          "photographer": "Maltelu",
+          "photographer_url": null,
+          "source_url": "https://www.pexels.com/photo/1669754/",
+          "blur": "data:image/webp;base64,UklGRkIAAABXRUJQVlA4IDYAAADwAQCdASoQAAsAA4BaJZwAAuR8fC9yJpgA/si/eaepv7viqg8RKzZXltLTceMWqYdgAcWAAAA="
+        },
+        {
+          "order": 3,
+          "file": "painting/hero-3-6764270.jpg",
+          "width": 2400,
+          "height": 1602,
+          "alt": "Painter rolling grey paint onto an interior wall",
+          "avg_color": "",
+          "focal": [
+            55,
+            40
+          ],
+          "pexels_id": 6764270,
+          "photographer": "Pavel Danilyuk",
+          "photographer_url": null,
+          "source_url": "https://www.pexels.com/photo/6764270/",
+          "blur": "data:image/webp;base64,UklGRkYAAABXRUJQVlA4IDoAAAAQAgCdASoQAAsAA4BaJZQC/ODcaBqjv59gAMwByMYlQj5IoCVPc9Hu4gKCRcrBHhfQqCVc67NFdYQA"
+        }
+      ],
+      "about": [
+        {
+          "order": 1,
+          "file": "painting/about-1-31608473.jpg",
+          "width": 1600,
+          "height": 1556,
+          "alt": "Painter on a ladder painting a tall white wall",
+          "avg_color": "",
+          "focal": [
+            45,
+            50
+          ],
+          "pexels_id": 31608473,
+          "photographer": "Rajesh S Balouria",
+          "photographer_url": null,
+          "source_url": "https://www.pexels.com/photo/31608473/",
+          "blur": "data:image/webp;base64,UklGRkoAAABXRUJQVlA4ID4AAACQAQCdASoQABAAA4BaJZwAAltTEmAA/uIxP3FXmn5WAvdshhuPKvinTIFG8sKNb1cwCiU48hUmHcUeuaQAAA=="
+        },
+        {
+          "order": 2,
+          "file": "painting/about-2-7217983.jpg",
+          "width": 1600,
+          "height": 1067,
+          "alt": "Two painters taping and preparing a white wall",
+          "avg_color": "",
+          "focal": [
+            50,
+            40
+          ],
+          "pexels_id": 7217983,
+          "photographer": "Blue Bird",
+          "photographer_url": null,
+          "source_url": "https://www.pexels.com/photo/7217983/",
+          "blur": "data:image/webp;base64,UklGRmQAAABXRUJQVlA4IFgAAADwAQCdASoQAAsAA4BaJZQAAxX8k2SxzgAA/urIv/ilZA4R/67BEnLun7PloZLOZCHbitmv/odTT8Di3TSUIfJyhQvW5Mep+60xqCftGQmwX4QVgIae+AAA"
+        }
+      ],
+      "gallery": [
+        {
+          "order": 1,
+          "file": "painting/gallery-1-37621239.jpg",
+          "width": 1600,
+          "height": 2133,
+          "alt": "Freshly painted arched doorway with a green front door",
+          "avg_color": "",
+          "focal": [
+            50,
+            45
+          ],
+          "pexels_id": 37621239,
+          "photographer": "Benprater",
+          "photographer_url": null,
+          "source_url": "https://www.pexels.com/photo/37621239/",
+          "blur": "data:image/webp;base64,UklGRqoAAABXRUJQVlA4IJ4AAAAQBACdASoQABUAPu1iqU2ppaOiMAgBMB2JZAB3AAOe8P9vtXdO0Kl4AAD+0JGm3I2/CPjobXApGFW8/Zpc6DV2u99ll0tZArmj01Ev+bhxBdQx4yhOSO9aMknUwJ6uwPi7jWGALN8oAiGt1a8FXLxgIXNT5TUa9AtuZscAavRPwdYMV4GXhpD+TU2txaXXdgCQGaTC9sqBJFWRtblgAA=="
+        },
+        {
+          "order": 2,
+          "file": "painting/gallery-2-20395889.jpg",
+          "width": 1600,
+          "height": 2845,
+          "alt": "Green double door framed by painted decoration",
+          "avg_color": "",
+          "focal": [
+            50,
+            45
+          ],
+          "pexels_id": 20395889,
+          "photographer": "Damir",
+          "photographer_url": null,
+          "source_url": "https://www.pexels.com/photo/20395889/",
+          "blur": "data:image/webp;base64,UklGRqIAAABXRUJQVlA4IJYAAADwAwCdASoQABwAPu1oqk6ppiQiMAgBMB2JZwC06GS/nOkQ/IsmdeAAAP76KXIaEshKKml4pE6Y4tLR5as0g7CNwEnm9eJCnfssycdy17h0Ic92gczV/EYc1KSwlXT7KGJ4hHVpm9ykd/e0TC9vj1/aDPIlUocQD69BFLV3pJHmJkJLi2T6/BCNSr74KpecAaIF24KPEAA="
+        },
+        {
+          "order": 3,
+          "file": "painting/gallery-3-26632166.jpg",
+          "width": 1600,
+          "height": 2400,
+          "alt": "Colourful painted mural wall with paint cans on the floor",
+          "avg_color": "",
+          "focal": [
+            50,
+            55
+          ],
+          "pexels_id": 26632166,
+          "photographer": "Gezerasph",
+          "photographer_url": null,
+          "source_url": "https://www.pexels.com/photo/26632166/",
+          "blur": "data:image/webp;base64,UklGRqwAAABXRUJQVlA4IKAAAAAQBACdASoQABgAPu1iqU2ppaOiMAgBMB2JbACdMoACIsgqNlsU9LyYAAD2FGLupD8/MfiLNz+A1MUTB7KmBFDJG0KQvCavz/qoyICXcQqr6/Vd+SxUohK/yWI4Ti6bsCtI/zX83TWs1LcUF7vHbQui6OQ146/SsKB7hLPMn8rOVek2IlNB3v2nSXsyHg+yU+fAAq3+Uv6JwNy8036d+cQA"
+        },
+        {
+          "order": 4,
+          "file": "painting/gallery-4-1036863.jpg",
+          "width": 1600,
+          "height": 1067,
+          "alt": "Painter giving a house exterior a new coat of colour",
+          "avg_color": "",
+          "focal": [
+            55,
+            50
+          ],
+          "pexels_id": 1036863,
+          "photographer": "Apgpotr",
+          "photographer_url": null,
+          "source_url": "https://www.pexels.com/photo/1036863/",
+          "blur": "data:image/webp;base64,UklGRoAAAABXRUJQVlA4IHQAAAAQAgCdASoQAAsAA4BaJZACdAYulngWYOuwAPlhSHeWATn+XcenmtS9m5UfROfRl2M0AcxQTi0vtkpzP3F2d7l4e0mg3mpDKaSxLdYb1IIb7gvIjL0zJq43Fe+5Q7J4rRk++eFxnj3iVPdaK6UUOxYIKAAAAA=="
+        },
+        {
+          "order": 5,
+          "file": "painting/gallery-5-29274535.jpg",
+          "width": 1600,
+          "height": 1067,
+          "alt": "Painter on a lift repainting the facade of an apartment building",
+          "avg_color": "",
+          "focal": [
+            40,
+            45
+          ],
+          "pexels_id": 29274535,
+          "photographer": "Sejio402",
+          "photographer_url": null,
+          "source_url": "https://www.pexels.com/photo/29274535/",
+          "blur": "data:image/webp;base64,UklGRmIAAABXRUJQVlA4IFYAAAAwAgCdASoQAAsAA4BaJZACw7YuRgb+Rcx2SAD967Y0mAQwJyOxmw4IEBoxkMcFMAvtDdNzSZXu96VkbduldrogSDhpNAH+o7HekpwTdPdnmSHmtI0AAA=="
+        },
+        {
+          "order": 6,
+          "file": "painting/gallery-6-35570308.jpg",
+          "width": 1600,
+          "height": 1067,
+          "alt": "Painter on a rope painting a tall exterior wall",
+          "avg_color": "",
+          "focal": [
+            45,
+            45
+          ],
+          "pexels_id": 35570308,
+          "photographer": "Soc Nang D Ng",
+          "photographer_url": null,
+          "source_url": "https://www.pexels.com/photo/35570308/",
+          "blur": "data:image/webp;base64,UklGRloAAABXRUJQVlA4IE4AAAAwAgCdASoQAAsAA4BaJZQCdADdr0j5lB8mAAD+t+pMEVVFPxFR/uoURix7M1MT4+s/tfq5ynyWrlSmlmAA/0W3LtQrjaQu1DhJKo5gAAA="
+        }
+      ],
+      "detail": [
+        {
+          "order": 1,
+          "file": "painting/detail-1-5137779.jpg",
+          "width": 1200,
+          "height": 1800,
+          "alt": "Wall corner painted white above and mustard yellow below",
+          "avg_color": "",
+          "focal": [
+            50,
+            50
+          ],
+          "pexels_id": 5137779,
+          "photographer": "Cottonbro",
+          "photographer_url": null,
+          "source_url": "https://www.pexels.com/photo/5137779/",
+          "blur": "data:image/webp;base64,UklGRlYAAABXRUJQVlA4IEoAAACQAwCdASoQABgAPu1iqU2ppaOiMAgBMB2JYgAAW4HrFRfZ5+qIAP7qeVJgCp4IpgDso//47diJr5oCeI7/X8p1+mz+AM9mozZ8AA=="
+        },
+        {
+          "order": 2,
+          "file": "painting/detail-2-12745884.jpg",
+          "width": 1200,
+          "height": 1600,
+          "alt": "Orange curve painted over white brick",
+          "avg_color": "",
+          "focal": [
+            50,
+            50
+          ],
+          "pexels_id": 12745884,
+          "photographer": "Ann H",
+          "photographer_url": null,
+          "source_url": "https://www.pexels.com/photo/12745884/",
+          "blur": "data:image/webp;base64,UklGRnIAAABXRUJQVlA4IGYAAADwAwCdASoQABUAPu1krU2ppaSiMAgBMB2JbACdMoR3AH4NCjunOM5AAP7WJVfYnGyVfREBnhljw0QF41v/VAj1b1dSzg+LPytTLc1jlP5TLHybH5x17oiz38ORaq3DILUZW0OxAAA="
+        }
+      ]
+    }
+  }
+}

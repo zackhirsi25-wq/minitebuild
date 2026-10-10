@@ -1,4 +1,5 @@
 import { generateSiteContent, type BusinessFacts, type CallModel } from "@/lib/ai/copy";
+import { inferBusinessType } from "@/lib/business-type";
 import { parsePhone } from "@/lib/content/phone";
 import {
   businessInputSchema,
@@ -115,6 +116,7 @@ export async function generateBusiness(rawInput: BusinessInput, deps: GenerateDe
     address: details.address,
     category: details.category,
     trade,
+    businessType: inferBusinessType(details.name, details.category),
     hours: details.hours,
     services: input.services,
   };

@@ -90,7 +90,7 @@ export function fixtureContent(facts: BusinessFacts): SiteContent {
   }
 
   const content: SiteContent = {
-    headline: (remodel ? `Remodeling done right in ${city}` : `Trusted contractor in ${city}`).slice(0, 70),
+    headline: (remodel ? `Kitchens and baths rebuilt in ${city}` : `Additions and repairs across ${city}`).slice(0, 70),
     subheadline:
       `${name} plans and builds ${remodel ? "kitchens, baths and living spaces" : "additions, renovations and repairs"} for homeowners in ${city} and nearby. Call for a straight answer and a clear quote.`.slice(
         0,
@@ -132,6 +132,11 @@ export function fixtureContent(facts: BusinessFacts): SiteContent {
       body: `Talk to ${name} today about your project in ${city}.`.slice(0, 200),
       buttonLabel: "Call for a quote",
     },
+    process: [
+      { title: "Call us", body: `Call ${phone} and tell us what you have in mind for your home.` },
+      { title: "We visit", body: "We look at the space with you, talk through options and follow up with a written quote." },
+      { title: "We build", body: "Work starts on an agreed schedule, and you know what is happening each step of the way." },
+    ],
   };
   return content;
 }

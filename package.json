@@ -11,7 +11,18 @@
     "test:watch": "vitest",
     "typecheck": "next typegen && tsc --noEmit",
     "db:types": "supabase gen types typescript --local > src/lib/supabase/database.types.ts.tmp && mv src/lib/supabase/database.types.ts.tmp src/lib/supabase/database.types.ts && prettier --write src/lib/supabase/database.types.ts",
-    "stock:generate": "node scripts/generate-stock-art.mjs"
+    "stock:generate": "node scripts/generate-stock-art.mjs",
+    "predev": "node scripts/build-template-registry.mjs",
+    "prebuild": "node scripts/build-template-registry.mjs",
+    "pretest": "node scripts/build-template-registry.mjs",
+    "pretypecheck": "node scripts/build-template-registry.mjs",
+    "stock:search": "node scripts/stock/fetch-stock.mjs search",
+    "stock:status": "node scripts/stock/fetch-stock.mjs status",
+    "stock:download": "node scripts/stock/fetch-stock.mjs download",
+    "stock:upload": "node --env-file=.env.local scripts/stock/upload-stock.mjs",
+    "stock:list": "node scripts/stock/shopping-list.mjs",
+    "stock:prepare": "node scripts/stock/ingest-manual.mjs prepare",
+    "stock:ingest": "node scripts/stock/ingest-manual.mjs ingest"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.132.1",
