@@ -2,6 +2,10 @@
 import type { StaticImageData } from "next/image";
 import type { ComponentType } from "react";
 import type { TemplateDemo, TemplateMeta, TemplateProps } from "./_kit/types";
+import bentoMeta from "./bento/meta";
+import bentoDemo from "./bento/demo";
+import brutalMeta from "./brutal/meta";
+import brutalDemo from "./brutal/demo";
 import cinematicMeta from "./cinematic/meta";
 import cinematicDemo from "./cinematic/demo";
 import editorialMeta from "./editorial/meta";
@@ -12,8 +16,16 @@ import havenMeta from "./haven/meta";
 import havenDemo from "./haven/demo";
 import impactMeta from "./impact/meta";
 import impactDemo from "./impact/demo";
+import ledgerMeta from "./ledger/meta";
+import ledgerDemo from "./ledger/demo";
 import storyMeta from "./story/meta";
 import storyDemo from "./story/demo";
+import swissMeta from "./swiss/meta";
+import swissDemo from "./swiss/demo";
+import bentoDesktop from "./bento/thumb-desktop.jpg";
+import bentoMobile from "./bento/thumb-mobile.jpg";
+import brutalDesktop from "./brutal/thumb-desktop.jpg";
+import brutalMobile from "./brutal/thumb-mobile.jpg";
 import cinematicDesktop from "./cinematic/thumb-desktop.jpg";
 import cinematicMobile from "./cinematic/thumb-mobile.jpg";
 import editorialDesktop from "./editorial/thumb-desktop.jpg";
@@ -24,45 +36,76 @@ import havenDesktop from "./haven/thumb-desktop.jpg";
 import havenMobile from "./haven/thumb-mobile.jpg";
 import impactDesktop from "./impact/thumb-desktop.jpg";
 import impactMobile from "./impact/thumb-mobile.jpg";
+import ledgerDesktop from "./ledger/thumb-desktop.jpg";
+import ledgerMobile from "./ledger/thumb-mobile.jpg";
 import storyDesktop from "./story/thumb-desktop.jpg";
 import storyMobile from "./story/thumb-mobile.jpg";
+import swissDesktop from "./swiss/thumb-desktop.jpg";
+import swissMobile from "./swiss/thumb-mobile.jpg";
 
-export const TEMPLATE_IDS = ["cinematic", "editorial", "gallery", "haven", "impact", "story"] as const;
+export const TEMPLATE_IDS = [
+  "bento",
+  "brutal",
+  "cinematic",
+  "editorial",
+  "gallery",
+  "haven",
+  "impact",
+  "ledger",
+  "story",
+  "swiss",
+] as const;
 
 export const TEMPLATE_METAS: Record<string, TemplateMeta> = {
+  bento: bentoMeta,
+  brutal: brutalMeta,
   cinematic: cinematicMeta,
   editorial: editorialMeta,
   gallery: galleryMeta,
   haven: havenMeta,
   impact: impactMeta,
+  ledger: ledgerMeta,
   story: storyMeta,
+  swiss: swissMeta,
 };
 
 export const TEMPLATE_DEMOS: Record<string, TemplateDemo> = {
+  bento: bentoDemo,
+  brutal: brutalDemo,
   cinematic: cinematicDemo,
   editorial: editorialDemo,
   gallery: galleryDemo,
   haven: havenDemo,
   impact: impactDemo,
+  ledger: ledgerDemo,
   story: storyDemo,
+  swiss: swissDemo,
 };
 
 /** Rendered thumbnails of each template's demo, where they exist. */
 export const TEMPLATE_THUMBS: Record<string, { desktop: StaticImageData; mobile: StaticImageData }> = {
+  bento: { desktop: bentoDesktop, mobile: bentoMobile },
+  brutal: { desktop: brutalDesktop, mobile: brutalMobile },
   cinematic: { desktop: cinematicDesktop, mobile: cinematicMobile },
   editorial: { desktop: editorialDesktop, mobile: editorialMobile },
   gallery: { desktop: galleryDesktop, mobile: galleryMobile },
   haven: { desktop: havenDesktop, mobile: havenMobile },
   impact: { desktop: impactDesktop, mobile: impactMobile },
+  ledger: { desktop: ledgerDesktop, mobile: ledgerMobile },
   story: { desktop: storyDesktop, mobile: storyMobile },
+  swiss: { desktop: swissDesktop, mobile: swissMobile },
 };
 
 /** Loaded on demand so a page only pulls in the fonts and CSS of the template it shows. */
 export const TEMPLATE_LOADERS: Record<string, () => Promise<{ default: ComponentType<TemplateProps> }>> = {
+  bento: () => import("./bento/Template"),
+  brutal: () => import("./brutal/Template"),
   cinematic: () => import("./cinematic/Template"),
   editorial: () => import("./editorial/Template"),
   gallery: () => import("./gallery/Template"),
   haven: () => import("./haven/Template"),
   impact: () => import("./impact/Template"),
+  ledger: () => import("./ledger/Template"),
   story: () => import("./story/Template"),
+  swiss: () => import("./swiss/Template"),
 };

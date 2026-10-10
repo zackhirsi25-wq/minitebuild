@@ -1,0 +1,35 @@
+/* Ledger tokens. --accent is set inline from meta.ts. */
+.led {
+  --paper: #ffffff;
+  --page: #f4f4f4;
+  --ink: #161616;
+  --muted: #525252; /* 7.8:1 on white */
+  --rule: #c6c6c6;
+  --rule-strong: #161616;
+  --accent: #0f62fe;
+  --on-accent: #ffffff;
+  --focus: var(--accent);
+  --selection-bg: var(--ink);
+  --selection-fg: var(--paper);
+
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 24px;
+  --sp-6: 32px;
+  --sp-7: 48px;
+  --sp-8: 64px;
+  --sp-9: 96px;
+  --gutter: clamp(20px, 5vw, 48px);
+  --measure: 820px;
+
+  --r-0: 0;
+
+  --font: var(--led-font), system-ui, sans-serif;
+  --mono: var(--led-mono), ui-monospace, monospace;
+  --fs-display: clamp(2.25rem, 1.5rem + 3.4vw, 4.25rem);
+  --fs-h2: clamp(1.5rem, 1.25rem + 1.2vw, 2.25rem);
+  --fs-h3: clamp(1.0625rem, 1rem + 0.3vw, 1.25rem);
+  --fs-body: clamp(1rem, 0.97rem + 0.15vw, 1.0625rem);
+  --fs-small: 0.8125rem;
+}

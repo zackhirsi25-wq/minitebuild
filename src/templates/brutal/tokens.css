@@ -1,0 +1,38 @@
+/* Brutal tokens. --accent is set inline from meta.ts. */
+.bru {
+  --cream: #fffbef;
+  --white: #ffffff;
+  --ink: #111111;
+  --muted: #4a4a4a; /* 8.6:1 on cream */
+  --accent: #ffd93d;
+  --on-accent: var(--ink);
+  --focus: var(--ink);
+  --selection-bg: var(--ink);
+  --selection-fg: var(--accent);
+
+  --border: 3px solid var(--ink);
+  --shadow: 6px 6px 0 var(--ink);
+  --shadow-sm: 4px 4px 0 var(--ink);
+
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 24px;
+  --sp-6: 32px;
+  --sp-7: 48px;
+  --sp-8: 64px;
+  --gutter: clamp(16px, 3.5vw, 48px);
+  --section-y: clamp(64px, 2.5rem + 5vw, 128px);
+  --max: 1280px;
+
+  --r-1: 10px;
+  --r-full: 999px;
+
+  --font: var(--bru-font), system-ui, sans-serif;
+  --mono: var(--bru-mono), ui-monospace, monospace;
+  --fs-display: clamp(2.75rem, 1.4rem + 6vw, 7rem);
+  --fs-h2: clamp(2rem, 1.3rem + 3vw, 4rem);
+  --fs-h3: clamp(1.25rem, 1.1rem + 0.6vw, 1.625rem);
+  --fs-body: clamp(1rem, 0.97rem + 0.15vw, 1.0625rem);
+  --fs-small: 0.8125rem;
+}

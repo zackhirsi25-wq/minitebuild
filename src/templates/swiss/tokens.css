@@ -1,0 +1,36 @@
+/* Swiss tokens. --accent is set inline from meta.ts. */
+.swi {
+  --white: #ffffff;
+  --black: #111111;
+  --grey: #616161; /* 6.2:1 on white */
+  --grid-line: rgb(17 17 17 / 0.06);
+  --rule: #111111;
+  --accent: #d3191c;
+  --on-accent: #ffffff;
+  --focus: var(--black);
+  --selection-bg: var(--accent);
+  --selection-fg: #ffffff;
+
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 24px;
+  --sp-6: 32px;
+  --sp-7: 48px;
+  --sp-8: 64px;
+  --sp-9: 96px;
+  --gutter: clamp(16px, 3.5vw, 56px);
+  --col-gap: clamp(12px, 1.6vw, 24px);
+  --section-y: clamp(72px, 3rem + 6vw, 160px);
+  --max: 1440px;
+
+  --r-0: 0;
+
+  --font: var(--swi-font), "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --fs-display: clamp(3rem, 1.4rem + 7.6vw, 9.5rem);
+  --fs-num: clamp(4rem, 2rem + 9vw, 12rem);
+  --fs-h2: clamp(2rem, 1.4rem + 2.8vw, 4rem);
+  --fs-lead: clamp(1.125rem, 1rem + 0.6vw, 1.5rem);
+  --fs-body: clamp(0.975rem, 0.95rem + 0.15vw, 1.0625rem);
+  --fs-small: 0.8125rem;
+}
