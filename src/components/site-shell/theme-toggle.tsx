@@ -18,7 +18,8 @@ function subscribe(onChange: () => void) {
   observer.observe(root, { attributes: true, attributeFilter: ["data-theme"] });
   return () => observer.disconnect();
 }
-const readTheme = (): Theme => (document.querySelector(".mb")?.getAttribute("data-theme") === "light" ? "light" : "dark");
+const readTheme = (): Theme =>
+  document.querySelector(".mb")?.getAttribute("data-theme") === "light" ? "light" : "dark";
 const serverTheme = (): Theme => "dark";
 
 /** Dark/light switch for the Minitebuild site. The choice is remembered in this browser only. */

@@ -4,7 +4,7 @@ import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { Spinner } from "@/components/ui/spinner";
 import { useToast } from "@/components/ui/toast";
 import type { BusinessEdit } from "@/lib/admin/details";
-import { LIMITS, TEMPLATES, type SiteContent, type TemplateId, type Trade } from "@/lib/content/schema";
+import { LIMITS, type SiteContent, type TemplateId, type Trade } from "@/lib/content/schema";
 import { confirmServices, saveBusiness } from "../../actions";
 
 type Details = {
@@ -19,12 +19,6 @@ type Details = {
   template: TemplateId;
 };
 type State = { details: Details; content: SiteContent };
-
-const TEMPLATE_INFO: Record<TemplateId, string> = {
-  bold: "Bold: dark hero",
-  classic: "Classic: light, trust-focused",
-  split: "Split: two-column hero",
-};
 
 const inputClass =
   "mt-1 block w-full rounded-lg border px-3 py-2.5 text-base shadow-sm focus:outline-none focus:ring-2 focus:ring-brand-100";
@@ -83,6 +77,7 @@ export function Editor({
   initial,
   savedAt,
   servicesConfirmed,
+  templates,
 }: {
   id: string;
   slug: string;
@@ -90,6 +85,8 @@ export function Editor({
   savedAt: string;
   /** False until the admin edits the services or confirms them as they are. */
   servicesConfirmed: boolean;
+  /** Every registered template, in gallery order. */
+  templates: { id: string; name: string }[];
 }) {
   const toast = useToast();
   const initialJson = JSON.stringify(initial);
@@ -175,8 +172,8 @@ export function Editor({
         }}
       >
         <Section title="Template">
-          <div className="grid gap-2 sm:grid-cols-3">
-            {TEMPLATES.map((t) => (
+          <div className="grid gap-2 sm:grid-cols-2">
+            {templates.map(({ id: t, name }) => (
               <label
                 key={t}
                 className="flex min-h-11 cursor-pointer items-center gap-2 rounded-lg border border-slate-200 px-3 py-2 text-sm has-[:checked]:border-brand-600 has-[:checked]:bg-brand-50"
@@ -188,7 +185,7 @@ export function Editor({
                   checked={details.template === t}
                   onChange={() => setDetail("template", t)}
                 />
-                {TEMPLATE_INFO[t]}
+                {name}
               </label>
             ))}
           </div>

@@ -113,6 +113,11 @@ export function storagePublicUrl(supabaseUrl: string, path: string, bucket = "si
  * general-contractor for contractors and general-business for everyone else;
  * with neither, slots stay empty and templates render their typographic hero.
  */
+/** Whether a business would get stock hero photos (used to hide demo types that have none yet). */
+export function hasStockPhotos(site: { name: string; category: string | null }, index = STOCK_INDEX): boolean {
+  return (nicheEntry(site, index)?.slots.hero?.length ?? 0) > 0;
+}
+
 function nicheEntry(site: { name: string; category: string | null }, index: Record<string, StockNiche>) {
   const own = index[nicheFor(site, index)];
   if (own) return own;

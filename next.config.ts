@@ -42,10 +42,26 @@ const nextConfig: NextConfig = {
     // Local Supabase serves uploads from 127.0.0.1.
     dangerouslyAllowLocalIP: supabaseIsLocal,
   },
+  // Basic security headers on every response (app and customer sites).
+  // SAMEORIGIN, not DENY: the template gallery and the admin preview show
+  // sites in iframes on the same origin.
+  async headers() {
+    const headers = [
+      { key: "X-Content-Type-Options", value: "nosniff" },
+      { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+      { key: "X-Frame-Options", value: "SAMEORIGIN" },
+      { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=(), payment=(), usb=()" },
+      { key: "Cross-Origin-Opener-Policy", value: "same-origin" },
+    ];
+    if (process.env.NODE_ENV === "production") {
+      headers.push({ key: "Strict-Transport-Security", value: "max-age=31536000; includeSubDomains" });
+    }
+    return [{ source: "/:path*", headers }];
+  },
   experimental: {
     serverActions: {
-      // Photo uploads (max 5 MB) go through a server action.
-      bodySizeLimit: "6mb",
+      // Photo uploads (admin: 5 MB, build flow: 10 MB) go through server actions.
+      bodySizeLimit: "11mb",
     },
   },
 };

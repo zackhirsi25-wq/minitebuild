@@ -46,7 +46,10 @@ for (const id of ids) {
     await page.waitForFunction(
       () =>
         [...document.images]
-          .filter((img) => img.getBoundingClientRect().top < window.innerHeight)
+          .filter((img) => {
+            const r = img.getBoundingClientRect();
+            return r.width > 0 && r.height > 0 && r.top < window.innerHeight;
+          })
           .every((img) => img.complete && img.naturalWidth > 0),
       null,
       { timeout: 90_000 },

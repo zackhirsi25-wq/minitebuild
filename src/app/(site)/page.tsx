@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { BuildBox } from "@/components/site-shell/build-box";
+import { photoReadyTypes } from "@/demo";
 import { ButtonLink } from "@/components/ui/button";
 import { annualSaving, formatPrice, product } from "@/config/product";
 import { allTemplates, TEMPLATE_THUMBS } from "@/templates";
@@ -52,7 +53,7 @@ const STEPS = [
   },
   {
     title: "Go live",
-    body: "See the whole site first. When you're happy, pick a plan and it goes live at its own address.",
+    body: "See the whole site first. When you're happy, choose a plan and we switch it on at its own address.",
     visual: "live",
   },
 ] as const;
@@ -131,7 +132,7 @@ const INCLUDED = [
   },
   {
     title: "Changes when you need them",
-    body: "Tell us what to update, from opening hours to services, and we change it on your site.",
+    body: "Email us what to update, from opening hours to services, and we change it on your site.",
   },
 ];
 
@@ -142,23 +143,23 @@ const QUESTIONS = [
   },
   {
     q: "How long does it take?",
-    a: "Usually about a minute after you enter your details. You can watch each step as it happens.",
+    a: "Usually a minute or two once you've confirmed your details. You can watch each step as it happens.",
   },
   {
     q: "What if my business isn't on Google?",
-    a: "We build the site from the details you type in. You can add or change anything afterwards.",
+    a: "We build the site from the details you type in.",
   },
   {
-    q: "Can I use my own photos and logo?",
-    a: "Yes. Add a logo and up to 10 photos while you build. Anywhere you don't, we use photos chosen for your kind of business.",
+    q: "Can I use my own photos?",
+    a: "Yes. Add up to 10 photos while you build. Anywhere you don't, we use photos chosen for your kind of business. Add your logo too and we match your site's colours to it.",
   },
   {
     q: "Can I change the design later?",
-    a: "Yes. Switch to another template at any time and your words and photos come with you.",
+    a: "Yes. While you're looking at your preview, choose Change design to switch templates and colours. Your words and photos come with you.",
   },
   {
     q: "How long does a preview stay up?",
-    a: "Previews that haven't gone live are kept for 14 days.",
+    a: "Previews you build here are kept for 14 days. Choose a plan before then to keep yours.",
   },
 ];
 
@@ -179,7 +180,7 @@ export default function HomePage() {
             A website for your business, built while you wait.
           </h1>
           <p className="mt-5 text-lead text-muted">Name, city and phone. We do the rest.</p>
-          <BuildBox className="mt-10 max-w-2xl" />
+          <BuildBox className="mt-10 max-w-2xl" starterTypes={photoReadyTypes()} />
         </div>
       </section>
 
@@ -320,7 +321,7 @@ export default function HomePage() {
           <h2 id="closing-title" className="text-heading font-semibold">
             Ready when you are.
           </h2>
-          <p className="mt-4 text-lead text-muted">Your site is about a minute away.</p>
+          <p className="mt-4 text-lead text-muted">Your site is a minute or two away.</p>
           <BuildBox showStarters={false} className="mt-10 max-w-2xl" />
         </div>
       </section>

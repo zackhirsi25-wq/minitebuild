@@ -1,4 +1,5 @@
-import type { BusinessType } from "@/lib/business-type";
+import { BUSINESS_TYPES, type BusinessType } from "@/lib/business-type";
+import { hasStockPhotos } from "@/lib/images/stock";
 import type { PublicSite } from "@/lib/sites/public";
 import { MORE_DEMOS } from "./more";
 
@@ -108,4 +109,19 @@ export function demoSite(type: BusinessType, templateId: string): PublicSite {
 
 export function hasDemo(type: BusinessType): boolean {
   return type in DEMOS;
+}
+
+/**
+ * Business types whose demo has stock photos. Only these are offered in the
+ * gallery, the template preview and the home page starters; the rest come
+ * back automatically once their niche has photos in public/stock/index.json.
+ */
+export function photoReadyTypes(): BusinessType[] {
+  return BUSINESS_TYPES.filter((t) => DEMOS[t] && hasStockPhotos(DEMOS[t]));
+}
+
+/** The demo type a template shows by default: its own, or the first one with photos. */
+export function demoTypeFor(preferred: BusinessType): BusinessType {
+  const ready = photoReadyTypes();
+  return ready.includes(preferred) ? preferred : (ready[0] ?? preferred);
 }

@@ -78,6 +78,11 @@ export default async function CheckoutPage({ params, searchParams }: PageProps<"
             </div>
           </fieldset>
 
+          {error === "consent" && (
+            <p role="alert" className="mt-4 rounded-lg bg-red-50 px-4 py-3 text-red-800">
+              We couldn&apos;t record your agreement to our policies, so checkout didn&apos;t start. Please try again.
+            </p>
+          )}
           {error === "plan" && (
             <p role="alert" className="mt-4 rounded-lg bg-red-50 px-4 py-3 text-red-800">
               Pick a plan to continue.
@@ -86,9 +91,26 @@ export default async function CheckoutPage({ params, searchParams }: PageProps<"
 
           <div className="mt-8">
             {provider.online ? (
-              <SubmitButton className="w-full text-lg" pendingLabel="Opening checkout…">
-                Continue to payment
-              </SubmitButton>
+              <>
+                <p className="mb-4 text-center text-sm text-slate-600">
+                  By subscribing you agree to our{" "}
+                  <Link href="/terms" className="font-medium text-slate-900 underline underline-offset-2">
+                    Terms of Service
+                  </Link>
+                  ,{" "}
+                  <Link href="/privacy" className="font-medium text-slate-900 underline underline-offset-2">
+                    Privacy Policy
+                  </Link>{" "}
+                  and{" "}
+                  <Link href="/refunds" className="font-medium text-slate-900 underline underline-offset-2">
+                    Refund Policy
+                  </Link>
+                  .
+                </p>
+                <SubmitButton className="w-full text-lg" pendingLabel="Opening checkout…">
+                  Continue to payment
+                </SubmitButton>
+              </>
             ) : (
               <div className="rounded-2xl border border-slate-200 bg-white p-6 text-center">
                 <p className="text-lg font-semibold">Contact us to activate</p>

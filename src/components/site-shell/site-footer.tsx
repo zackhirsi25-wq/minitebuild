@@ -23,7 +23,7 @@ function Item({ href, children }: { href: string; children: React.ReactNode }) {
     <li>
       <Link
         href={href}
-        className="inline-flex min-h-9 items-center text-small text-muted transition-colors hover:text-fg"
+        className="inline-flex min-h-11 items-center text-small text-muted transition-colors hover:text-fg"
       >
         {children}
       </Link>

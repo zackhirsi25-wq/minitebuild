@@ -88,3 +88,18 @@ details[open] .kit-plus::after {
     display: none;
   }
 }
+
+/* Tap targets on phones: header and footer links and every phone link are at
+   least 44px tall. min-height wins over template sizes on purpose; the display
+   change stays in :where() so it never overrides a template's layout. */
+@media (max-width: 767px) {
+  .tpl header a,
+  .tpl footer a,
+  .tpl a[href^="tel:"] {
+    min-height: 44px;
+  }
+  .tpl :where(header a, footer a, a[href^="tel:"]):where(:not([class*="btn"])) {
+    display: inline-flex;
+    align-items: center;
+  }
+}

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { SiteRenderer } from "@/components/site/site-renderer";
-import { demoSite } from "@/demo";
+import { demoSite, demoTypeFor } from "@/demo";
 import { isBusinessType } from "@/lib/business-type";
 import { isTemplateId, TEMPLATE_DEMOS, templateMeta } from "@/templates";
 
@@ -21,7 +21,7 @@ export default async function DemoPage({ params, searchParams }: PageProps<"/dem
   const { id } = await params;
   const { type, palette } = await searchParams;
   if (!isTemplateId(id)) notFound();
-  const businessType = isBusinessType(type) ? type : TEMPLATE_DEMOS[id].defaultType;
+  const businessType = isBusinessType(type) ? type : demoTypeFor(TEMPLATE_DEMOS[id].defaultType);
   return (
     <SiteRenderer
       site={demoSite(businessType, id)}

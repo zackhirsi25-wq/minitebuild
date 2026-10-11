@@ -7,7 +7,7 @@ import type { BusinessInput, SiteContent, Trade } from "@/lib/content/schema";
 import { env } from "@/lib/env";
 import { createPlacesClient, PlacesApiError } from "@/lib/places/client";
 import { supabaseAdmin } from "@/lib/supabase/admin";
-import type { Database } from "@/lib/supabase/database.types";
+import type { Database, Json } from "@/lib/supabase/database.types";
 import { generateBusiness, InvalidInputError, type GeneratedBusiness, type GenerateDeps } from "./generate";
 
 type JobRow = Database["public"]["Tables"]["import_jobs"]["Row"];
@@ -43,8 +43,20 @@ export function factsFor(row: {
   return { ...facts, trade: row.trade as Trade, services: input_services.length ? input_services : undefined };
 }
 
+/** Extra columns set by the public build flow (admin imports leave the defaults). */
+export type InsertExtras = {
+  source?: "admin" | "public";
+  editTokenHash?: string;
+  expiresAt?: string;
+  images?: Record<string, unknown>;
+  palette?: string | null;
+};
+
 /** Inserts a generated business under a free slug (business-name-city, then -2, -3...). */
-export async function insertBusiness(generated: GeneratedBusiness): Promise<{ id: string; slug: string }> {
+export async function insertBusiness(
+  generated: GeneratedBusiness,
+  extras: InsertExtras = {},
+): Promise<{ id: string; slug: string }> {
   const db = supabaseAdmin();
   const base = baseSlug(generated.input.name, generated.input.city);
 
@@ -80,6 +92,11 @@ export async function insertBusiness(generated: GeneratedBusiness): Promise<{ id
         places_fetched_at: generated.placesFetchedAt,
         content: generated.content,
         tags: generated.tags,
+        ...(extras.source ? { source: extras.source } : {}),
+        ...(extras.editTokenHash ? { edit_token_hash: extras.editTokenHash } : {}),
+        ...(extras.expiresAt ? { expires_at: extras.expiresAt } : {}),
+        ...(extras.images ? { images: extras.images as { [key: string]: Json } } : {}),
+        ...(extras.palette ? { palette: extras.palette } : {}),
       })
       .select("id, slug")
       .single();

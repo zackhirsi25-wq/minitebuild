@@ -1,27 +1,38 @@
 "use client";
 
-import Form from "next/form";
 import Link from "next/link";
-import { useId, useState } from "react";
+import { useActionState, useId, useState } from "react";
+import { startBuild, type DetailsState } from "@/app/(build)/build/actions";
 import { Chip } from "@/components/ui/chip";
 import { cx } from "@/components/ui/cx";
 import { inputClass } from "@/components/ui/field";
 import { PHONE_PLACEHOLDER, STARTERS } from "./starters";
 
 /**
- * The build box: business name, city and phone. Submitting goes to /build with
- * the details filled in, where the "Build it for me" flow continues (Google
- * lookup, photos, design). Used in the hero and again in the closing section.
+ * The build box: business name, city and phone. Posts to startBuild (so the
+ * phone never appears in a URL), which looks the business up on Google and
+ * opens the build flow. Used in the hero and again in the closing section.
  */
-export function BuildBox({ showStarters = true, className }: { showStarters?: boolean; className?: string }) {
+export function BuildBox({
+  showStarters = true,
+  starterTypes,
+  className,
+}: {
+  showStarters?: boolean;
+  /** Business types to offer as chips (those with stock photos). */
+  starterTypes?: string[];
+  className?: string;
+}) {
+  const starters = starterTypes ? STARTERS.filter((s) => starterTypes.includes(s.type)) : STARTERS;
   const [starter, setStarter] = useState<(typeof STARTERS)[number] | null>(null);
   const id = useId();
   const field = (name: string) => `${id}-${name}`;
+  const [state, action, pending] = useActionState<DetailsState, FormData>(startBuild, {});
 
   return (
     <div className={cx("w-full", className)}>
-      <Form
-        action="/build"
+      <form
+        action={action}
         className="grid gap-2 rounded-[20px] border border-line-strong bg-surface p-2 shadow-raised"
       >
         {starter && <input type="hidden" name="type" value={starter.type} />}
@@ -31,6 +42,7 @@ export function BuildBox({ showStarters = true, className }: { showStarters?: bo
             name="name"
             label="Business name"
             placeholder={starter?.name ?? "Your business name"}
+            defaultValue={state.fields?.name}
             autoComplete="organization"
           />
           <BoxInput
@@ -38,6 +50,7 @@ export function BuildBox({ showStarters = true, className }: { showStarters?: bo
             name="city"
             label="City"
             placeholder={starter?.city ?? "City, state"}
+            defaultValue={state.fields?.city}
             autoComplete="address-level2"
           />
           <BoxInput
@@ -47,15 +60,17 @@ export function BuildBox({ showStarters = true, className }: { showStarters?: bo
             type="tel"
             inputMode="tel"
             placeholder={PHONE_PLACEHOLDER}
+            defaultValue={state.fields?.phone}
             autoComplete="tel"
           />
         </div>
         <div>
           <button
             type="submit"
-            className="inline-flex h-14 w-full items-center justify-center gap-2 rounded-[14px] bg-accent px-6 text-body font-semibold text-on-accent shadow-[0_10px_30px_-12px_var(--mb-accent)] transition-[background-color,transform] duration-150 ease-mb hover:bg-accent-hover active:scale-[0.98]"
+            disabled={pending}
+            className="inline-flex h-14 w-full items-center justify-center gap-2 rounded-[14px] bg-accent px-6 text-body font-semibold text-on-accent shadow-[0_10px_30px_-12px_var(--mb-accent)] transition-[background-color,transform] duration-150 ease-mb hover:bg-accent-hover active:scale-[0.98] disabled:opacity-70"
           >
-            Build my site
+            {pending ? "Looking you up…" : "Build my site"}
             <svg viewBox="0 0 16 16" className="h-4 w-4" aria-hidden="true">
               <path
                 d="M3 8h10M9 4l4 4-4 4"
@@ -68,7 +83,12 @@ export function BuildBox({ showStarters = true, className }: { showStarters?: bo
             </svg>
           </button>
         </div>
-      </Form>
+        {state.error && (
+          <p role="alert" className="px-2 pb-1 text-left text-small text-danger">
+            {state.error}
+          </p>
+        )}
+      </form>
 
       {showStarters && (
         <div className="mt-5 grid justify-items-center gap-4">
@@ -78,7 +98,7 @@ export function BuildBox({ showStarters = true, className }: { showStarters?: bo
             className="w-full overflow-x-auto [scrollbar-width:none]"
           >
             <div className="mx-auto flex w-max gap-2 sm:w-auto sm:flex-wrap sm:justify-center">
-              {STARTERS.map((s) => (
+              {starters.map((s) => (
                 <Chip
                   key={s.id}
                   pressed={starter?.id === s.id}

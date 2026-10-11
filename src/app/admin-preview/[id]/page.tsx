@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { SiteRenderer } from "@/components/site/site-renderer";
 import { requireAdmin } from "@/lib/auth";
-import { TEMPLATES, type TemplateId } from "@/lib/content/schema";
+import { isTemplateId } from "@/templates";
 import { getPublicSiteFresh } from "@/lib/sites/public";
 import { supabaseAdmin } from "@/lib/supabase/admin";
 
@@ -20,6 +20,6 @@ export default async function AdminPreviewPage({ params, searchParams }: PagePro
   if (!data) notFound();
   const site = await getPublicSiteFresh(data.slug);
   if (!site) notFound();
-  const override = TEMPLATES.includes(template as TemplateId) ? (template as TemplateId) : undefined;
+  const override = isTemplateId(template) ? template : undefined;
   return <SiteRenderer site={site} template={override} />;
 }

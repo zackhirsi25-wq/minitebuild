@@ -1,6 +1,7 @@
 import { z } from "zod";
 import { parsePhone } from "@/lib/content/phone";
-import { containsHtml, siteContentSchema, TEMPLATES, TRADES } from "@/lib/content/schema";
+import { containsHtml, siteContentSchema, TRADES } from "@/lib/content/schema";
+import { isTemplateId } from "@/templates";
 
 const plain = (max: number, label: string) =>
   z
@@ -32,7 +33,7 @@ export const businessDetailsSchema = z.object({
     })
     .transform((v) => v || null),
   trade: z.enum(TRADES),
-  template: z.enum(TEMPLATES),
+  template: z.string().refine(isTemplateId, { message: "Choose one of the templates" }),
 });
 
 export const businessEditSchema = z.object({

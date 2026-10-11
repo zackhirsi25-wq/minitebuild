@@ -64,7 +64,7 @@ export default function CreditsPage() {
                   <a
                     key={url}
                     href={url}
-                    className="hover:text-fg"
+                    className="inline-flex min-h-11 items-center px-1 hover:text-fg"
                     aria-label={`Photo ${i + 1} by ${p.name} on Pexels`}
                   >
                     {p.photos.length > 1 ? `Photo ${i + 1}` : "Photo"}

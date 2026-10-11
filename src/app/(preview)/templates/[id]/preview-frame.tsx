@@ -39,27 +39,31 @@ export function PreviewFrame({
       <header className="flex flex-none flex-wrap items-center gap-x-3 gap-y-2 border-b border-line bg-canvas px-3 py-2.5 sm:px-4">
         <Link
           href="/templates"
-          className="inline-flex h-10 items-center gap-1.5 rounded-button px-2 text-small font-medium text-muted transition-colors hover:text-fg"
+          className="inline-flex h-11 min-w-11 items-center justify-center gap-1.5 rounded-button px-2 text-small font-medium text-muted transition-colors hover:text-fg"
         >
           <span aria-hidden="true">←</span>
           <span className="hidden sm:inline">Templates</span>
         </Link>
         <p className="text-body font-semibold">{name}</p>
 
-        <label className="ml-auto flex items-center gap-2 text-small text-muted">
-          <span className="sr-only sm:not-sr-only">Business</span>
-          <select
-            value={type}
-            onChange={(e) => go({ type: e.target.value })}
-            className="h-10 rounded-control border border-line-strong bg-surface px-3 text-small text-fg"
-          >
-            {types.map((t) => (
-              <option key={t.id} value={t.id}>
-                {t.label}
-              </option>
-            ))}
-          </select>
-        </label>
+        {types.length > 1 ? (
+          <label className="ml-auto flex items-center gap-2 text-small text-muted">
+            <span className="sr-only sm:not-sr-only">Business</span>
+            <select
+              value={type}
+              onChange={(e) => go({ type: e.target.value })}
+              className="h-11 rounded-control border border-line-strong bg-surface px-3 text-small text-fg"
+            >
+              {types.map((t) => (
+                <option key={t.id} value={t.id}>
+                  {t.label}
+                </option>
+              ))}
+            </select>
+          </label>
+        ) : (
+          <span className="ml-auto" />
+        )}
 
         <div role="group" aria-label="Device" className="hidden rounded-button border border-line-strong p-0.5 md:flex">
           {(["desktop", "mobile"] as const).map((d) => (
@@ -78,7 +82,7 @@ export function PreviewFrame({
           ))}
         </div>
 
-        <ButtonLink href={`/build?template=${id}`} className="h-10 md:ml-2">
+        <ButtonLink href={`/build?template=${id}`} className="h-11 md:ml-2">
           Use this template
         </ButtonLink>
       </header>

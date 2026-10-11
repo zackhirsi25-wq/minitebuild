@@ -3,13 +3,7 @@ import { createClient } from "@supabase/supabase-js";
 import { unstable_cache } from "next/cache";
 import { z } from "zod";
 import { env } from "@/lib/env";
-import {
-  imageOverridesSchema,
-  siteContentSchema,
-  STATUSES,
-  TRADES,
-  type ImageOverrides,
-} from "@/lib/content/schema";
+import { imageOverridesSchema, siteContentSchema, STATUSES, TRADES, type ImageOverrides } from "@/lib/content/schema";
 import type { Database } from "@/lib/supabase/database.types";
 
 // The only way public pages read a business. It calls get_public_site() with

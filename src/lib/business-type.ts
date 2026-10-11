@@ -56,7 +56,11 @@ const PATTERNS: [BusinessType, RegExp][] = [
 export function inferBusinessType(name: string, category: string | null): BusinessType {
   for (const source of [category ?? "", name]) {
     if (!source) continue;
-    if (/contractor|roof|plumb|electric|hvac|remodel|renovat|construct|landscap|paint(ing|er)|handym|concrete|masonry|floor|siding|fenc|deck/i.test(source)) {
+    if (
+      /contractor|roof|plumb|electric|hvac|remodel|renovat|construct|landscap|paint(ing|er)|handym|concrete|masonry|floor|siding|fenc|deck/i.test(
+        source,
+      )
+    ) {
       return "contractor";
     }
     const hit = PATTERNS.find(([, pattern]) => pattern.test(source));

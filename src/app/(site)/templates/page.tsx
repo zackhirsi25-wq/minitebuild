@@ -5,7 +5,8 @@ import { ChipLink } from "@/components/ui/chip";
 import { EmptyState } from "@/components/ui/empty-state";
 import { ButtonLink } from "@/components/ui/button";
 import { product } from "@/config/product";
-import { BUSINESS_TYPE_LABELS, BUSINESS_TYPES, isBusinessType, type BusinessType } from "@/lib/business-type";
+import { photoReadyTypes } from "@/demo";
+import { BUSINESS_TYPE_LABELS, isBusinessType, type BusinessType } from "@/lib/business-type";
 import { allTemplates, TEMPLATE_THUMBS } from "@/templates";
 import { isStyleTag, STYLE_LABELS, STYLE_TAGS } from "@/templates/labels";
 import type { StyleTag } from "@/templates";
@@ -25,7 +26,9 @@ function href(type: BusinessType | null, style: StyleTag | null) {
 
 export default async function TemplatesPage({ searchParams }: PageProps<"/templates">) {
   const q = await searchParams;
-  const type = isBusinessType(q.type) ? q.type : null;
+  // Only business types with stock photos are offered (see photoReadyTypes).
+  const readyTypes = photoReadyTypes();
+  const type = isBusinessType(q.type) && readyTypes.includes(q.type) ? q.type : null;
   const style = isStyleTag(q.style) ? q.style : null;
 
   // Every template works for any business; the type filter shows the ones
@@ -46,16 +49,18 @@ export default async function TemplatesPage({ searchParams }: PageProps<"/templa
       </div>
 
       <div className="mt-10 grid grid-cols-[minmax(0,1fr)] gap-4">
-        <FilterRow label="Business">
-          <ChipLink href={href(null, style)} selected={!type} scroll={false}>
-            All
-          </ChipLink>
-          {BUSINESS_TYPES.map((t) => (
-            <ChipLink key={t} href={href(t, style)} selected={type === t} scroll={false}>
-              {BUSINESS_TYPE_LABELS[t]}
+        {readyTypes.length > 1 && (
+          <FilterRow label="Business">
+            <ChipLink href={href(null, style)} selected={!type} scroll={false}>
+              All
             </ChipLink>
-          ))}
-        </FilterRow>
+            {readyTypes.map((t) => (
+              <ChipLink key={t} href={href(t, style)} selected={type === t} scroll={false}>
+                {BUSINESS_TYPE_LABELS[t]}
+              </ChipLink>
+            ))}
+          </FilterRow>
+        )}
         <FilterRow label="Style">
           <ChipLink href={href(type, null)} selected={!style} scroll={false}>
             All

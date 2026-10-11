@@ -134,8 +134,14 @@ export function fixtureContent(facts: BusinessFacts): SiteContent {
     },
     process: [
       { title: "Call us", body: `Call ${phone} and tell us what you have in mind for your home.` },
-      { title: "We visit", body: "We look at the space with you, talk through options and follow up with a written quote." },
-      { title: "We build", body: "Work starts on an agreed schedule, and you know what is happening each step of the way." },
+      {
+        title: "We visit",
+        body: "We look at the space with you, talk through options and follow up with a written quote.",
+      },
+      {
+        title: "We build",
+        body: "Work starts on an agreed schedule, and you know what is happening each step of the way.",
+      },
     ],
   };
   return content;

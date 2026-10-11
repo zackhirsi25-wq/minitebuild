@@ -8,6 +8,7 @@ import { paletteStyle } from "../_kit/palette";
 import { Photo } from "../_kit/photo";
 import type { TemplateProps } from "../_kit/types";
 import "../_kit/kit.css";
+import "../_kit/base.css";
 import "./tokens.css";
 import "./cinematic.css";
 
@@ -40,7 +41,7 @@ export default function CinematicTemplate({ site, images, palette }: TemplatePro
   const year = new Date().getFullYear();
 
   return (
-    <div data-site className={`cin ${display.variable} ${body.variable}`} style={paletteStyle(palette)}>
+    <div data-site className={`tpl cin ${display.variable} ${body.variable}`} style={paletteStyle(palette)}>
       <span data-scroll-sentinel aria-hidden="true" className="cin-sentinel" />
       <a href="#main" className="cin-skip">
         Skip to content

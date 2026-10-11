@@ -23,7 +23,8 @@
     "stock:list": "node scripts/stock/shopping-list.mjs",
     "stock:prepare": "node scripts/stock/ingest-manual.mjs prepare",
     "stock:ingest": "node scripts/stock/ingest-manual.mjs ingest",
-    "templates:thumbs": "node scripts/template-thumbs.mjs"
+    "templates:thumbs": "node scripts/template-thumbs.mjs",
+    "test-business": "npx --yes tsx --conditions=react-server --env-file=.env.local scripts/test-business.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.132.1",

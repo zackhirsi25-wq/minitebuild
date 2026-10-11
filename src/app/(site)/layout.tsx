@@ -1,4 +1,7 @@
+import type { Metadata } from "next";
 import { Onest } from "next/font/google";
+import { env } from "@/lib/env";
+import { appUrl } from "@/lib/routing/hostname";
 import { SiteFooter } from "@/components/site-shell/site-footer";
 import { SiteNav } from "@/components/site-shell/site-nav";
 import { THEME_SCRIPT } from "@/components/site-shell/theme-toggle";
@@ -8,6 +11,9 @@ import { THEME_SCRIPT } from "@/components/site-shell/theme-toggle";
 
 const onest = Onest({ subsets: ["latin"], variable: "--font-onest" });
 
+// Absolute URLs for the share image and canonical links.
+export const metadata: Metadata = { metadataBase: new URL(appUrl("/", env.rootDomain)) };
+
 export default function SiteLayout({ children }: LayoutProps<"/">) {
   return (
     // THEME_SCRIPT may switch data-theme before hydration, hence suppressHydrationWarning.
@@ -15,7 +21,7 @@ export default function SiteLayout({ children }: LayoutProps<"/">) {
       <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
       <a
         href="#main"
-        className="absolute top-3 left-3 z-[70] rounded-button bg-fg px-4 py-2 text-small font-semibold text-canvas [clip-path:inset(50%)] focus-visible:[clip-path:none]"
+        className="absolute top-3 left-3 z-[70] inline-flex min-h-11 items-center rounded-button bg-fg px-4 text-small font-semibold text-canvas [clip-path:inset(50%)] focus-visible:[clip-path:none]"
       >
         Skip to content
       </a>

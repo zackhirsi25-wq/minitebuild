@@ -69,7 +69,7 @@ export function SiteNav() {
             </ButtonLink>
           </div>
           <div className="ml-auto flex items-center gap-2 md:hidden">
-            <ButtonLink href="/build" variant="secondary" className="h-10 px-3.5">
+            <ButtonLink href="/build" variant="secondary" className="h-11 px-3.5">
               Build
             </ButtonLink>
             <button
@@ -78,7 +78,7 @@ export function SiteNav() {
               aria-controls="mobile-menu"
               aria-label={open ? "Close menu" : "Open menu"}
               onClick={() => setOpen((o) => !o)}
-              className="grid h-10 w-10 place-items-center rounded-button border border-line-strong text-fg"
+              className="grid h-11 w-11 place-items-center rounded-button border border-line-strong text-fg"
             >
               <svg viewBox="0 0 20 20" className="h-5 w-5" aria-hidden="true">
                 {open ? (

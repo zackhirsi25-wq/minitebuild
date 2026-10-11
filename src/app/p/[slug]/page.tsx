@@ -4,6 +4,7 @@ import { PreviewBanner, PreviewFrame } from "@/components/preview-banner";
 import { SiteRenderer } from "@/components/site/site-renderer";
 import { env } from "@/lib/env";
 import { liveSiteUrl } from "@/lib/routing/hostname";
+import { ownedBusiness } from "@/lib/build/owner";
 import { getPublicSite } from "@/lib/sites/public";
 import { siteTitle } from "@/lib/sites/seo";
 
@@ -28,7 +29,7 @@ export default async function PreviewPage({ params }: PageProps<"/p/[slug]">) {
 
   return (
     <PreviewFrame>
-      <PreviewBanner name={site.name} slug={site.slug} />
+      <PreviewBanner name={site.name} slug={site.slug} owner={!!(await ownedBusiness(site.slug))} />
       <SiteRenderer site={site} />
     </PreviewFrame>
   );

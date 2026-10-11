@@ -244,8 +244,8 @@ export type Tag = (typeof TAGS)[number];
 export const STATUSES = ["preview", "live", "paused"] as const;
 export type BusinessStatus = (typeof STATUSES)[number];
 
-export const TEMPLATES = ["bold", "classic", "split"] as const;
-export type TemplateId = (typeof TEMPLATES)[number];
+/** A registered template id (src/templates/<id>); validated against the registry where it's saved. */
+export type TemplateId = string;
 
 export const TRADES = ["general_contractor", "remodeling"] as const;
 export type Trade = (typeof TRADES)[number];
@@ -281,9 +281,11 @@ const imageOverrideSchema = z.object({
 });
 
 export const imageOverridesSchema = z
-  .object(Object.fromEntries(IMAGE_SLOTS.map((slot) => [slot, imageOverrideSchema.optional()])) as {
-    [K in ImageSlot]: z.ZodOptional<typeof imageOverrideSchema>;
-  })
+  .object(
+    Object.fromEntries(IMAGE_SLOTS.map((slot) => [slot, imageOverrideSchema.optional()])) as {
+      [K in ImageSlot]: z.ZodOptional<typeof imageOverrideSchema>;
+    },
+  )
   .catch({});
 
 export type ImageOverrides = z.infer<typeof imageOverridesSchema>;

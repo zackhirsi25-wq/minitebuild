@@ -3,15 +3,9 @@ import { notFound } from "next/navigation";
 import { CopyLinkButton } from "@/components/ui/copy-link-button";
 import { StatusBadge } from "@/components/ui/status-badge";
 import { getBusiness } from "@/lib/admin/queries";
-import {
-  siteContentSchema,
-  type BusinessStatus,
-  type ImageSlot,
-  type Tag,
-  type TemplateId,
-  type Trade,
-} from "@/lib/content/schema";
+import { siteContentSchema, type BusinessStatus, type ImageSlot, type Tag, type Trade } from "@/lib/content/schema";
 import { env } from "@/lib/env";
+import { allTemplates, resolveTemplateId } from "@/templates";
 import { siteImage } from "@/lib/images/stock";
 import { appUrl, liveSiteUrl } from "@/lib/routing/hostname";
 import { IMAGE_SLOTS, imageOverridesSchema } from "@/lib/content/schema";
@@ -108,12 +102,13 @@ export default async function BusinessPage({ params, searchParams }: PageProps<"
                 hours: b.hours,
                 websiteUrl: b.website_url ?? "",
                 trade: b.trade as Trade,
-                template: b.template as TemplateId,
+                template: resolveTemplateId(b.template),
               },
               content: content.data,
             }}
             savedAt={b.updated_at}
             servicesConfirmed={!!b.services_confirmed_at}
+            templates={allTemplates().map((t) => ({ id: t.id, name: `${t.name}: ${t.concept.split(":")[0]}` }))}
           />
         ) : (
           <p role="alert" className="rounded-lg bg-red-50 px-4 py-3 text-red-800">

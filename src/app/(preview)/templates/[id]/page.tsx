@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { product } from "@/config/product";
-import { BUSINESS_TYPE_LABELS, BUSINESS_TYPES, isBusinessType } from "@/lib/business-type";
+import { demoTypeFor, photoReadyTypes } from "@/demo";
+import { BUSINESS_TYPE_LABELS, isBusinessType } from "@/lib/business-type";
 import { allTemplates, isTemplateId, TEMPLATE_DEMOS, templateMeta } from "@/templates";
 import { PreviewFrame } from "./preview-frame";
 
@@ -21,7 +22,8 @@ export default async function TemplatePreviewPage({ params, searchParams }: Page
   if (!isTemplateId(id)) notFound();
   const q = await searchParams;
   const meta = templateMeta(id);
-  const type = isBusinessType(q.type) ? q.type : TEMPLATE_DEMOS[id].defaultType;
+  const ready = photoReadyTypes();
+  const type = isBusinessType(q.type) && ready.includes(q.type) ? q.type : demoTypeFor(TEMPLATE_DEMOS[id].defaultType);
   const device = q.device === "mobile" ? "mobile" : "desktop";
 
   return (
@@ -30,7 +32,7 @@ export default async function TemplatePreviewPage({ params, searchParams }: Page
       name={meta.name}
       type={type}
       device={device}
-      types={BUSINESS_TYPES.map((t) => ({ id: t, label: BUSINESS_TYPE_LABELS[t] }))}
+      types={ready.map((t) => ({ id: t, label: BUSINESS_TYPE_LABELS[t] }))}
     />
   );
 }

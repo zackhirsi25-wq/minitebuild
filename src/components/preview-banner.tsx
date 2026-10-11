@@ -10,7 +10,7 @@ export const PREVIEW_BANNER_HEIGHT = 52;
  * header sits directly under it instead of sliding beneath it. Neutral glass
  * so it sits on any template's palette.
  */
-export function PreviewBanner({ name, slug }: { name: string; slug: string }) {
+export function PreviewBanner({ name, slug, owner = false }: { name: string; slug: string; owner?: boolean }) {
   return (
     <div
       className={`${brandFont.className} sticky top-0 z-[60] flex items-center border-b border-white/10 bg-neutral-950/90 text-white backdrop-blur-xl`}
@@ -27,16 +27,26 @@ export function PreviewBanner({ name, slug }: { name: string; slug: string }) {
             Built for <strong className="font-semibold">{name}</strong>
           </span>
         </p>
-        <a
-          href={`/p/${slug}/checkout`}
-          className="group inline-flex h-9 flex-none items-center gap-2 rounded-full bg-white px-4 text-[13px] font-semibold text-neutral-950 transition hover:bg-white/90 active:scale-[0.97] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white sm:text-sm"
-        >
-          Go live
-          <span className="hidden font-normal text-neutral-500 sm:inline">{planPriceLabel("monthly")}</span>
-          <span aria-hidden="true" className="transition-transform group-hover:translate-x-0.5">
-            →
-          </span>
-        </a>
+        <div className="flex flex-none items-center gap-1 sm:gap-2">
+          {owner && (
+            <a
+              href={`/p/${slug}/design`}
+              className="inline-flex h-11 items-center rounded-full px-3 text-[13px] font-medium text-white/80 transition hover:text-white sm:text-sm"
+            >
+              Change design
+            </a>
+          )}
+          <a
+            href={`/p/${slug}/checkout`}
+            className="group inline-flex h-9 flex-none items-center gap-2 rounded-full bg-white px-4 text-[13px] font-semibold text-neutral-950 transition hover:bg-white/90 active:scale-[0.97] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white sm:text-sm"
+          >
+            Go live
+            <span className="hidden font-normal text-neutral-500 sm:inline">{planPriceLabel("monthly")}</span>
+            <span aria-hidden="true" className="transition-transform group-hover:translate-x-0.5">
+              →
+            </span>
+          </a>
+        </div>
       </div>
     </div>
   );

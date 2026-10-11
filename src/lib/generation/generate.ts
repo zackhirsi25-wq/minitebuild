@@ -1,9 +1,10 @@
 import { generateSiteContent, type BusinessFacts, type CallModel } from "@/lib/ai/copy";
-import { inferBusinessType } from "@/lib/business-type";
+import { chooseTemplate } from "@/lib/build/design";
+import { inferBusinessType, type BusinessType } from "@/lib/business-type";
+import { allTemplates } from "@/templates";
 import { parsePhone } from "@/lib/content/phone";
 import {
   businessInputSchema,
-  TEMPLATES,
   type BusinessInput,
   type SiteContent,
   type Tag,
@@ -50,11 +51,9 @@ export function inferTrade(name: string, category: string | null): Trade {
   return /remodel|renovat|kitchen|bath/i.test(`${name} ${category ?? ""}`) ? "remodeling" : "general_contractor";
 }
 
-/** Spreads businesses across the three templates, stable for the same name and city. */
-export function pickTemplate(seed: string): TemplateId {
-  let h = 0;
-  for (const ch of seed) h = (h * 31 + ch.charCodeAt(0)) >>> 0;
-  return TEMPLATES[h % TEMPLATES.length];
+/** A template designed with the business type in mind, stable for the same name and city. */
+export function pickTemplate(seed: string, type: BusinessType): TemplateId {
+  return chooseTemplate(allTemplates(), type, seed).id;
 }
 
 /** Places details used to refresh a business; shared with "Refresh from Google". */
@@ -109,6 +108,7 @@ export async function generateBusiness(rawInput: BusinessInput, deps: GenerateDe
   if (!match.found) tags.push("unverified");
 
   const trade = inferTrade(details.name, details.category);
+  const businessType = inferBusinessType(details.name, details.category);
   const facts: BusinessFacts = {
     name: details.name,
     city: details.city,
@@ -116,7 +116,7 @@ export async function generateBusiness(rawInput: BusinessInput, deps: GenerateDe
     address: details.address,
     category: details.category,
     trade,
-    businessType: inferBusinessType(details.name, details.category),
+    businessType,
     hours: details.hours,
     services: input.services,
   };
@@ -127,7 +127,7 @@ export async function generateBusiness(rawInput: BusinessInput, deps: GenerateDe
     ...details,
     placesFetchedAt: now().toISOString(),
     trade,
-    template: pickTemplate(`${input.name}|${input.city}`.toLowerCase()),
+    template: pickTemplate(`${input.name}|${input.city}`.toLowerCase(), businessType),
     tags,
     content,
     match,

@@ -65,9 +65,76 @@ export type Database = {
           },
         ];
       };
+      build_drafts: {
+        Row: {
+          business_id: string | null;
+          created_at: string;
+          data: Json;
+          id: string;
+          token_hash: string;
+          updated_at: string;
+        };
+        Insert: {
+          business_id?: string | null;
+          created_at?: string;
+          data?: Json;
+          id?: string;
+          token_hash: string;
+          updated_at?: string;
+        };
+        Update: {
+          business_id?: string | null;
+          created_at?: string;
+          data?: Json;
+          id?: string;
+          token_hash?: string;
+          updated_at?: string;
+        };
+        Relationships: [];
+      };
+      rate_limits: {
+        Row: { count: number; key: string; window_start: string };
+        Insert: { count?: number; key: string; window_start: string };
+        Update: { count?: number; key?: string; window_start?: string };
+        Relationships: [];
+      };
+      terms_acceptances: {
+        Row: {
+          accepted_at: string;
+          business_id: string;
+          documents: Json;
+          id: string;
+          ip_hash: string | null;
+          plan: string;
+          user_agent: string | null;
+        };
+        Insert: {
+          accepted_at?: string;
+          business_id: string;
+          documents: Json;
+          id?: string;
+          ip_hash?: string | null;
+          plan: string;
+          user_agent?: string | null;
+        };
+        Update: {
+          accepted_at?: string;
+          business_id?: string;
+          documents?: Json;
+          id?: string;
+          ip_hash?: string | null;
+          plan?: string;
+          user_agent?: string | null;
+        };
+        Relationships: [];
+      };
       businesses: {
         Row: {
           address: string | null;
+          edit_token_hash: string | null;
+          expires_at: string | null;
+          palette: string | null;
+          source: string;
           category: string | null;
           city: string;
           content: NonNullable<Json>;
@@ -100,6 +167,10 @@ export type Database = {
         ComputedFields: never;
         Insert: {
           address?: string | null;
+          edit_token_hash?: string | null;
+          expires_at?: string | null;
+          palette?: string | null;
+          source?: string;
           category?: string | null;
           city: string;
           content: NonNullable<Json>;
@@ -131,6 +202,10 @@ export type Database = {
         };
         Update: {
           address?: string | null;
+          edit_token_hash?: string | null;
+          expires_at?: string | null;
+          palette?: string | null;
+          source?: string;
           category?: string | null;
           city?: string;
           content?: NonNullable<Json>;
@@ -342,6 +417,7 @@ export type Database = {
         };
       };
       get_public_site: { Args: { p_slug: string }; Returns: Json };
+      hit_rate_limit: { Args: { p_key: string; p_window_seconds: number; p_max: number }; Returns: boolean };
       invoke_import_worker: { Args: Record<PropertyKey, never>; Returns: undefined };
     };
     Enums: {
