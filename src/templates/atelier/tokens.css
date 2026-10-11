@@ -1,0 +1,36 @@
+/* Atelier tokens. --accent is set inline from meta.ts. */
+.ate {
+  --ivory: #f8f5ef;
+  --white: #fffdf9;
+  --black: #111111;
+  --grey: #67625a; /* 5.7:1 on ivory */
+  --hair: rgb(17 17 17 / 0.16);
+  --accent: #111111;
+  --on-accent: #ffffff;
+  --focus: var(--black);
+  --selection-bg: var(--black);
+  --selection-fg: var(--ivory);
+
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 24px;
+  --sp-6: 32px;
+  --sp-7: 48px;
+  --sp-8: 64px;
+  --sp-9: 96px;
+  --sp-10: 144px;
+  --gutter: clamp(20px, 5vw, 80px);
+  --section-y: clamp(88px, 3rem + 8vw, 200px);
+  --max: 1240px;
+
+  --r-0: 0;
+
+  --serif: var(--ate-serif), "Didot", "Bodoni MT", serif;
+  --sans: var(--ate-sans), system-ui, sans-serif;
+  --fs-display: clamp(2.75rem, 1.2rem + 7vw, 8.5rem);
+  --fs-h2: clamp(2rem, 1.3rem + 3vw, 4rem);
+  --fs-lead: clamp(1.125rem, 1rem + 0.5vw, 1.375rem);
+  --fs-body: clamp(0.9375rem, 0.92rem + 0.1vw, 1rem);
+  --fs-small: 0.75rem;
+}

@@ -1,0 +1,39 @@
+/* Glass tokens. --accent is set inline from meta.ts. */
+.gla {
+  --navy: #0b1020;
+  --navy-2: #121a33;
+  --text: #eef1fb;
+  --muted: #aab3cc; /* 8.8:1 on navy */
+  --glass: rgb(255 255 255 / 0.07);
+  --glass-strong: rgb(255 255 255 / 0.12);
+  --glass-line: rgb(255 255 255 / 0.14);
+  --accent: #5eead4;
+  --on-accent: var(--navy);
+  --focus: var(--accent);
+  --selection-bg: var(--accent);
+  --selection-fg: var(--navy);
+
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 24px;
+  --sp-6: 32px;
+  --sp-7: 48px;
+  --sp-8: 64px;
+  --sp-9: 96px;
+  --gutter: clamp(16px, 4vw, 56px);
+  --section-y: clamp(72px, 3rem + 5vw, 140px);
+  --max: 1200px;
+
+  --r-2: 20px;
+  --r-3: 32px;
+  --r-full: 999px;
+  --blur: blur(22px) saturate(1.4);
+
+  --font: var(--gla-font), system-ui, sans-serif;
+  --fs-display: clamp(2.5rem, 1.4rem + 5vw, 6rem);
+  --fs-h2: clamp(1.875rem, 1.3rem + 2.4vw, 3.25rem);
+  --fs-h3: clamp(1.125rem, 1.05rem + 0.4vw, 1.375rem);
+  --fs-body: clamp(1rem, 0.97rem + 0.15vw, 1.0625rem);
+  --fs-small: 0.8125rem;
+}

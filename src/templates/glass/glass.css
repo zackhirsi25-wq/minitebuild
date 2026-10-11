@@ -1,0 +1,415 @@
+/* Glass: frosted panels over slowly drifting colour fields. */
+.gla {
+  position: relative;
+  isolation: isolate;
+  background: var(--navy);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: var(--fs-body);
+  line-height: 1.65;
+}
+/* The colour field: fixed behind everything, drifting very slowly */
+.gla-field {
+  position: fixed;
+  inset: -10%;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(35% 30% at 20% 20%, color-mix(in oklab, var(--accent) 40%, transparent), transparent 70%),
+    radial-gradient(30% 35% at 85% 30%, rgb(129 140 248 / 0.35), transparent 70%),
+    radial-gradient(40% 35% at 60% 90%, rgb(244 114 182 / 0.22), transparent 70%), var(--navy);
+  animation: gla-drift 40s ease-in-out infinite alternate;
+}
+@keyframes gla-drift {
+  to {
+    transform: translate3d(3%, -2%, 0) scale(1.06);
+  }
+}
+.gla-wrap {
+  max-width: var(--max);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+.gla-section {
+  padding-block: var(--section-y);
+}
+.gla-panel {
+  border-radius: var(--r-3);
+  background: var(--glass);
+  -webkit-backdrop-filter: var(--blur);
+  backdrop-filter: var(--blur);
+  box-shadow:
+    inset 0 0 0 1px var(--glass-line),
+    inset 0 1px 0 rgb(255 255 255 / 0.18),
+    0 30px 60px -40px rgb(0 0 0 / 0.6);
+}
+
+/* Type */
+.gla-display {
+  font-size: var(--fs-display);
+  font-weight: 600;
+  line-height: 1.02;
+  letter-spacing: -0.04em;
+  text-wrap: balance;
+}
+.gla-h2 {
+  font-size: var(--fs-h2);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+}
+.gla-h3 {
+  font-size: var(--fs-h3);
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+}
+.gla-body {
+  max-width: 60ch;
+  color: var(--muted);
+  text-wrap: pretty;
+}
+.gla-small {
+  font-size: var(--fs-small);
+  line-height: 1.45;
+}
+.gla-muted {
+  color: var(--muted);
+}
+.gla-skip {
+  background: var(--accent);
+  color: var(--navy);
+}
+
+/* Buttons */
+.gla-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+  min-height: 52px;
+  padding: 0 1.5rem;
+  border-radius: var(--r-full);
+  background: var(--accent);
+  color: var(--on-accent);
+  font-weight: 600;
+  box-shadow: 0 10px 30px -12px var(--accent);
+  transition:
+    transform var(--dur-fast) var(--ease-out),
+    box-shadow var(--dur-base) var(--ease-out);
+}
+.gla-btn svg {
+  width: 1em;
+  height: 1em;
+}
+.gla-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 40px -12px var(--accent);
+}
+.gla-btn:active {
+  transform: scale(0.98);
+}
+.gla-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  min-height: 34px;
+  padding: 0 0.9rem;
+  border-radius: var(--r-full);
+  background: var(--glass-strong);
+  box-shadow: inset 0 0 0 1px var(--glass-line);
+  font-size: var(--fs-small);
+}
+.gla-pill-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--muted);
+}
+.gla-pill[data-open="true"] .gla-pill-dot {
+  background: #4ade80;
+  box-shadow: 0 0 10px #4ade80;
+}
+
+/* Header */
+.gla-header {
+  position: sticky;
+  top: calc(var(--site-offset, 0px) + 12px);
+  z-index: 50;
+  padding-inline: var(--gutter);
+  margin-top: 12px;
+}
+.gla-header-inner {
+  max-width: var(--max);
+  margin-inline: auto;
+  display: flex;
+  align-items: center;
+  gap: var(--sp-4);
+  min-height: 60px;
+  padding: 6px 6px 6px 20px;
+  border-radius: var(--r-full);
+}
+.gla-name {
+  margin-right: auto;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+.gla-header .gla-btn {
+  min-height: 46px;
+}
+
+/* Hero: centred, then the photo in a glass frame */
+.gla-hero {
+  display: grid;
+  justify-items: center;
+  text-align: center;
+  gap: var(--sp-5);
+  padding-block: var(--sp-9) var(--sp-8);
+  min-height: calc(100svh - var(--site-offset, 0px) - 84px);
+  align-content: center;
+}
+.gla-hero .gla-display {
+  max-width: 16ch;
+}
+.gla-frame {
+  position: relative;
+  overflow: clip;
+  border-radius: var(--r-3);
+  padding: 10px;
+}
+.gla-frame-inner {
+  position: relative;
+  overflow: clip;
+  border-radius: calc(var(--r-3) - 10px);
+  aspect-ratio: 16 / 10;
+}
+.gla-hero-frame {
+  width: 100%;
+  margin-top: var(--sp-6);
+}
+
+/* Services: glass cards */
+.gla-cards {
+  display: grid;
+  gap: var(--sp-4);
+  margin-top: var(--sp-7);
+}
+.gla-card {
+  display: grid;
+  gap: var(--sp-3);
+  align-content: start;
+  padding: var(--sp-6);
+  transition:
+    transform var(--dur-base) var(--ease-out),
+    background-color var(--dur-base);
+}
+.gla-card:hover {
+  transform: translateY(-4px);
+  background: var(--glass-strong);
+}
+.gla-card-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--accent), color-mix(in oklab, var(--accent) 30%, transparent));
+  box-shadow: 0 8px 24px -8px var(--accent);
+}
+@media (min-width: 768px) {
+  .gla-cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (min-width: 1100px) {
+  .gla-cards {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .gla-cards--4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* About */
+.gla-about {
+  display: grid;
+  gap: var(--sp-6);
+  padding: clamp(24px, 4vw, 56px);
+  align-items: center;
+}
+.gla-about .gla-frame-inner {
+  aspect-ratio: 4 / 5;
+}
+@media (min-width: 900px) {
+  .gla-about {
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  }
+}
+
+/* Spaces */
+.gla-spaces {
+  display: grid;
+  gap: var(--sp-4);
+  margin-top: var(--sp-7);
+}
+@media (min-width: 768px) {
+  .gla-spaces {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* How it works: a connected track */
+.gla-track {
+  display: grid;
+  gap: var(--sp-4);
+  margin-top: var(--sp-7);
+  padding: var(--sp-6);
+}
+.gla-track li {
+  display: grid;
+  gap: var(--sp-2);
+  align-content: start;
+  position: relative;
+}
+.gla-track-dot {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--glass-strong);
+  box-shadow: inset 0 0 0 1px var(--accent);
+  color: var(--accent);
+  font-weight: 600;
+  margin-bottom: var(--sp-3);
+}
+@media (min-width: 768px) {
+  .gla-track {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--sp-6);
+  }
+  .gla-track li:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    top: 20px;
+    left: 52px;
+    right: calc(-1 * var(--sp-6) + 12px);
+    height: 1px;
+    background: linear-gradient(90deg, var(--accent), var(--glass-line));
+  }
+}
+
+/* Areas + hours */
+.gla-areas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2);
+  margin-top: var(--sp-5);
+}
+
+/* FAQ */
+.gla-faq {
+  display: grid;
+  gap: var(--sp-3);
+  margin-top: var(--sp-7);
+  max-width: 52rem;
+}
+.gla-faq details {
+  border-radius: var(--r-2);
+  background: var(--glass);
+  -webkit-backdrop-filter: var(--blur);
+  backdrop-filter: var(--blur);
+  box-shadow: inset 0 0 0 1px var(--glass-line);
+}
+.gla-faq summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-4);
+  min-height: 64px;
+  padding: var(--sp-4) var(--sp-5);
+}
+.gla-faq h3 {
+  font-size: 1.0625rem;
+  font-weight: 600;
+  line-height: 1.35;
+}
+.gla-faq p {
+  padding: 0 var(--sp-5) var(--sp-5);
+  color: var(--muted);
+}
+
+/* Closing */
+.gla-cta {
+  display: grid;
+  gap: var(--sp-5);
+  justify-items: center;
+  text-align: center;
+  padding: clamp(40px, 6vw, 96px) var(--sp-6);
+}
+.gla-cta-phone {
+  font-size: var(--fs-h2);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+  background: linear-gradient(90deg, var(--text), var(--accent));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Footer */
+.gla-footer {
+  padding-block: var(--sp-8) calc(var(--sp-7) + 88px);
+}
+@media (min-width: 768px) {
+  .gla-footer {
+    padding-bottom: var(--sp-7);
+  }
+}
+.gla-footer-grid {
+  display: grid;
+  gap: var(--sp-5);
+  padding-top: var(--sp-6);
+  border-top: 1px solid var(--glass-line);
+}
+.gla-footer-grid h2 {
+  font-size: var(--fs-small);
+  font-weight: 600;
+  margin-bottom: var(--sp-2);
+}
+@media (min-width: 768px) {
+  .gla-footer-grid {
+    grid-template-columns: 2fr 1fr 1fr 1.3fr;
+  }
+}
+
+/* Call bar */
+.gla-callbar a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-4);
+  min-height: 60px;
+  padding: 0 6px 0 20px;
+  border-radius: var(--r-full);
+  background: rgb(18 26 51 / 0.7);
+  -webkit-backdrop-filter: var(--blur);
+  backdrop-filter: var(--blur);
+  box-shadow: inset 0 0 0 1px var(--glass-line);
+  font-variant-numeric: tabular-nums;
+}
+.gla-callbar strong {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  min-height: 46px;
+  padding: 0 1.1rem;
+  border-radius: var(--r-full);
+  background: var(--accent);
+  color: var(--on-accent);
+  font-weight: 600;
+}
+.gla-callbar svg {
+  width: 1em;
+  height: 1em;
+}

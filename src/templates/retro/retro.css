@@ -1,0 +1,429 @@
+/* Retro: cream, brown and sunburst stripes. */
+.ret {
+  background: var(--cream);
+  color: var(--brown);
+  font-family: var(--sans);
+  font-size: var(--fs-body);
+  line-height: 1.65;
+}
+.ret-wrap {
+  max-width: var(--max);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+.ret-section {
+  padding-block: var(--section-y);
+}
+.ret-brown {
+  background: var(--brown);
+  color: var(--cream-on-brown);
+  --focus: var(--accent);
+}
+.ret-display,
+.ret-h2,
+.ret-h3 {
+  font-family: var(--serif);
+  font-weight: 400;
+  text-wrap: balance;
+}
+.ret-display {
+  font-size: var(--fs-display);
+  line-height: 0.98;
+  letter-spacing: -0.015em;
+}
+.ret-h2 {
+  font-size: var(--fs-h2);
+  line-height: 1.05;
+}
+.ret-h3 {
+  font-size: var(--fs-h3);
+  line-height: 1.2;
+}
+.ret-body {
+  max-width: 60ch;
+  text-wrap: pretty;
+}
+.ret-muted {
+  color: var(--muted);
+}
+.ret-brown .ret-muted {
+  color: rgb(246 226 196 / 0.78);
+}
+.ret-small {
+  font-size: var(--fs-small);
+  font-weight: 600;
+  line-height: 1.4;
+}
+.ret-skip {
+  background: var(--brown);
+  color: var(--cream);
+}
+
+/* Buttons: fat pills */
+.ret-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+  min-height: 56px;
+  padding: 0 1.7rem;
+  border-radius: var(--r-full);
+  background: var(--accent);
+  color: var(--on-accent);
+  font-weight: 700;
+  box-shadow: inset 0 -4px 0 rgb(43 26 16 / 0.18);
+  transition:
+    transform var(--dur-fast) var(--ease-out),
+    filter var(--dur-fast);
+}
+.ret-btn svg {
+  width: 1.05em;
+  height: 1.05em;
+}
+.ret-btn:hover {
+  filter: brightness(1.06);
+  transform: translateY(-2px);
+}
+.ret-btn:active {
+  transform: translateY(1px);
+  box-shadow: inset 0 -1px 0 rgb(43 26 16 / 0.18);
+}
+
+/* Header */
+.ret-header {
+  position: sticky;
+  top: var(--site-offset, 0px);
+  z-index: 50;
+  transition: background-color var(--dur-base);
+}
+.ret-header[data-scrolled] {
+  background: rgb(255 244 226 / 0.92);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 2px 0 var(--cream-2);
+}
+.ret-header-inner {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-4);
+  min-height: 72px;
+}
+.ret-name {
+  margin-right: auto;
+  font-family: var(--serif);
+  font-size: clamp(1.25rem, 1rem + 1vw, 1.6rem);
+  line-height: 1.05;
+}
+.ret-header .ret-btn {
+  min-height: 46px;
+  padding: 0 1.2rem;
+}
+
+/* Hero: text left, round photo against sunburst stripes right */
+.ret-hero {
+  display: grid;
+  gap: var(--sp-7);
+  align-items: center;
+  min-height: calc(100svh - var(--site-offset, 0px) - 72px);
+  padding-block: var(--sp-6) var(--sp-8);
+}
+.ret-hero-text {
+  display: grid;
+  gap: var(--sp-5);
+  justify-items: start;
+}
+.ret-sun {
+  position: relative;
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1;
+  width: min(100%, 560px);
+  justify-self: center;
+  border-radius: 50%;
+  background: repeating-conic-gradient(from 0deg, var(--accent) 0deg 9deg, var(--cream-2) 9deg 18deg);
+}
+.ret-sun::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle, transparent 55%, var(--cream) 71%);
+}
+.ret-sun-photo {
+  position: relative;
+  z-index: 1;
+  width: 64%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  overflow: clip;
+  box-shadow:
+    0 0 0 10px var(--cream),
+    0 0 0 14px var(--brown);
+}
+.ret-sun-initial {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 64%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--brown);
+  color: var(--accent);
+  font-family: var(--serif);
+  font-size: clamp(6rem, 14vw, 11rem);
+  line-height: 1;
+  box-shadow: 0 0 0 10px var(--cream);
+}
+@media (min-width: 1024px) {
+  .ret-hero {
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  }
+}
+
+/* Wavy edge between sections */
+.ret-wave {
+  display: block;
+  width: 100%;
+  height: 40px;
+  color: var(--brown);
+}
+.ret-wave--flip {
+  transform: rotate(180deg);
+}
+
+/* Services: a two-column menu card */
+.ret-menu {
+  margin-top: var(--sp-7);
+  padding: clamp(24px, 4vw, 56px);
+  border-radius: var(--r-3);
+  background: var(--cream);
+  color: var(--brown);
+  box-shadow:
+    inset 0 0 0 3px var(--brown),
+    inset 0 0 0 9px var(--cream),
+    inset 0 0 0 10px var(--brown);
+}
+.ret-menu ul {
+  display: grid;
+  gap: var(--sp-6) var(--sp-8);
+}
+.ret-menu li {
+  display: grid;
+  gap: var(--sp-2);
+}
+.ret-menu li .ret-h3 {
+  display: flex;
+  align-items: baseline;
+  gap: var(--sp-3);
+}
+.ret-menu li .ret-h3::after {
+  content: "";
+  flex: 1;
+  border-bottom: 2px dotted var(--muted);
+  transform: translateY(-0.25em);
+  min-width: 1.5rem;
+}
+@media (min-width: 768px) {
+  .ret-menu ul {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* About */
+.ret-about {
+  display: grid;
+  gap: var(--sp-7);
+  align-items: center;
+}
+.ret-about-photo {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: clip;
+  border-radius: 200px 200px var(--r-2) var(--r-2);
+  max-width: 440px;
+}
+@media (min-width: 900px) {
+  .ret-about {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+}
+
+/* Work: three round frames */
+.ret-rounds {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--sp-5);
+  margin-top: var(--sp-7);
+}
+.ret-rounds li {
+  position: relative;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  overflow: clip;
+  box-shadow:
+    0 0 0 6px var(--cream),
+    0 0 0 9px var(--accent);
+}
+
+/* How it works: big numbered pills */
+.ret-steps {
+  display: grid;
+  gap: var(--sp-5);
+  margin-top: var(--sp-7);
+}
+.ret-steps li {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: var(--sp-2) var(--sp-5);
+  align-items: center;
+  padding: var(--sp-4) var(--sp-6) var(--sp-4) var(--sp-4);
+  border-radius: var(--r-full);
+  background: var(--cream-2);
+}
+.ret-steps .ret-num {
+  grid-row: span 2;
+  display: grid;
+  place-items: center;
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: var(--accent);
+  font-family: var(--serif);
+  font-size: 2rem;
+}
+@media (min-width: 900px) {
+  .ret-steps li:nth-child(2) {
+    margin-left: var(--sp-9);
+  }
+  .ret-steps li:nth-child(3) {
+    margin-left: calc(2 * var(--sp-9));
+  }
+}
+
+/* Areas */
+.ret-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-3);
+  margin-top: var(--sp-6);
+}
+.ret-pills li {
+  padding: 0.5rem 1.1rem;
+  border-radius: var(--r-full);
+  box-shadow: inset 0 0 0 2px var(--brown);
+  font-weight: 600;
+}
+
+/* FAQ */
+.ret-faq {
+  display: grid;
+  gap: var(--sp-3);
+  margin-top: var(--sp-7);
+  max-width: 52rem;
+}
+.ret-faq details {
+  border-radius: var(--r-2);
+  background: var(--cream-2);
+}
+.ret-faq summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-4);
+  min-height: 64px;
+  padding: var(--sp-4) var(--sp-5);
+}
+.ret-faq h3 {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 1.25rem;
+  line-height: 1.3;
+}
+.ret-faq p {
+  padding: 0 var(--sp-5) var(--sp-5);
+}
+
+/* Closing: stripes band over brown */
+.ret-cta {
+  position: relative;
+  overflow: clip;
+  border-radius: var(--r-3);
+  background: var(--brown);
+  color: var(--cream-on-brown);
+  padding: clamp(40px, 6vw, 88px) clamp(24px, 5vw, 72px);
+  display: grid;
+  gap: var(--sp-5);
+  justify-items: start;
+}
+.ret-cta::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 18px;
+  background: repeating-linear-gradient(90deg, var(--accent) 0 48px, var(--cream-2) 48px 96px);
+}
+.ret-cta-phone {
+  font-family: var(--serif);
+  font-size: var(--fs-display);
+  line-height: 1;
+  color: var(--accent);
+}
+
+/* Footer */
+.ret-footer {
+  padding-block: var(--sp-8) calc(var(--sp-7) + 88px);
+}
+@media (min-width: 768px) {
+  .ret-footer {
+    padding-bottom: var(--sp-7);
+  }
+}
+.ret-footer-grid {
+  display: grid;
+  gap: var(--sp-5);
+}
+.ret-footer-grid h2 {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 1.25rem;
+  margin-bottom: var(--sp-2);
+}
+@media (min-width: 768px) {
+  .ret-footer-grid {
+    grid-template-columns: 2fr 1fr 1fr 1.3fr;
+  }
+}
+
+/* Call bar */
+.ret-callbar a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-4);
+  min-height: 62px;
+  padding: 0 6px 0 20px;
+  border-radius: var(--r-full);
+  background: var(--brown);
+  color: var(--cream-on-brown);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+.ret-callbar strong {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  min-height: 48px;
+  padding: 0 1.2rem;
+  border-radius: var(--r-full);
+  background: var(--accent);
+  color: var(--on-accent);
+}
+.ret-callbar svg {
+  width: 1.05em;
+  height: 1.05em;
+}
+
+/* The menu card is cream inside a brown section: use the dark text colours. */
+.ret-menu .ret-muted {
+  color: var(--muted);
+}

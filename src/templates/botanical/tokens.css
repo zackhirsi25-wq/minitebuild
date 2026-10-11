@@ -1,0 +1,40 @@
+/* Botanical tokens. --accent is set inline from meta.ts. */
+.bot {
+  --oat: #f3f1e7;
+  --oat-2: #e8e4d3;
+  --green: #1f3b2d;
+  --green-2: #29483a;
+  --muted: #56665b; /* 5.6:1 on oat */
+  --on-green: #eef0e4;
+  --on-green-muted: #b9c7b9; /* 8:1 on green */
+  --line: rgb(31 59 45 / 0.16);
+  --accent: #2f5d3a;
+  --on-accent: #ffffff;
+  --focus: var(--green);
+  --selection-bg: var(--green);
+  --selection-fg: var(--oat);
+
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 24px;
+  --sp-6: 32px;
+  --sp-7: 48px;
+  --sp-8: 64px;
+  --sp-9: 96px;
+  --gutter: clamp(18px, 4.5vw, 64px);
+  --section-y: clamp(72px, 3rem + 6vw, 160px);
+  --max: 1240px;
+
+  --leaf: 0 70% 0 70%;
+  --leaf-flip: 70% 0 70% 0;
+  --r-full: 999px;
+
+  --serif: var(--bot-serif), Georgia, serif;
+  --sans: var(--bot-sans), system-ui, sans-serif;
+  --fs-display: clamp(2.75rem, 1.5rem + 5.4vw, 6.75rem);
+  --fs-h2: clamp(2rem, 1.4rem + 2.6vw, 3.75rem);
+  --fs-h3: clamp(1.25rem, 1.1rem + 0.5vw, 1.5rem);
+  --fs-body: clamp(1rem, 0.97rem + 0.15vw, 1.0625rem);
+  --fs-small: 0.875rem;
+}

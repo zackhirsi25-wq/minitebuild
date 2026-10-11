@@ -2,8 +2,12 @@
 import type { StaticImageData } from "next/image";
 import type { ComponentType } from "react";
 import type { TemplateDemo, TemplateMeta, TemplateProps } from "./_kit/types";
+import atelierMeta from "./atelier/meta";
+import atelierDemo from "./atelier/demo";
 import bentoMeta from "./bento/meta";
 import bentoDemo from "./bento/demo";
+import botanicalMeta from "./botanical/meta";
+import botanicalDemo from "./botanical/demo";
 import brutalMeta from "./brutal/meta";
 import brutalDemo from "./brutal/demo";
 import cinematicMeta from "./cinematic/meta";
@@ -12,18 +16,26 @@ import editorialMeta from "./editorial/meta";
 import editorialDemo from "./editorial/demo";
 import galleryMeta from "./gallery/meta";
 import galleryDemo from "./gallery/demo";
+import glassMeta from "./glass/meta";
+import glassDemo from "./glass/demo";
 import havenMeta from "./haven/meta";
 import havenDemo from "./haven/demo";
 import impactMeta from "./impact/meta";
 import impactDemo from "./impact/demo";
 import ledgerMeta from "./ledger/meta";
 import ledgerDemo from "./ledger/demo";
+import retroMeta from "./retro/meta";
+import retroDemo from "./retro/demo";
 import storyMeta from "./story/meta";
 import storyDemo from "./story/demo";
 import swissMeta from "./swiss/meta";
 import swissDemo from "./swiss/demo";
+import atelierDesktop from "./atelier/thumb-desktop.jpg";
+import atelierMobile from "./atelier/thumb-mobile.jpg";
 import bentoDesktop from "./bento/thumb-desktop.jpg";
 import bentoMobile from "./bento/thumb-mobile.jpg";
+import botanicalDesktop from "./botanical/thumb-desktop.jpg";
+import botanicalMobile from "./botanical/thumb-mobile.jpg";
 import brutalDesktop from "./brutal/thumb-desktop.jpg";
 import brutalMobile from "./brutal/thumb-mobile.jpg";
 import cinematicDesktop from "./cinematic/thumb-desktop.jpg";
@@ -32,80 +44,104 @@ import editorialDesktop from "./editorial/thumb-desktop.jpg";
 import editorialMobile from "./editorial/thumb-mobile.jpg";
 import galleryDesktop from "./gallery/thumb-desktop.jpg";
 import galleryMobile from "./gallery/thumb-mobile.jpg";
+import glassDesktop from "./glass/thumb-desktop.jpg";
+import glassMobile from "./glass/thumb-mobile.jpg";
 import havenDesktop from "./haven/thumb-desktop.jpg";
 import havenMobile from "./haven/thumb-mobile.jpg";
 import impactDesktop from "./impact/thumb-desktop.jpg";
 import impactMobile from "./impact/thumb-mobile.jpg";
 import ledgerDesktop from "./ledger/thumb-desktop.jpg";
 import ledgerMobile from "./ledger/thumb-mobile.jpg";
+import retroDesktop from "./retro/thumb-desktop.jpg";
+import retroMobile from "./retro/thumb-mobile.jpg";
 import storyDesktop from "./story/thumb-desktop.jpg";
 import storyMobile from "./story/thumb-mobile.jpg";
 import swissDesktop from "./swiss/thumb-desktop.jpg";
 import swissMobile from "./swiss/thumb-mobile.jpg";
 
 export const TEMPLATE_IDS = [
+  "atelier",
   "bento",
+  "botanical",
   "brutal",
   "cinematic",
   "editorial",
   "gallery",
+  "glass",
   "haven",
   "impact",
   "ledger",
+  "retro",
   "story",
   "swiss",
 ] as const;
 
 export const TEMPLATE_METAS: Record<string, TemplateMeta> = {
+  atelier: atelierMeta,
   bento: bentoMeta,
+  botanical: botanicalMeta,
   brutal: brutalMeta,
   cinematic: cinematicMeta,
   editorial: editorialMeta,
   gallery: galleryMeta,
+  glass: glassMeta,
   haven: havenMeta,
   impact: impactMeta,
   ledger: ledgerMeta,
+  retro: retroMeta,
   story: storyMeta,
   swiss: swissMeta,
 };
 
 export const TEMPLATE_DEMOS: Record<string, TemplateDemo> = {
+  atelier: atelierDemo,
   bento: bentoDemo,
+  botanical: botanicalDemo,
   brutal: brutalDemo,
   cinematic: cinematicDemo,
   editorial: editorialDemo,
   gallery: galleryDemo,
+  glass: glassDemo,
   haven: havenDemo,
   impact: impactDemo,
   ledger: ledgerDemo,
+  retro: retroDemo,
   story: storyDemo,
   swiss: swissDemo,
 };
 
 /** Rendered thumbnails of each template's demo, where they exist. */
 export const TEMPLATE_THUMBS: Record<string, { desktop: StaticImageData; mobile: StaticImageData }> = {
+  atelier: { desktop: atelierDesktop, mobile: atelierMobile },
   bento: { desktop: bentoDesktop, mobile: bentoMobile },
+  botanical: { desktop: botanicalDesktop, mobile: botanicalMobile },
   brutal: { desktop: brutalDesktop, mobile: brutalMobile },
   cinematic: { desktop: cinematicDesktop, mobile: cinematicMobile },
   editorial: { desktop: editorialDesktop, mobile: editorialMobile },
   gallery: { desktop: galleryDesktop, mobile: galleryMobile },
+  glass: { desktop: glassDesktop, mobile: glassMobile },
   haven: { desktop: havenDesktop, mobile: havenMobile },
   impact: { desktop: impactDesktop, mobile: impactMobile },
   ledger: { desktop: ledgerDesktop, mobile: ledgerMobile },
+  retro: { desktop: retroDesktop, mobile: retroMobile },
   story: { desktop: storyDesktop, mobile: storyMobile },
   swiss: { desktop: swissDesktop, mobile: swissMobile },
 };
 
 /** Loaded on demand so a page only pulls in the fonts and CSS of the template it shows. */
 export const TEMPLATE_LOADERS: Record<string, () => Promise<{ default: ComponentType<TemplateProps> }>> = {
+  atelier: () => import("./atelier/Template"),
   bento: () => import("./bento/Template"),
+  botanical: () => import("./botanical/Template"),
   brutal: () => import("./brutal/Template"),
   cinematic: () => import("./cinematic/Template"),
   editorial: () => import("./editorial/Template"),
   gallery: () => import("./gallery/Template"),
+  glass: () => import("./glass/Template"),
   haven: () => import("./haven/Template"),
   impact: () => import("./impact/Template"),
   ledger: () => import("./ledger/Template"),
+  retro: () => import("./retro/Template"),
   story: () => import("./story/Template"),
   swiss: () => import("./swiss/Template"),
 };
