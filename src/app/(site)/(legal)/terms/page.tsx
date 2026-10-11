@@ -1,7 +1,7 @@
-import { Unpublished, unpublishedMetadata } from "../unpublished";
+import { LegalPage, legalMetadata } from "../unpublished";
 
-export const metadata = unpublishedMetadata("Terms");
+export const metadata = legalMetadata("terms");
 
 export default function TermsPage() {
-  return <Unpublished title="Terms" />;
+  return <LegalPage id="terms" />;
 }

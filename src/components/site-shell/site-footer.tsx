@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { product } from "@/config/product";
+import { isLegalPublished } from "@/app/(site)/(legal)/unpublished";
 import { telHref } from "@/lib/content/phone";
+import { LEGAL_TITLES, type LegalDocId } from "@/lib/legal";
 import { env } from "@/lib/env";
 import { allTemplates } from "@/templates";
 import { LogoMark } from "./logo";
@@ -73,6 +75,11 @@ export function SiteFooter() {
           <Item href="/login">Sign in</Item>
         </Column>
         <Column title="Legal">
+          {(Object.keys(LEGAL_TITLES) as LegalDocId[]).filter(isLegalPublished).map((id) => (
+            <Item key={id} href={`/${id}`}>
+              {LEGAL_TITLES[id]}
+            </Item>
+          ))}
           <Item href="/credits">Credits</Item>
         </Column>
       </div>
