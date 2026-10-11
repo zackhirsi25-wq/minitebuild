@@ -1,17 +1,15 @@
 import type { Metadata } from "next";
 import { Markdown } from "@/components/markdown";
-import { legal } from "@/config/legal";
 import { product } from "@/config/product";
 import { env } from "@/lib/env";
 import { LEGAL_TITLES, resolveLegalDoc, type LegalDocId } from "@/lib/legal";
 
 // /privacy, /terms and /refunds show the owner's text (src/content/legal) with
-// its placeholders filled from src/config/legal.ts and CONTACT_EMAIL. Until
-// every placeholder in a document has a value, its page says it isn't
+// [CONTACT EMAIL] filled from CONTACT_EMAIL. Without it a page says it isn't
 // published, isn't indexed and isn't linked from the footer.
 
 export function legalDoc(id: LegalDocId) {
-  return resolveLegalDoc(id, { ...legal, contactEmail: env.contactEmail ?? null });
+  return resolveLegalDoc(id, { contactEmail: env.contactEmail ?? null });
 }
 
 export function isLegalPublished(id: LegalDocId): boolean {
@@ -32,8 +30,7 @@ export function LegalPage({ id }: { id: LegalDocId }) {
         <p className="mt-4 text-lead text-muted">This page hasn&apos;t been published yet.</p>
         {process.env.NODE_ENV !== "production" && (
           <p className="mt-8 max-w-xl rounded-card border border-line bg-surface p-4 text-small text-muted">
-            Development only: set {missing.join(", ")} in src/config/legal.ts
-            {missing.includes("[CONTACT EMAIL]") ? " (and CONTACT_EMAIL in .env.local)" : ""} to publish it.
+            Development only: set CONTACT_EMAIL in .env.local to publish it.
           </p>
         )}
       </div>
