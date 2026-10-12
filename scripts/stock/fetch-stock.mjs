@@ -244,7 +244,7 @@ async function download() {
   await mkdir(outDir, { recursive: true });
   await writeJson(path.join(outDir, 'index.json'), index);
   let credits = '# Photo credits\n\nStock photos are from [Pexels](https://www.pexels.com) and used under the [Pexels licence](https://www.pexels.com/license/).\n';
-  for (const [id, entry] of Object.entries(index)) {
+  for (const entry of Object.values(index)) {
     credits += `\n## ${entry.label}\n\n`;
     // Photos ingested by hand (ingest-manual.mjs) have no photographer profile link.
     for (const list of Object.values(entry.slots)) for (const p of list) credits += `- \`${p.file}\`: [photo](${p.source_url}) by ${p.photographer_url ? `[${p.photographer}](${p.photographer_url})` : p.photographer} on Pexels\n`;
