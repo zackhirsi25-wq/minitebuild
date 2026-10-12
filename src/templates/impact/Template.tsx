@@ -16,7 +16,7 @@ import "./impact.css";
 // Impact: "Signal". Condensed type, hard rules, one signal colour, and the
 // phone number set as the closing headline.
 
-const font = Archivo({ subsets: ["latin"], axes: ["wdth"], variable: "--imp-font" });
+const font = Archivo({ subsets: ["latin"], preload: false, axes: ["wdth"], variable: "--imp-font" });
 
 export default function ImpactTemplate({ site, images, palette }: TemplateProps) {
   const { content } = site;

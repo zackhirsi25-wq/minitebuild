@@ -17,7 +17,7 @@ import "./glass.css";
 // Glass: frosted panels over a colour field that drifts very slowly (still
 // with reduced motion). Everything sits on glass; nothing sits on bare colour.
 
-const font = Sora({ subsets: ["latin"], variable: "--gla-font" });
+const font = Sora({ subsets: ["latin"], preload: false, variable: "--gla-font" });
 
 export default function GlassTemplate({ site, images, palette }: TemplateProps) {
   const { content } = site;

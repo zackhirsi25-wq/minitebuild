@@ -17,7 +17,7 @@ import "./bento.css";
 // Bento: the opening screen is a grid of tiles (headline, photo, phone,
 // opening status, areas) so the essentials are visible without scrolling.
 
-const font = Plus_Jakarta_Sans({ subsets: ["latin"], variable: "--ben-font" });
+const font = Plus_Jakarta_Sans({ subsets: ["latin"], preload: false, variable: "--ben-font" });
 
 export default function BentoTemplate({ site, images, palette }: TemplateProps) {
   const { content } = site;

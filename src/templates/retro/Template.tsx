@@ -16,8 +16,8 @@ import "./retro.css";
 // Retro: sunburst stripes behind a round photo, a menu card for services,
 // wavy edges between cream and brown sections.
 
-const serif = DM_Serif_Display({ subsets: ["latin"], weight: "400", variable: "--ret-serif" });
-const sans = DM_Sans({ subsets: ["latin"], variable: "--ret-sans" });
+const serif = DM_Serif_Display({ subsets: ["latin"], preload: false, weight: "400", variable: "--ret-serif" });
+const sans = DM_Sans({ subsets: ["latin"], preload: false, variable: "--ret-sans" });
 
 function Wave({ flip = false }: { flip?: boolean }) {
   return (

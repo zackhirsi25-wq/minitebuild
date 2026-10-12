@@ -13,6 +13,7 @@ export async function generateMetadata({ params }: PageProps<"/demo/[id]">): Pro
   const { id } = await params;
   return {
     title: isTemplateId(id) ? `${templateMeta(id).name} template demo` : "Not found",
+    description: isTemplateId(id) ? templateMeta(id).concept : undefined,
     robots: { index: false, follow: false },
   };
 }

@@ -16,7 +16,7 @@ import "./gallery.css";
 // Gallery: "White wall". The headline is the exhibit; photos hang like framed
 // prints with wall labels.
 
-const font = Geist({ subsets: ["latin"], variable: "--gal-font" });
+const font = Geist({ subsets: ["latin"], preload: false, variable: "--gal-font" });
 
 function Label({ image, city }: { image: SiteImage; city: string }) {
   return (

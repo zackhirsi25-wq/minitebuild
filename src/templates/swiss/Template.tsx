@@ -18,7 +18,7 @@ import "./swiss.css";
 // Swiss: everything sits on a 12-column grid that is drawn faintly on the
 // page; the hero photo is the one thing that breaks out of it.
 
-const font = Inter_Tight({ subsets: ["latin"], variable: "--swi-font" });
+const font = Inter_Tight({ subsets: ["latin"], preload: false, variable: "--swi-font" });
 
 function Lines() {
   return (

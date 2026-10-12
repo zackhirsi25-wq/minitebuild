@@ -39,6 +39,7 @@ export function PreviewFrame({
       <header className="flex flex-none flex-wrap items-center gap-x-3 gap-y-2 border-b border-line bg-canvas px-3 py-2.5 sm:px-4">
         <Link
           href="/templates"
+          aria-label="All templates"
           className="inline-flex h-11 min-w-11 items-center justify-center gap-1.5 rounded-button px-2 text-small font-medium text-muted transition-colors hover:text-fg"
         >
           <span aria-hidden="true">←</span>

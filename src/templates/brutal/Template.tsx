@@ -17,8 +17,8 @@ import "./brutal.css";
 // Brutal: every element is a box with a thick outline and a hard shadow;
 // buttons press flat into the page when tapped.
 
-const font = Space_Grotesk({ subsets: ["latin"], variable: "--bru-font" });
-const mono = Space_Mono({ subsets: ["latin"], weight: ["400", "700"], variable: "--bru-mono" });
+const font = Space_Grotesk({ subsets: ["latin"], preload: false, variable: "--bru-font" });
+const mono = Space_Mono({ subsets: ["latin"], preload: false, weight: ["400", "700"], variable: "--bru-mono" });
 
 export default function BrutalTemplate({ site, images, palette }: TemplateProps) {
   const { content } = site;

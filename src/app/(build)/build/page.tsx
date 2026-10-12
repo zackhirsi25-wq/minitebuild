@@ -9,7 +9,11 @@ import { confirmDetails, startOver } from "./actions";
 import { DetailsForm } from "./details-form";
 import { StepShell } from "./shell";
 
-export const metadata: Metadata = { title: `Build your site | ${product.name}`, robots: { index: false } };
+export const metadata: Metadata = {
+  title: `Build your site | ${product.name}`,
+  description: "Check your business details, add photos and pick a design for your one-page site.",
+  robots: { index: false },
+};
 
 function Row({ label, children }: { label: string; children: React.ReactNode }) {
   return (

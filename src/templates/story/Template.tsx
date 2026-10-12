@@ -17,8 +17,8 @@ import "./story.css";
 // chapters scroll past; each chapter swaps the scene (CSS scroll-driven
 // animations, first scene only where unsupported or with reduced motion).
 
-const display = Bricolage_Grotesque({ subsets: ["latin"], axes: ["opsz"], variable: "--sto-display" });
-const serif = Source_Serif_4({ subsets: ["latin"], variable: "--sto-serif" });
+const display = Bricolage_Grotesque({ subsets: ["latin"], preload: false, axes: ["opsz"], variable: "--sto-display" });
+const serif = Source_Serif_4({ subsets: ["latin"], preload: false, variable: "--sto-serif" });
 
 function Scene({ image, n }: { image: SiteImage | null; n: number }) {
   return (

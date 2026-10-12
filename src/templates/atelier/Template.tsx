@@ -16,8 +16,14 @@ import "./atelier.css";
 // Atelier: a fashion house's restraint. Hairline Bodoni set centred, black on
 // ivory, and the about portrait dropping below its own section.
 
-const serif = Bodoni_Moda({ subsets: ["latin"], axes: ["opsz"], style: ["normal", "italic"], variable: "--ate-serif" });
-const sans = Jost({ subsets: ["latin"], variable: "--ate-sans" });
+const serif = Bodoni_Moda({
+  subsets: ["latin"],
+  preload: false,
+  axes: ["opsz"],
+  style: ["normal", "italic"],
+  variable: "--ate-serif",
+});
+const sans = Jost({ subsets: ["latin"], preload: false, variable: "--ate-sans" });
 const NUMERALS = ["I", "II", "III"];
 
 export default function AtelierTemplate({ site, images, palette }: TemplateProps) {

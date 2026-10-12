@@ -19,11 +19,12 @@ import "./editorial.css";
 
 const serif = Instrument_Serif({
   subsets: ["latin"],
+  preload: false,
   weight: "400",
   style: ["normal", "italic"],
   variable: "--edi-serif",
 });
-const sans = Instrument_Sans({ subsets: ["latin"], variable: "--edi-sans" });
+const sans = Instrument_Sans({ subsets: ["latin"], preload: false, variable: "--edi-sans" });
 
 function Chapter({ n, id, title }: { n: number; id: string; title: string }) {
   return (

@@ -14,8 +14,13 @@ import "./cinematic.css";
 
 // Cinematic: "Night shoot". See meta.ts for slots and palettes.
 
-const display = Fraunces({ subsets: ["latin"], axes: ["SOFT", "opsz"], variable: "--cin-font-display" });
-const body = Manrope({ subsets: ["latin"], variable: "--cin-font-body" });
+const display = Fraunces({
+  subsets: ["latin"],
+  preload: false,
+  axes: ["SOFT", "opsz"],
+  variable: "--cin-font-display",
+});
+const body = Manrope({ subsets: ["latin"], preload: false, variable: "--cin-font-body" });
 
 function PhoneGlyph() {
   return (

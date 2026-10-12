@@ -16,8 +16,8 @@ import "./botanical.css";
 // Botanical: leaf-shaped frames (two opposite rounded corners), a vine
 // running down "How it works", deep green and oat in turn.
 
-const serif = Lora({ subsets: ["latin"], style: ["normal", "italic"], variable: "--bot-serif" });
-const sans = Nunito_Sans({ subsets: ["latin"], variable: "--bot-sans" });
+const serif = Lora({ subsets: ["latin"], preload: false, style: ["normal", "italic"], variable: "--bot-serif" });
+const sans = Nunito_Sans({ subsets: ["latin"], preload: false, variable: "--bot-sans" });
 
 function Leaf() {
   return (

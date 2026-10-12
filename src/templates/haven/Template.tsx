@@ -17,8 +17,8 @@ import "./haven.css";
 // Haven: "Open door". Arched photo frames like doorways, and a live "Open now"
 // status worked out from the business's own hours.
 
-const serif = Young_Serif({ subsets: ["latin"], weight: "400", variable: "--hav-serif" });
-const sans = Figtree({ subsets: ["latin"], variable: "--hav-sans" });
+const serif = Young_Serif({ subsets: ["latin"], preload: false, weight: "400", variable: "--hav-serif" });
+const sans = Figtree({ subsets: ["latin"], preload: false, variable: "--hav-sans" });
 
 export default function HavenTemplate({ site, images, palette }: TemplateProps) {
   const { content } = site;

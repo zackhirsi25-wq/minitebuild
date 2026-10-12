@@ -1,4 +1,4 @@
-import { TEMPLATE_DEMOS, TEMPLATE_IDS, TEMPLATE_LOADERS, TEMPLATE_METAS, TEMPLATE_THUMBS } from "./registry.generated";
+import { TEMPLATE_DEMOS, TEMPLATE_IDS, TEMPLATE_METAS, TEMPLATE_THUMBS } from "./registry.generated";
 import type { TemplateMeta } from "./_kit/types";
 
 export { TEMPLATE_DEMOS, TEMPLATE_IDS, TEMPLATE_METAS, TEMPLATE_THUMBS };
@@ -23,10 +23,6 @@ export function resolveTemplateId(id: string | null | undefined): string {
 
 export function templateMeta(id: string): TemplateMeta {
   return TEMPLATE_METAS[resolveTemplateId(id)];
-}
-
-export async function loadTemplate(id: string) {
-  return (await TEMPLATE_LOADERS[resolveTemplateId(id)]()).default;
 }
 
 /** All templates in gallery order. */

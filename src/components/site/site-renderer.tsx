@@ -2,7 +2,8 @@ import { env } from "@/lib/env";
 import { businessTypeOf, siteImages } from "@/lib/images/stock";
 import { localBusinessJsonLd } from "@/lib/sites/seo";
 import type { PublicSite } from "@/lib/sites/public";
-import { loadTemplate, resolveTemplateId, templateMeta } from "@/templates";
+import { resolveTemplateId, templateMeta } from "@/templates";
+import { loadTemplate } from "@/templates/load";
 import { pickPalette } from "@/templates/_kit/palette";
 import { JsonLd } from "./parts";
 

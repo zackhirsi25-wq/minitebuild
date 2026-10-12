@@ -16,8 +16,13 @@ import "./ledger.css";
 // Ledger: one sheet of paper. Services are a typeset index with dotted
 // leaders; details are set in mono like figures on a statement.
 
-const font = IBM_Plex_Sans({ subsets: ["latin"], weight: ["400", "500", "600"], variable: "--led-font" });
-const mono = IBM_Plex_Mono({ subsets: ["latin"], weight: ["400", "500"], variable: "--led-mono" });
+const font = IBM_Plex_Sans({
+  subsets: ["latin"],
+  preload: false,
+  weight: ["400", "500", "600"],
+  variable: "--led-font",
+});
+const mono = IBM_Plex_Mono({ subsets: ["latin"], preload: false, weight: ["400", "500"], variable: "--led-mono" });
 
 function Section({ id, n, title, children }: { id?: string; n: number; title: string; children: ReactNode }) {
   return (
