@@ -301,7 +301,7 @@ export const MORE_DEMOS: Partial<Record<BusinessType, Demo>> = {
         },
       ],
       about:
-        "Fern & Co. is a small flower shop in Capitol Hill. We buy what is in season and arrange it by hand, so no two bouquets are quite the same.\n\nCall to order flowers for a birthday, a thank-you or a wedding, or drop in to see what arrived this week.",
+        "Fern & Co. Florist is a small flower shop in Capitol Hill. We buy what is in season and arrange it by hand, so no two bouquets are quite the same.\n\nCall to order flowers for a birthday, a thank-you or a wedding, or drop in to see what arrived this week.",
       serviceAreas: ["Capitol Hill", "First Hill", "Central District", "Madison Park", "Eastlake", "Downtown Seattle"],
       faq: [
         {
@@ -323,7 +323,7 @@ export const MORE_DEMOS: Partial<Record<BusinessType, Demo>> = {
       ],
       cta: {
         heading: "Send flowers this week",
-        body: "Call Fern & Co. to order or ask what is in season.",
+        body: "Call Fern & Co. Florist to order or ask what is in season.",
         buttonLabel: "Call to order",
       },
       process: [

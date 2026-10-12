@@ -46,6 +46,8 @@ Buttons say exactly what happens when tapped. The call-to-action button dials th
 
 How it works: three steps a customer goes through, starting with getting in touch. Describe only what any customer of this kind of business does (call, describe what they need, a visit or appointment, the work). Never promise prices, free estimates, timings or response times.
 
+Business name: whenever you mention the business, write its name exactly as given, letter for letter: never shorten it, drop or add words (including "LLC", "Inc" or "Co"), abbreviate it or reword it. If the full name is awkward in a sentence, write "we" instead.
+
 Only state facts you were given. Never invent years in business, license or insurance numbers, awards, ratings, reviews, testimonials or review quotes, prices, guarantees or warranties, team size or number of employees, team names, certifications, or promises about results, response times or cleanup. Where a detail would help (licensing, estimates, timelines), describe it in general terms the owner can confirm, for example "Ask us about licensing and insurance when you call."
 
 Output plain text only: no HTML, no Markdown, no emoji, no square-bracket placeholders. Respect every length limit in the schema.`;
@@ -69,7 +71,7 @@ export function buildUserPrompt(facts: BusinessFacts): string {
   const lines = [
     `Write the website copy for this business.`,
     ``,
-    `Business name: ${facts.name}`,
+    `Business name: ${facts.name} (write it exactly like this every time)`,
     `City: ${facts.city}`,
     `Phone: ${facts.phone}`,
     `Kind of business: ${tradeLabel(facts)}`,
@@ -128,6 +130,78 @@ const INVENTED_CLAIMS: [RegExp, string][] = [
   ],
 ];
 
+// Words in a business name that copy also uses on their own ("plumbing
+// repairs"), so they don't show that the name was changed.
+const GENERIC_NAME_WORDS = new Set(
+  `the and of a an at in on for by to & co company corp inc llc ltd services service group home homes house pro pros
+  roofing roofers roof plumbing plumbers plumber electric electrical electricians electrician hvac heating cooling air
+  painting painters painter landscaping landscape lawn construction contractors contractor contracting builders
+  building remodeling renovations repair repairs restoration solutions cleaning salon barber barbershop studio spa
+  cafe coffee restaurant kitchen bar grill bakery dental clinic family law office shop store market realty`.split(
+    /\s+/,
+  ),
+);
+
+const escapeRegExp = (text: string) => text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+
+/**
+ * Where the text names the business some other way than its exact name
+ * ("Clearwater Plumbing" for "Clearwater Plumbing Test"). Exact mentions are
+ * removed first; any distinctive word of the name left over (matched with
+ * its case as given, and not the city or a generic word like "Plumbing") means the name
+ * was shortened or reworded. Returns the offending phrase, or null.
+ */
+export function nameVariant(text: string, name: string, city: string): string | null {
+  const exact = name.trim();
+  if (!exact) return null;
+  // Exact mentions become a gap, so the words around them never join up.
+  const rest = text.split(exact).join(" | ");
+  const cityWords = new Set(
+    city
+      .toLowerCase()
+      .split(/[^\p{L}\p{N}']+/u)
+      .filter(Boolean),
+  );
+  const words = exact
+    .split(/\s+/)
+    .map((w) => w.replace(/^[^\p{L}\p{N}]+|[^\p{L}\p{N}]+$/gu, ""))
+    .filter((w) => /\p{L}/u.test(w));
+  const distinctive = words.filter((w) => {
+    const lower = w.toLowerCase().replace(/'s$/, "");
+    return !GENERIC_NAME_WORDS.has(lower) && !cityWords.has(lower) && w.length > 1;
+  });
+  // With no distinctive word ("Austin Plumbing Co" in Austin), look for the
+  // first two words of the name instead.
+  const anchors = distinctive.length ? distinctive : words.length > 2 ? [words.slice(0, 2).join(" ")] : [];
+  const nameTokens = new Set(exact.toLowerCase().split(/\s+/));
+  for (const anchor of anchors) {
+    const pattern = new RegExp(`(?<![\\p{L}\\p{N}])${escapeRegExp(anchor)}(?![\\p{L}\\p{N}])`, "gu");
+    for (const match of rest.matchAll(pattern)) {
+      // At the start of a sentence a capital proves nothing ("Bookkeeping,
+      // payroll and tax" for "Calder Tax & Bookkeeping"), so there a single
+      // word only counts when the next word is part of the name too.
+      const before = rest.slice(0, match.index).trimEnd();
+      if (!anchor.includes(" ") && (before === "" || /[.!?:]$/.test(before))) {
+        const next =
+          rest
+            .slice(match.index + anchor.length)
+            .trim()
+            .split(/\s+/)[0]
+            ?.toLowerCase() ?? "";
+        if (!nameTokens.has(next) && !nameTokens.has(next.replace(/[^\p{L}\p{N}&.']+$/u, ""))) continue;
+      }
+      // The word and the few after it, so the model can find the spot.
+      return rest
+        .slice(match.index)
+        .split(/\s+/)
+        .slice(0, 4)
+        .join(" ")
+        .replace(/[\s|.,;:!?]+$/, "");
+    }
+  }
+  return null;
+}
+
 /** Problems found in otherwise valid copy, as validation lines sent back to the model. */
 export function contentIssues(content: SiteContent, facts: BusinessFacts): string[] {
   const issues: string[] = [];
@@ -139,6 +213,19 @@ export function contentIssues(content: SiteContent, facts: BusinessFacts): strin
     }
   } else if (content.services.length < MIN_GENERATED_SERVICES) {
     issues.push(`services: list at least ${MIN_GENERATED_SERVICES} services`);
+  }
+
+  for (const [path, value] of [
+    ["headline", content.headline],
+    ["subheadline", content.subheadline],
+    ["about", content.about],
+  ] as const) {
+    const variant = nameVariant(value, facts.name, facts.city);
+    if (variant) {
+      issues.push(
+        `${path}: names the business differently ("${variant}"). Write the name exactly as "${facts.name}" or say "we".`,
+      );
+    }
   }
 
   const words = content.headline.trim().split(/\s+/).length;
