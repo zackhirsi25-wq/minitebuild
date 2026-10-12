@@ -128,9 +128,13 @@ $$;
 -- 6. Checkout consent: who agreed to which version of the policies, and when.
 -- ---------------------------------------------------------------------------
 
+-- Kept when the business is deleted: business_id becomes null and the name
+-- and slug recorded at acceptance still say whose agreement it was.
 create table public.terms_acceptances (
   id uuid primary key default gen_random_uuid(),
-  business_id uuid not null references public.businesses (id) on delete cascade,
+  business_id uuid references public.businesses (id) on delete set null,
+  business_name text not null,
+  business_slug text not null,
   plan text not null check (plan in ('monthly', 'annual')),
   -- SHA-256 of each document's text as shown: {"terms": "...", "privacy": "...", "refunds": "..."}
   documents jsonb not null,
@@ -142,7 +146,42 @@ create table public.terms_acceptances (
 create index terms_acceptances_business_idx on public.terms_acceptances (business_id, accepted_at desc);
 
 -- ---------------------------------------------------------------------------
--- 7. Row-level security and grants
+-- 7. Billing records outlive the business. Subscriptions used to be deleted
+--    with it; now business_id becomes null and the name and slug are copied
+--    onto the row just before the business is deleted. (billing_events
+--    already used on delete set null.)
+-- ---------------------------------------------------------------------------
+
+alter table public.subscriptions
+  add column business_name text,
+  add column business_slug text,
+  alter column business_id drop not null,
+  drop constraint subscriptions_business_id_fkey,
+  add constraint subscriptions_business_id_fkey
+    foreign key (business_id) references public.businesses (id) on delete set null;
+
+create or replace function public.keep_billing_identity()
+returns trigger
+language plpgsql
+security definer
+set search_path = ''
+as $$
+begin
+  update public.subscriptions
+     set business_name = old.name, business_slug = old.slug
+   where business_id = old.id;
+  return old;
+end;
+$$;
+
+revoke all on function public.keep_billing_identity() from public, anon, authenticated;
+
+create trigger businesses_keep_billing_identity
+  before delete on public.businesses
+  for each row execute function public.keep_billing_identity();
+
+-- ---------------------------------------------------------------------------
+-- 8. Row-level security and grants
 -- ---------------------------------------------------------------------------
 
 alter table public.build_drafts enable row level security;
@@ -155,7 +194,97 @@ revoke all on function public.hit_rate_limit(text, integer, integer) from public
 grant execute on function public.hit_rate_limit(text, integer, integer) to service_role;
 
 -- ---------------------------------------------------------------------------
--- 8. Housekeeping: drop drafts untouched for 7 days and old rate-limit windows.
+-- 9. Sites due for deletion (read by the app's nightly cleanup, which deletes
+--    their photos from storage and then the rows; storage files can't be
+--    removed from SQL).
+--
+--    expired: an unpaid public preview, 30 days past its expires_at.
+--    canceled: every subscription is canceled, the last one more than
+--      p_retention_days ago, and the site isn't live. The app passes
+--      retentionDays from src/config/legal.ts and skips this when it's unset.
+--
+--    Deleting a business keeps its subscriptions, billing_events and
+--    terms_acceptances (section 7 and their on delete set null).
+-- ---------------------------------------------------------------------------
+
+create or replace function public.sites_due_for_deletion(p_retention_days integer)
+returns table (id uuid, slug text, images jsonb, reason text)
+language sql
+stable
+security definer
+set search_path = ''
+as $$
+  select b.id, b.slug, b.images, 'expired'
+    from public.businesses b
+   where b.status = 'preview'
+     and b.expires_at < now() - interval '30 days'
+     and not exists (
+       select 1 from public.subscriptions s
+        where s.business_id = b.id and s.status in ('active', 'past_due')
+     )
+  union all
+  select b.id, b.slug, b.images, 'canceled'
+    from public.businesses b
+   where p_retention_days is not null
+     and b.status <> 'live'
+     and exists (select 1 from public.subscriptions s where s.business_id = b.id)
+     and not exists (
+       select 1 from public.subscriptions s
+        where s.business_id = b.id
+          and (s.status <> 'canceled'
+               or s.canceled_at is null
+               or s.canceled_at > now() - make_interval(days => p_retention_days))
+     )
+$$;
+
+revoke all on function public.sites_due_for_deletion(integer) from public, anon, authenticated;
+grant execute on function public.sites_due_for_deletion(integer) to service_role;
+
+-- Calls the app's cleanup route (POST /api/housekeeping) with the worker
+-- secret. The URL is the import worker's URL from Vault with /api/worker
+-- swapped for /api/housekeeping, so no extra secret is needed.
+create or replace function public.invoke_housekeeping()
+returns void
+language plpgsql
+security definer
+set search_path = ''
+as $$
+declare
+  v_url text;
+  v_secret text;
+begin
+  select decrypted_secret into v_url
+    from vault.decrypted_secrets
+   where name = 'import_worker_url'
+   limit 1;
+
+  select decrypted_secret into v_secret
+    from vault.decrypted_secrets
+   where name = 'import_worker_secret'
+   limit 1;
+
+  if v_url is null or v_secret is null then
+    return;
+  end if;
+
+  perform net.http_post(
+    url := regexp_replace(v_url, '/api/worker/?$', '/api/housekeeping'),
+    headers := jsonb_build_object(
+      'Content-Type', 'application/json',
+      'Authorization', 'Bearer ' || v_secret
+    ),
+    body := '{}'::jsonb,
+    timeout_milliseconds := 300000
+  );
+end;
+$$;
+
+revoke all on function public.invoke_housekeeping() from public, anon, authenticated;
+
+-- ---------------------------------------------------------------------------
+-- 10. Nightly housekeeping: drop drafts untouched for 7 days and old
+--     rate-limit windows, then ask the app to delete expired previews and
+--     cancelled sites past retention (section 9).
 -- ---------------------------------------------------------------------------
 
 select cron.schedule(
@@ -164,5 +293,6 @@ select cron.schedule(
   $$
     delete from public.build_drafts where updated_at < now() - interval '7 days';
     delete from public.rate_limits where window_start < now() - interval '2 days';
+    select public.invoke_housekeeping();
   $$
 );

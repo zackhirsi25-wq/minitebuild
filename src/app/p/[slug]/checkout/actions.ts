@@ -12,12 +12,15 @@ import { supabaseAdmin } from "@/lib/supabase/admin";
 
 const sha256 = (text: string) => createHash("sha256").update(text).digest("hex");
 
-async function recordAcceptance(businessId: string, plan: PlanId): Promise<boolean> {
+async function recordAcceptance(business: { id: string; name: string; slug: string }, plan: PlanId): Promise<boolean> {
   const documents = Object.fromEntries(Object.entries(LEGAL_DOCS).map(([id, text]) => [id, sha256(text)]));
   const { error } = await supabaseAdmin()
     .from("terms_acceptances")
     .insert({
-      business_id: businessId,
+      business_id: business.id,
+      // Kept so the record still says whose agreement it was if the business is deleted.
+      business_name: business.name,
+      business_slug: business.slug,
       plan,
       documents,
       ip_hash: await ipKey(),
@@ -42,7 +45,7 @@ export async function startCheckout(formData: FormData) {
 
   // Pressing the button is agreement to the policies shown above it; record
   // which version of each was shown, and from where. No record, no checkout.
-  if (!(await recordAcceptance(business.id, plan))) redirect(`/p/${slug}/checkout?error=consent`);
+  if (!(await recordAcceptance(business, plan))) redirect(`/p/${slug}/checkout?error=consent`);
 
   const result = await getBillingProvider().createCheckout({
     businessId: business.id,

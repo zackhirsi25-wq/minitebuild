@@ -101,7 +101,9 @@ export type Database = {
       terms_acceptances: {
         Row: {
           accepted_at: string;
-          business_id: string;
+          business_id: string | null;
+          business_name: string;
+          business_slug: string;
           documents: Json;
           id: string;
           ip_hash: string | null;
@@ -110,7 +112,9 @@ export type Database = {
         };
         Insert: {
           accepted_at?: string;
-          business_id: string;
+          business_id?: string | null;
+          business_name: string;
+          business_slug: string;
           documents: Json;
           id?: string;
           ip_hash?: string | null;
@@ -119,7 +123,9 @@ export type Database = {
         };
         Update: {
           accepted_at?: string;
-          business_id?: string;
+          business_id?: string | null;
+          business_name?: string;
+          business_slug?: string;
           documents?: Json;
           id?: string;
           ip_hash?: string | null;
@@ -337,7 +343,9 @@ export type Database = {
       };
       subscriptions: {
         Row: {
-          business_id: string;
+          business_id: string | null;
+          business_name: string | null;
+          business_slug: string | null;
           canceled_at: string | null;
           created_at: string;
           current_period_end: string | null;
@@ -351,7 +359,9 @@ export type Database = {
         };
         ComputedFields: never;
         Insert: {
-          business_id: string;
+          business_id?: string | null;
+          business_name?: string | null;
+          business_slug?: string | null;
           canceled_at?: string | null;
           created_at?: string;
           current_period_end?: string | null;
@@ -364,7 +374,9 @@ export type Database = {
           updated_at?: string;
         };
         Update: {
-          business_id?: string;
+          business_id?: string | null;
+          business_name?: string | null;
+          business_slug?: string | null;
           canceled_at?: string | null;
           created_at?: string;
           current_period_end?: string | null;
@@ -419,6 +431,11 @@ export type Database = {
       get_public_site: { Args: { p_slug: string }; Returns: Json };
       hit_rate_limit: { Args: { p_key: string; p_window_seconds: number; p_max: number }; Returns: boolean };
       invoke_import_worker: { Args: Record<PropertyKey, never>; Returns: undefined };
+      invoke_housekeeping: { Args: Record<PropertyKey, never>; Returns: undefined };
+      sites_due_for_deletion: {
+        Args: { p_retention_days: number | null };
+        Returns: { id: string; slug: string; images: Json; reason: string }[];
+      };
     };
     Enums: {
       [_ in never]: never;
