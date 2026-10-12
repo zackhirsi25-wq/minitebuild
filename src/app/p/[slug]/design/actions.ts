@@ -10,9 +10,10 @@ import { isTemplateId, templateMeta } from "@/templates";
 export async function setDesign(formData: FormData) {
   const slug = String(formData.get("slug") ?? "");
   const template = String(formData.get("template") ?? "");
-  const palette = String(formData.get("palette") ?? "");
   const owned = await ownedBusiness(slug);
   if (!owned || !isTemplateId(template)) redirect(`/p/${slug}`);
+  // Each template has its own colour group in the form (palette-<template>).
+  const palette = String(formData.get(`palette-${template}`) ?? "");
   const validPalette = templateMeta(template).palettes.some((p) => p.id === palette) ? palette : null;
   const { error } = await supabaseAdmin()
     .from("businesses")

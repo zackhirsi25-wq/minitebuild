@@ -1,17 +1,50 @@
 import type { Metadata } from "next";
+import { BUSINESS_TYPE_LABELS, inferBusinessType, type BusinessType } from "@/lib/business-type";
 import { telHref } from "@/lib/content/phone";
 import type { PublicSite } from "./public";
 
+// Trades named in a business's name, as a title word and a schema.org type.
+const TRADES: [RegExp, string, string][] = [
+  [/roof/i, "Roofing Contractor", "RoofingContractor"],
+  [/plumb/i, "Plumber", "Plumber"],
+  [/electric/i, "Electrician", "Electrician"],
+  [/hvac|heating|air condition|cooling/i, "HVAC Contractor", "HVACBusiness"],
+  [/paint/i, "Painter", "HousePainter"],
+  [/landscap|lawn/i, "Landscaper", "HomeAndConstructionBusiness"],
+  [/remodel|renovat/i, "Remodeling", "HomeAndConstructionBusiness"],
+];
+
+const TYPE_SCHEMA: Record<BusinessType, string> = {
+  contractor: "GeneralContractor",
+  restaurant: "Restaurant",
+  salon: "BeautySalon",
+  clinic: "MedicalClinic",
+  "real-estate": "RealEstateAgent",
+  shop: "Store",
+  professional: "ProfessionalService",
+};
+
+/** What the business is, for the title and JSON-LD: Google's category first, then its name, then its type. */
+export function businessKind(site: Pick<PublicSite, "name" | "category" | "trade">): {
+  label: string;
+  schemaType: string;
+} {
+  const type = inferBusinessType(site.name, site.category);
+  const trade = TRADES.find(([pattern]) => pattern.test(site.category ?? "") || pattern.test(site.name));
+  const schemaType = trade?.[2] ?? TYPE_SCHEMA[type];
+  // Google's category ("Roofing contractor") says it best when there is one.
+  if (site.category) return { label: site.category.charAt(0).toUpperCase() + site.category.slice(1), schemaType };
+  if (trade) return { label: trade[1], schemaType };
+  if (type !== "contractor") return { label: BUSINESS_TYPE_LABELS[type], schemaType };
+  return {
+    label: site.trade === "remodeling" ? "Remodeling" : "General Contractor",
+    schemaType: site.trade === "remodeling" ? "HomeAndConstructionBusiness" : "GeneralContractor",
+  };
+}
+
 /** "<Name> | <Category> in <City>", trimmed to ~60 characters. */
 export function siteTitle(site: PublicSite): string {
-  // Google's category ("Roofing contractor") says what the business is; the old
-  // two-value trade is only a fallback for businesses Google couldn't find.
-  const what = site.category
-    ? site.category.charAt(0).toUpperCase() + site.category.slice(1)
-    : site.trade === "remodeling"
-      ? "Remodeling"
-      : "General Contractor";
-  const full = `${site.name} | ${what} in ${site.city}`;
+  const full = `${site.name} | ${businessKind(site).label} in ${site.city}`;
   return full.length <= 65 ? full : `${site.name} | ${site.city}`;
 }
 
@@ -74,7 +107,7 @@ export function localBusinessJsonLd(site: PublicSite, url: string, imageUrl: str
   const street = site.address?.split(",")[0]?.trim();
   return {
     "@context": "https://schema.org",
-    "@type": site.trade === "remodeling" ? "HomeAndConstructionBusiness" : "GeneralContractor",
+    "@type": businessKind(site).schemaType,
     name: site.name,
     url,
     telephone: telHref(site.phone).replace("tel:", ""),

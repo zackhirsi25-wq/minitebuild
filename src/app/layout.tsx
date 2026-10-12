@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import { THEME_SCRIPT } from "@/components/site-shell/theme-script";
 import "./globals.css";
 
 // The root layout is shared by the Minitebuild app and every customer site, so
@@ -15,7 +16,12 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en">
+    // THEME_SCRIPT may set data-mb-theme before hydration, hence suppressHydrationWarning.
+    // It only affects Minitebuild's own pages (styles scoped to .mb).
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
+      </head>
       <body className="min-h-dvh">{children}</body>
     </html>
   );

@@ -17,11 +17,22 @@ export function BuildProgress({ steps }: { steps: { id: BuildStepId; label: stri
   const [error, setError] = useState<string | null>(null);
   const [attempt, setAttempt] = useState(0);
   const started = useRef(-1);
+  // Whether the component is on screen. Not a per-effect "cancelled" flag: in
+  // development React runs the effect twice, and the guard below keeps the
+  // second run from starting another build, so the first run's request must
+  // keep reporting after its cleanup.
+  const mounted = useRef(false);
+
+  useEffect(() => {
+    mounted.current = true;
+    return () => {
+      mounted.current = false;
+    };
+  }, []);
 
   useEffect(() => {
     if (started.current === attempt) return;
     started.current = attempt;
-    let cancelled = false;
 
     const apply = (event: BuildEvent) => {
       if (event.type === "step") {
@@ -42,7 +53,7 @@ export function BuildProgress({ steps }: { steps: { id: BuildStepId; label: stri
         const reader = res.body.getReader();
         const decoder = new TextDecoder();
         let buffer = "";
-        while (!cancelled) {
+        while (mounted.current) {
           const { value, done } = await reader.read();
           if (done) break;
           buffer += decoder.decode(value, { stream: true });
@@ -54,12 +65,9 @@ export function BuildProgress({ steps }: { steps: { id: BuildStepId; label: stri
           }
         }
       } catch {
-        if (!cancelled) setError("We lost the connection while building. Please try again.");
+        if (mounted.current) setError("We lost the connection while building. Please try again.");
       }
     })();
-    return () => {
-      cancelled = true;
-    };
   }, [attempt, router]);
 
   return (

@@ -6,7 +6,7 @@ import { notFound } from "next/navigation";
 import { product } from "@/config/product";
 import { ownedBusiness } from "@/lib/build/owner";
 import { getPublicSite } from "@/lib/sites/public";
-import { allTemplates, resolveTemplateId, TEMPLATE_THUMBS, templateMeta } from "@/templates";
+import { allTemplates, resolveTemplateId, TEMPLATE_THUMBS } from "@/templates";
 import { setDesign } from "./actions";
 
 export const metadata: Metadata = { title: `Change design | ${product.name}`, robots: { index: false, follow: false } };
@@ -15,6 +15,9 @@ const onest = Onest({ subsets: ["latin"], variable: "--font-onest" });
 
 const card =
   "group relative block cursor-pointer overflow-hidden rounded-card border border-line bg-surface transition-colors hover:border-fg/30 has-[:checked]:border-fg has-[:checked]:ring-2 has-[:checked]:ring-fg has-[:focus-visible]:outline has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2";
+
+const pill =
+  "inline-flex min-h-11 cursor-pointer items-center gap-2 rounded-full border border-line-strong px-4 text-small has-[:checked]:border-fg has-[:checked]:bg-raised has-[:focus-visible]:outline has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2";
 
 /** For the person who built the preview: switch template (and colours) without losing any content. */
 export default async function ChangeDesignPage({ params, searchParams }: PageProps<"/p/[slug]/design">) {
@@ -26,10 +29,10 @@ export default async function ChangeDesignPage({ params, searchParams }: PagePro
 
   const current = resolveTemplateId(owned.template);
   const selected = typeof q.template === "string" && q.template ? resolveTemplateId(q.template) : current;
-  const meta = templateMeta(selected);
+  const templates = allTemplates();
 
   return (
-    <div className={`mb ${onest.variable} min-h-dvh`} data-theme="dark">
+    <div className={`mb ${onest.variable} min-h-dvh`}>
       <div className="mx-auto max-w-[var(--mb-max)] px-[var(--mb-gutter)] pt-8 pb-24">
         <Link
           href={`/p/${slug}`}
@@ -47,7 +50,7 @@ export default async function ChangeDesignPage({ params, searchParams }: PagePro
           <fieldset>
             <legend className="text-lead font-semibold">Template</legend>
             <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {allTemplates().map((t) => {
+              {templates.map((t) => {
                 const thumb = TEMPLATE_THUMBS[t.id];
                 return (
                   <label key={t.id} className={card}>
@@ -82,45 +85,53 @@ export default async function ChangeDesignPage({ params, searchParams }: PagePro
             </div>
           </fieldset>
 
-          <fieldset className="mt-10">
-            <legend className="text-lead font-semibold">Colours for {meta.name}</legend>
-            <p className="mt-1 text-small text-muted">
-              These colours are for {meta.name}. If you switch to another template, its colours start on automatic and
-              you can change them here afterwards.
-            </p>
-            <div className="mt-4 flex flex-wrap gap-3">
-              <label className="inline-flex min-h-11 cursor-pointer items-center gap-2 rounded-full border border-line-strong px-4 text-small has-[:checked]:border-fg has-[:checked]:bg-raised">
-                <input
-                  type="radio"
-                  name="palette"
-                  value=""
-                  defaultChecked={!owned.palette || selected !== current}
-                  className="sr-only"
-                />
-                Automatic
-              </label>
-              {meta.palettes.map((p) => (
-                <label
-                  key={p.id}
-                  className="inline-flex min-h-11 cursor-pointer items-center gap-2 rounded-full border border-line-strong px-4 text-small has-[:checked]:border-fg has-[:checked]:bg-raised"
-                >
-                  <input
-                    type="radio"
-                    name="palette"
-                    value={p.id}
-                    defaultChecked={selected === current && owned.palette === p.id}
-                    className="sr-only"
-                  />
-                  <span
-                    aria-hidden="true"
-                    className="h-4 w-4 rounded-full border border-line-strong"
-                    style={{ background: p.vars.accent }}
-                  />
-                  {p.name}
-                </label>
-              ))}
-            </div>
-          </fieldset>
+          {/* One colour group per template; CSS shows the group for the checked
+              template, so switching templates needs no script. */}
+          <style>
+            {templates
+              .map(
+                (t) =>
+                  `form:not(:has(input[name="template"][value="${t.id}"]:checked)) [data-palettes="${t.id}"]{display:none}`,
+              )
+              .join("")}
+          </style>
+          {templates.map((t) => {
+            const isCurrent = t.id === current;
+            return (
+              <fieldset key={t.id} data-palettes={t.id} className="mt-10">
+                <legend className="text-lead font-semibold">Colours for {t.name}</legend>
+                <div className="mt-4 flex flex-wrap gap-3">
+                  <label className={pill}>
+                    <input
+                      type="radio"
+                      name={`palette-${t.id}`}
+                      value=""
+                      defaultChecked={!isCurrent || !owned.palette}
+                      className="sr-only"
+                    />
+                    Automatic
+                  </label>
+                  {t.palettes.map((p) => (
+                    <label key={p.id} className={pill}>
+                      <input
+                        type="radio"
+                        name={`palette-${t.id}`}
+                        value={p.id}
+                        defaultChecked={isCurrent && owned.palette === p.id}
+                        className="sr-only"
+                      />
+                      <span
+                        aria-hidden="true"
+                        className="h-4 w-4 rounded-full border border-line-strong"
+                        style={{ background: p.vars.accent }}
+                      />
+                      {p.name}
+                    </label>
+                  ))}
+                </div>
+              </fieldset>
+            );
+          })}
 
           <div className="mt-10 flex flex-wrap items-center gap-3">
             <button

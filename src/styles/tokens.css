@@ -1,7 +1,7 @@
 /* Minitebuild design tokens: the one source for the product site, the build
    flow and the admin. Scoped to .mb so customer sites (which share the root
-   layout) never inherit them. Dark first; data-theme="light" swaps values,
-   never names. Tailwind utilities map onto these in globals.css (@theme).
+   layout) never inherit them. Dark first; data-mb-theme="light" on <html> (set by the
+   root layout's script and the theme toggle) swaps values, never names. Tailwind utilities map onto these in globals.css (@theme).
 
    Contrast (WCAG AA):
    - text on canvas: 15.8:1 dark, 17.4:1 light
@@ -57,7 +57,7 @@
   --mb-base: 280ms;
 }
 
-.mb[data-theme="light"] {
+html[data-mb-theme="light"] .mb {
   color-scheme: light;
   --mb-canvas: #fafaf9;
   --mb-surface: #ffffff;
@@ -103,7 +103,7 @@ html:has(.mb) {
   background: #0b0c0e;
   scroll-behavior: smooth;
 }
-html:has(.mb[data-theme="light"]) {
+html[data-mb-theme="light"]:has(.mb) {
   background: #fafaf9;
 }
 html:has(.mb) body {
